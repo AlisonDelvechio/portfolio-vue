@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container">
-      <h1 class="logo">MeuPortfólio</h1>
+      <h1 class="logo">AlisonDelvechio_</h1>
       
       <nav :class="{'is-open': menuOpen}" aria-label="Main Navigation">
         <ul>
@@ -40,8 +40,8 @@ function toggleMenu() {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  background-color: $primary-color;
-  padding: 1rem 0;
+  // background-color: $primary-color;
+  padding: 2rem 0;
   color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
@@ -49,33 +49,36 @@ function toggleMenu() {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem; 
+    padding: 0 2rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; 
+    position: relative;
   }
 
   .logo {
+    position: absolute;
+    left: -18rem;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
-    text-transform: uppercase;
   }
 
   nav ul {
     display: flex;
-    gap: 2rem; // um pouco mais de espaço
+    gap: 4rem;
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 1.2rem;
 
     li a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: 600; // um pouco mais forte
-        position: relative;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
 
-        &::after {
+      &::after {
         content: "";
         display: block;
         width: 0;
@@ -85,11 +88,11 @@ function toggleMenu() {
         position: absolute;
         bottom: -4px;
         left: 0;
-        }
+      }
 
-        &:hover::after {
+      &:hover::after {
         width: 100%;
-        }
+      }
     }
   }
 
@@ -114,7 +117,7 @@ function toggleMenu() {
       display: none;
       position: absolute;
       top: 60px;
-      right: 1rem;
+      right: 1rem; // talvez aqui você queira ajustar para não colidir com o logo no canto esquerdo
       background: $primary-color;
       padding: 1rem;
       border-radius: 8px;
@@ -131,6 +134,10 @@ function toggleMenu() {
 
     .menu-toggle {
       display: flex;
+    }
+
+    .logo {
+      position: static; // para que no mobile o logo volte ao fluxo normal
     }
   }
 }
