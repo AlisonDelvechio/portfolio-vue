@@ -34,7 +34,7 @@ section {
     to bottom,
     #121212 0%,
     #1f1f1f 30%,
-    #1c365e 60%,   // azul mais escuro
+    #1c365e 60%,
     #121212 100%
   );
   min-height: 70vh;
@@ -42,9 +42,15 @@ section {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 2rem; 
 
   .hero-content {
     max-width: 800px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 5rem;
+    min-height: 40vh;
   }
 
   h1 {
@@ -54,6 +60,15 @@ section {
     text-transform: uppercase;
     white-space: pre-wrap;
     letter-spacing: 0.1em;
+
+    @media (max-width: 768px) {
+      font-size: 4rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+    }
   }
 
   p {
@@ -62,12 +77,20 @@ section {
     margin-top: 1rem;
     white-space: pre-wrap;
     letter-spacing: 0.05em;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
   }
 
   span {
     display: inline-block;
     animation: jump 0.5s ease forwards;
-    opacity: 0; // inicia invisível
+    opacity: 0;
     transform: translateY(10px);
   }
 
