@@ -1,6 +1,13 @@
-$primary-color: #f0f0f0; 
-$secondary-color: #121212; 
-$text-color: #333333; 
+// Geral
 $accent-color: #3b82f6;
-
 $font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+// Tema Dark
+$primary-color-dark: #f0f0f0; // cor do texto, links etc
+$secondary-color-dark: #121212; // fundo escuro
+$text-color-dark: #f0f0f0; // texto claro
+
+// Tema Light
+$primary-color-light: #121212; // texto escuro, links etc
+$secondary-color-light: #f0f0f0; // fundo claro
+$text-color-light: #333333; // texto escuro

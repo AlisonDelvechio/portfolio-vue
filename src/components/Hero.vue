@@ -29,13 +29,15 @@ const description = 'Desenvolvedor Front-end especializado em Vue, Sass e TypeSc
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variables' as vars;
+
 section {
   background: linear-gradient(
     to bottom,
-    #121212 0%,
+    vars.$secondary-color-dark 0%,
     #1f1f1f 30%,
     #1c365e 60%,
-    #121212 100%
+    vars.$secondary-color-dark 100%
   );
   min-height: 70vh;
   display: flex;
@@ -43,6 +45,16 @@ section {
   align-items: center;
   text-align: center;
   padding: 2rem; 
+
+  body.light & {
+    background: linear-gradient(
+      to bottom,
+      vars.$secondary-color-light 0%,
+      #dcdcdc 30%,
+      #a0c4ff 60%,
+      vars.$secondary-color-light 100%
+    );
+  }
 
   .hero-content {
     max-width: 800px;
@@ -54,7 +66,12 @@ section {
   }
 
   h1 {
-    color: $primary-color;
+    color: vars.$primary-color-dark;
+
+    body.light & {
+      color: vars.$primary-color-light;
+    }
+
     font-size: 6rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -73,7 +90,12 @@ section {
 
   p {
     font-size: 1.5rem;
-    color: $primary-color;
+    color: vars.$primary-color-dark;
+
+    body.light & {
+      color: vars.$primary-color-light;
+    }
+
     margin-top: 1rem;
     white-space: pre-wrap;
     letter-spacing: 0.05em;

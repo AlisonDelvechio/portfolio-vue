@@ -1,14 +1,32 @@
 @use './reset';
 
 body {
+  font-family: $font-stack;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: block;
-  font-family: sans-serif;
+}
 
-  background-color: $secondary-color;
+body.dark {
+  background-color: $secondary-color-dark;
+  color: $text-color-dark;
+  
+  a {
+    color: $primary-color-dark;
+  }
+  
+}
+
+body.light {
+  background-color: $secondary-color-light;
+  color: $text-color-light;
+  
+  a {
+    color: $primary-color-light;
+  }
+  
 }
 
 #app {

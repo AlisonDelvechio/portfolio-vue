@@ -43,13 +43,20 @@
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variables' as vars;
+
 .expertise {
   padding: 0rem 10rem;
   text-align: center;
 
   h2 {
     font-size: 2.5rem;
-    color: $primary-color;
+    color: vars.$primary-color-dark;
+
+    body.light & {
+      color: vars.$primary-color-light;
+    }
+
     margin-bottom: 3rem;
   }
 
@@ -57,25 +64,31 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-
-    // border: 2px solid #fff;
     padding: 2rem;
-    background-color: #121212;
+    background-color: vars.$secondary-color-dark;
+
+    body.light & {
+      background-color: vars.$secondary-color-light;
+    }
   }
 
   .expertise-item {
-    border: 1px solid $primary-color;
+    border: 1px solid vars.$primary-color-dark;
+
+    body.light & {
+      border-color: vars.$primary-color-light;
+    }
+
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    // animação
+    border-radius: 0.5rem;
+
     opacity: 0;
     transform: translateY(-30px);
     animation: fall-in 0.8s ease forwards;
 
-    // delay baseado na ordem usando nth-child
     &:nth-child(1) {
       animation-delay: 0.2s;
     }
@@ -91,23 +104,38 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 1.2rem;
-      color: $primary-color;
+      color: vars.$primary-color-dark;
+
+      body.light & {
+        color: vars.$primary-color-light;
+      }
+
       margin-bottom: 1rem;
 
       svg {
-        fill: $primary-color;
+        fill: vars.$primary-color-dark;
+
+        body.light & {
+          fill: vars.$primary-color-light;
+        }
+
         width: 32px;
         height: 32px;
       }
     }
 
     p {
-      color: #ccc;
+      color: vars.$text-color-dark;
+
+      body.light & {
+        color: vars.$text-color-light;
+      }
+
       font-size: 1rem;
       text-align: center;
     }
   }
-  
+
   .expertise-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -143,6 +171,5 @@
       transform: translateY(0);
     }
   }
-
 }
 </style>
