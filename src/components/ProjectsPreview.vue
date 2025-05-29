@@ -20,6 +20,7 @@ import ProjectCard from '@/components/ProjectCard.vue';
 import Project1 from '@/assets/projects/Screenshot_2.png';
 import Project2 from '@/assets/projects/Screenshot_3.png';
 import Project3 from '@/assets/projects/Screenshot_4.png';
+import Project4 from '@/assets/projects/Screenshot_5.png';
 
 const projects = [
   {
@@ -36,6 +37,11 @@ const projects = [
     title: 'Pokedex',
     description: 'The project is about creating a pokedex with search and listing functions consuming an API.',
     image: Project3
+  },
+  {
+    title: 'Pokedex',
+    description: 'The project is about creating a pokedex with search and listing functions consuming an API.',
+    image: Project4
   }
 ];
 </script>

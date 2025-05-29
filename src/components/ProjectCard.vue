@@ -61,12 +61,14 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+  
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 
     .project-image {
       transform: scale(1.10);
+      transition: transform 0.4s ease;
     }
   }
 
