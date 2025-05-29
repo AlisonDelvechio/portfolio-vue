@@ -32,7 +32,7 @@ const description = 'Desenvolvedor Front-end especializado em Vue, Sass e TypeSc
 @use '@/styles/variables' as vars;
 
 section {
-  min-height: 70vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;

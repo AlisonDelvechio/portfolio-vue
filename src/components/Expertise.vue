@@ -24,7 +24,7 @@
           <span>Design System</span>
         </div>
         <h3 class="code-description">
-          | Desenvolvimento de Design Systems escaláveis e acessíveis. Integração entre times de design e desenvolvimento |
+          | Desenvolvimento de <strong>Design Systems</strong> escaláveis e acessíveis. Integração entre times de design e desenvolvimento |
         </h3>
         <div class="specialties">
           <span>Zeroheight</span>
@@ -62,7 +62,7 @@ import { Icon } from '@iconify/vue'
 @use '@/styles/variables' as vars;
 
 .expertise {
-  padding: 4rem 10rem;
+  padding: 0.1rem 10rem;
   text-align: center;
 
   h2 {
@@ -115,7 +115,7 @@ import { Icon } from '@iconify/vue'
       animation-delay: 0.6s;
     }
 
-    // Linha rosa à esquerda
+    // Linha à esquerda
     &::before {
       content: "";
       position: absolute;
@@ -123,7 +123,7 @@ import { Icon } from '@iconify/vue'
       top: 8px;
       width: 4px;
       height: 90%;
-      background-color: vars.$accent-color; // Define isso no SCSS se quiser padronizar
+      background-color: vars.$accent-color;
     }
 
     .icon-title {
@@ -166,20 +166,29 @@ import { Icon } from '@iconify/vue'
 
   .code-description {
     font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+    // font-family: 'Consolas', 'Courier New', monospace;
+
     font-size: 1rem;
     background-color: #1e1e1e; 
     color: #f8f8f2; 
     padding: 0.5rem 1rem;
-    // border-left: 4px solid #ff66cc; 
     margin: 1rem 0;
     white-space: pre-wrap; 
     position: relative;
 
     strong {
-      color: #ff79c6; // destaque pink nos fortes
+      color: #ff79c6;
+    }
+
+    body.light & {
+      color: vars.$primary-color-light;
+      background-color: #c2c2c2; 
+
+      strong {
+        color: #ca3d8d;
+      }
     }
   }
-
 
   .specialties {
     display: flex;
@@ -206,6 +215,7 @@ import { Icon } from '@iconify/vue'
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     opacity: 0;
     transform: translateY(20px);

@@ -3,41 +3,37 @@
     <h2>My Work</h2>
     <p>A collection of projects I've worked on.</p>
     <div class="grid">
-      <!-- <ProjectCard 
+      <ProjectCard 
         v-for="(project, index) in projects" 
         :key="index"
-        v-bind="project"
-      /> -->
+        :title="project.title"
+        :description="project.description"
+        :image="project.image"
+      />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import ProjectCard from '@/components/ProjectCard.vue'
+import ProjectCard from '@/components/ProjectCard.vue';
 
 const projects = [
   {
     title: 'Domposer',
     description: 'Website builder with drag & drop interface.',
-    image: 'https://via.placeholder.com/400x200',
-    liveUrl: '#',
-    repoUrl: '#'
+    image: 'https://via.placeholder.com/400x200'
   },
   {
     title: 'Bay.js',
     description: 'Lightweight library for web-components.',
-    image: 'https://via.placeholder.com/400x200',
-    liveUrl: '#',
-    repoUrl: '#'
+    image: 'https://via.placeholder.com/400x200'
   },
   {
     title: 'Cookiemunch',
     description: 'Customizable cookie consent plugin.',
-    image: 'https://via.placeholder.com/400x200',
-    liveUrl: '#',
-    repoUrl: '#'
+    image: 'https://via.placeholder.com/400x200'
   }
-]
+];
 </script>
 
 <style scoped lang="scss">
