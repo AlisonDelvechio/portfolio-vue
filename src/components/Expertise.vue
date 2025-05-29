@@ -11,7 +11,14 @@
           </svg>
           <span>Software Development</span>
         </div>
-        <p>Desenvolvimento de aplicações web modernas e eficientes.</p>
+        <p>
+          Desenvolvimento de aplicações web modernas e eficientes utilizando paradigmas de 
+          <strong>POO</strong>.
+        </p>
+        <div class="specialties">
+          <span>JavaScript</span>
+          <span>TypeScript</span>
+        </div>
       </div>
 
       <div class="expertise-item">
@@ -133,6 +140,27 @@
 
       font-size: 1rem;
       text-align: center;
+    }
+  }
+
+  .specialties {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+
+    span {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: vars.$primary-color-dark;
+
+      body.light & {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: vars.$primary-color-light;
+      }
     }
   }
 
