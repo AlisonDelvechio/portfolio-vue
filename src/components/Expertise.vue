@@ -46,7 +46,7 @@
 @use '@/styles/variables' as vars;
 
 .expertise {
-  padding: 0rem 10rem;
+  padding: 4rem 10rem;
   text-align: center;
 
   h2 {
@@ -147,7 +147,7 @@
   }
 
   @media (max-width: 768px) {
-    padding: 0;
+    padding: 1rem 0;
 
     .expertise-grid {
       grid-template-columns: 1fr;

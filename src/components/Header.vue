@@ -20,7 +20,7 @@
       <button 
         class="menu-toggle"
         @click="toggleMenu"
-        :aria-expanded="menuOpen.toString()"
+        :aria-expanded="menuOpen"
         aria-controls="main-nav"
         aria-label="Abrir ou fechar o menu"
       >
@@ -196,7 +196,7 @@ onMounted(() => {
       order: 2; 
 
       .logo-img {
-        width: 16rem;
+        width: 15rem;
         height: auto;
       }
     }
@@ -251,6 +251,10 @@ onMounted(() => {
   right: 0;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    right: 0.5rem;
+  }
 }
 
 .switch {

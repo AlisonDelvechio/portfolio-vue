@@ -32,32 +32,56 @@ const description = 'Desenvolvedor Front-end especializado em Vue, Sass e TypeSc
 @use '@/styles/variables' as vars;
 
 section {
-  background: linear-gradient(
-    to bottom,
-    vars.$secondary-color-dark 0%,
-    #1f1f1f 30%,
-    #1c365e 60%,
-    vars.$secondary-color-dark 100%
-  );
   min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem; 
+  padding: 2rem;
 
-  body.light & {
-    background: linear-gradient(
+  // Fundo gradiente + textura (dark)
+  background-image: 
+    linear-gradient(
       to bottom,
-      vars.$secondary-color-light 0%,
-      #dcdcdc 30%,
-      #a0c4ff 60%,
-      vars.$secondary-color-light 100%
-    );
-  }
+      vars.$secondary-color-dark 0%,
+      #1f1f1f 30%,
+      #1c365e 60%,
+      vars.$secondary-color-dark 100%
+    ),
+    url('@/assets/diagmonds-dark.png');
+  
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 150px 150px; // gradiente cobre tudo, textura em tamanho fixo e repetindo
+  background-position: center, center;
+  background-blend-mode: overlay;
 
   .hero-content {
     max-width: 800px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 5rem;
+    min-height: 40vh;
+  }
+
+  // Light mode com textura e gradiente diferentes
+  body.light & {
+    background-image: 
+      linear-gradient(
+        to bottom,
+        vars.$secondary-color-light 0%,
+        #dcdcdc 30%,
+        #a0c4ff 60%,
+        vars.$secondary-color-light 100%
+      ),
+      url('@/assets/diagmonds-light.png');
+
+    background-repeat: no-repeat, repeat;
+    background-size: cover, 150px 150px;
+    background-position: center, center;
+    background-blend-mode: overlay;
   }
 
   @media (max-width: 768px) {
