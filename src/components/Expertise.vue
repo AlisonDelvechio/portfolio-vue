@@ -5,10 +5,7 @@
     <div class="expertise-grid">
       <div class="expertise-item">
         <div class="icon-title">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-            <path d="M4 5h16v10H4z"></path>
-            <path d="M2 19h20v2H2z"></path>
-          </svg>
+          <Icon icon="mdi:code-tags" width="32" height="32" />
           <span>Software Development</span>
         </div>
         <p>
@@ -18,16 +15,13 @@
         <div class="specialties">
           <span>JavaScript</span>
           <span>TypeScript</span>
+          <span>Node.JS</span>
         </div>
       </div>
 
       <div class="expertise-item">
         <div class="icon-title">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
-            <path d="M8 12h8"></path>
-            <path d="M12 8v8"></path>
-          </svg>
+          <Icon icon="mdi:palette-outline" width="32" height="32" />
           <span>UI/UX Design</span>
         </div>
         <p>Criação de interfaces intuitivas e experiência do usuário otimizada.</p>
@@ -35,9 +29,7 @@
 
       <div class="expertise-item">
         <div class="icon-title">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-            <path d="M16 3v2H8V3H5v18h14V3zM8 7h8v2H8V7zm0 4h8v2H8v-2z"></path>
-          </svg>
+          <Icon icon="mdi:monitor-cellphone" width="32" height="32" />
           <span>Front-end Engineering</span>
         </div>
         <p>Desenvolvimento front-end com foco em performance e manutenibilidade.</p>
@@ -47,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 </script>
 
 <style lang="scss" scoped>
@@ -106,12 +99,24 @@
       animation-delay: 0.6s;
     }
 
+    // Linha rosa à esquerda
+    &::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      width: 4px;
+      height: 90%;
+      background-color: vars.$accent-color; // Define isso no SCSS se quiser padronizar
+    }
+
     .icon-title {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       font-size: 1.2rem;
       color: vars.$primary-color-dark;
+      font-weight: bold;
 
       body.light & {
         color: vars.$primary-color-light;

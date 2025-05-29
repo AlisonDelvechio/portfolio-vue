@@ -51,7 +51,7 @@ section {
     url('@/assets/diagmonds-dark.png');
   
   background-repeat: no-repeat, repeat;
-  background-size: cover, 150px 150px; // gradiente cobre tudo, textura em tamanho fixo e repetindo
+  background-size: cover, 150px 150px;
   background-position: center, center;
   background-blend-mode: overlay;
 
@@ -66,7 +66,7 @@ section {
     min-height: 40vh;
   }
 
-  // Light mode com textura e gradiente diferentes
+  // Light mode 
   body.light & {
     background-image: 
       linear-gradient(
@@ -77,6 +77,15 @@ section {
         vars.$secondary-color-light 100%
       ),
       url('@/assets/diagmonds-light.png');
+
+    // background-image: 
+    //   linear-gradient(
+    //     to bottom,
+    //     #c4d0e2 0%,
+    //     #fff 40%,
+    //     #c4d0e2 100%
+    //   ),
+    //   url('@/assets/diagmonds-light.png');
 
     background-repeat: no-repeat, repeat;
     background-size: cover, 150px 150px;

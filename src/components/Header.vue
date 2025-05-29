@@ -34,8 +34,13 @@
         <label class="switch">
           <input type="checkbox" v-model="isDarkMode" @change="toggleTheme">
           <span class="slider">
-            <span class="icon">{{ isDarkMode ? '🌙' : '🌞' }}</span>
-            <!-- <span class="icon">{{ isDarkMode ? '🌞' :  '🌙'  }}</span> -->
+            <Icon 
+              :icon="isDarkMode ? 'mdi:moon-waxing-crescent' : 'mdi:white-balance-sunny'" 
+              width="22" 
+              height="22" 
+              class="icon" 
+              :color="isDarkMode ? '#333' : '#555'" 
+            />
           </span>
         </label>
       </div>
@@ -43,38 +48,40 @@
   </header>
 </template>
 
-<script setup lang="ts">import { ref, computed, onMounted } from 'vue';
-import LogoAlisonLight from '@/assets/Logo-Alison-V1.svg';
-import LogoAlisonDark from '@/assets/Logo-Alison-V1-Black.svg';
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
+import LogoAlisonLight from '@/assets/Logo-Alison-V1.svg'
+import LogoAlisonDark from '@/assets/Logo-Alison-V1-Black.svg'
 
-const menuOpen = ref(false);
-const isDarkMode = ref(true);
+const menuOpen = ref(false)
+const isDarkMode = ref(true)
 
 const logoSrc = computed(() => {
-  return isDarkMode.value ? LogoAlisonDark : LogoAlisonLight;
-});
+  return isDarkMode.value ? LogoAlisonDark : LogoAlisonLight
+})
 
 function toggleMenu() {
-  menuOpen.value = !menuOpen.value;
+  menuOpen.value = !menuOpen.value
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 function toggleTheme() {
   if (isDarkMode.value) {
-    document.body.classList.add('dark');
-    document.body.classList.remove('light');
+    document.body.classList.add('dark')
+    document.body.classList.remove('light')
   } else {
-    document.body.classList.add('light');
-    document.body.classList.remove('dark');
+    document.body.classList.add('light')
+    document.body.classList.remove('dark')
   }
 }
 
 onMounted(() => {
-  toggleTheme();
-});
+  toggleTheme()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -274,7 +281,7 @@ onMounted(() => {
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
 
-    background-color: #333;  // mais escuro como pediu
+    background-color: #333;
     border-radius: 34px;
     transition: background-color 0.4s;
 
@@ -299,14 +306,18 @@ onMounted(() => {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
       pointer-events: none;
       transition: transform 0.4s;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 
   input:checked + .slider {
-    background-color: #333;  // ou vars.$primary-color-dark se quiser padronizar
+    background-color: #333;
 
     &::before {
       transform: translateX(30px);
@@ -318,11 +329,12 @@ onMounted(() => {
   }
 
   body.light & .slider {
-    background-color: #ddd;  // mais claro no modo light
+    background-color: #ddd;
 
     input:checked + & {
       background-color: #ddd;
     }
   }
 }
+
 </style>
