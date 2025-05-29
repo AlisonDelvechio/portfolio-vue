@@ -35,7 +35,7 @@
           <input type="checkbox" v-model="isDarkMode" @change="toggleTheme">
           <span class="slider">
             <Icon 
-              :icon="isDarkMode ? 'mdi:moon-waxing-crescent' : 'mdi:white-balance-sunny'" 
+              :icon="isDarkMode ? 'mdi:moon-waning-crescent' : 'mdi:white-balance-sunny'" 
               width="22" 
               height="22" 
               class="icon" 

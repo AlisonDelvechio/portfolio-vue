@@ -8,10 +8,9 @@
           <Icon icon="mdi:code-tags" width="32" height="32" />
           <span>Software Development</span>
         </div>
-        <p>
-          Desenvolvimento de aplicações web modernas e eficientes utilizando paradigmas de 
-          <strong>POO</strong>.
-        </p>
+        <h3 class="code-description">
+          | Desenvolvimento de aplicações web modernas e eficientes utilizando paradigmas de <strong>POO</strong>. |
+        </h3>
         <div class="specialties">
           <span>JavaScript</span>
           <span>TypeScript</span>
@@ -21,10 +20,18 @@
 
       <div class="expertise-item">
         <div class="icon-title">
-          <Icon icon="mdi:palette-outline" width="32" height="32" />
-          <span>UI/UX Design</span>
+          <Icon icon="iconoir:component" width="32" height="32" />
+          <span>Design System</span>
         </div>
-        <p>Criação de interfaces intuitivas e experiência do usuário otimizada.</p>
+        <h3 class="code-description">
+          | Desenvolvimento de Design Systems escaláveis e acessíveis. Integração entre times de design e desenvolvimento |
+        </h3>
+        <div class="specialties">
+          <span>Zeroheight</span>
+          <span>Figma</span>
+          <span>Adobe XD</span>
+          <span>Storybook</span>
+        </div>
       </div>
 
       <div class="expertise-item">
@@ -32,7 +39,16 @@
           <Icon icon="mdi:monitor-cellphone" width="32" height="32" />
           <span>Front-end Engineering</span>
         </div>
-        <p>Desenvolvimento front-end com foco em performance e manutenibilidade.</p>
+        <h3 class="code-description">
+          | Apaixonado por UI/UX. Mais de 5 anos de experiência em desenvolvimento com frameworks. |
+        </h3>
+        <div class="specialties">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Vue.JS</span>
+          <span>Angular</span>
+          <span>Ionic</span>
+        </div>
       </div>
     </div>
   </section>
@@ -147,6 +163,23 @@ import { Icon } from '@iconify/vue'
       text-align: center;
     }
   }
+
+  .code-description {
+    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    background-color: #1e1e1e; 
+    color: #f8f8f2; 
+    padding: 0.5rem 1rem;
+    // border-left: 4px solid #ff66cc; 
+    margin: 1rem 0;
+    white-space: pre-wrap; 
+    position: relative;
+
+    strong {
+      color: #ff79c6; // destaque pink nos fortes
+    }
+  }
+
 
   .specialties {
     display: flex;
