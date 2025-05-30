@@ -4,7 +4,7 @@
     <Expertise />
     <MyWork />
     <ProjectsPreview />
-
+    <ExperiencePreview />
     <button 
       class="scroll-top" 
       v-show="showScrollTop" 
@@ -21,6 +21,7 @@ import Hero from '@/components/Hero.vue';
 import Expertise from '@/components/Expertise.vue';
 import MyWork from '@/components/MyWork.vue';
 import ProjectsPreview from '@/components/ProjectsPreview.vue';
+import ExperiencePreview from '@/components/ExperiencePreview.vue'
 
 const showScrollTop = ref(false);
 
