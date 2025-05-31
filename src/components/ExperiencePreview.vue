@@ -38,6 +38,24 @@ const experiences: Experience[] = [
     description: 'Responsável por manutenção de sistemas legados e desenvolvimento de novas features.',
     logo: LogoBradesco,
     technologies: ['JavaScript', 'SASS', 'Jest']
+  },
+  {
+    role: 'Desenvolvedor Júnior',
+    date: '2022 - 2024',
+    location: 'Empresa Y',
+    icon: 'mdi:office-building',
+    description: 'Responsável por manutenção de sistemas legados e desenvolvimento de novas features.',
+    logo: LogoBradesco,
+    technologies: ['JavaScript', 'SASS', 'Jest']
+  },
+  {
+    role: 'Desenvolvedor Júnior',
+    date: '2022 - 2024',
+    location: 'Empresa Y',
+    icon: 'mdi:office-building',
+    description: 'Responsável por manutenção de sistemas legados e desenvolvimento de novas features.',
+    logo: LogoBradesco,
+    technologies: ['JavaScript', 'SASS', 'Jest']
   }
 ]
 </script>

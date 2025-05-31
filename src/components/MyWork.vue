@@ -87,7 +87,7 @@ onMounted(() => {
   grid-template-columns: 1fr 1fr;
   align-items: start;
   gap: 2rem;
-  padding: 4rem 10rem;
+  padding: 4rem 12rem;
   justify-items: center;
 
   .text-content {
@@ -204,6 +204,9 @@ body.dark {
     align-items: center;
 
     .text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       margin-bottom: 1.5rem;
 
       h2 {

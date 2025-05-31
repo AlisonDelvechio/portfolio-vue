@@ -1,5 +1,5 @@
 <template>
-  <section class="expertise">
+  <section class="expertise" id="expertise">
     <h2 class="expertise-title">Minha expertise</h2>
 
     <div class="expertise-grid">

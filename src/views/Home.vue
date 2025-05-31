@@ -5,6 +5,7 @@
     <MyWork />
     <ProjectsPreview />
     <ExperiencePreview />
+    <Contact />
     <button 
       class="scroll-top" 
       v-show="showScrollTop" 
@@ -22,6 +23,7 @@ import Expertise from '@/components/Expertise.vue';
 import MyWork from '@/components/MyWork.vue';
 import ProjectsPreview from '@/components/ProjectsPreview.vue';
 import ExperiencePreview from '@/components/ExperiencePreview.vue'
+import Contact from '../components/Contact.vue';
 
 const showScrollTop = ref(false);
 

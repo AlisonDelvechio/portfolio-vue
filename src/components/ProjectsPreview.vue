@@ -1,5 +1,5 @@
 <template>
-  <section class="projects-preview">
+  <section class="projects-preview" id="projects">
     <h2>Projetos</h2>
     <p>A collection of projects I've worked on.</p>
     <div class="grid">
@@ -47,19 +47,43 @@ const projects = [
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/variables' as vars;
+
 .projects-preview {
   padding: 4rem 10rem;
   text-align: center;
   margin: 4rem 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 60%
+  );
+
+  body.dark & {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.5) 0%,
+      transparent 60%
+    );
+  }
 
   h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    color: vars.$text-color-light;
+
+    body.dark & {
+      color: vars.$text-color-dark;
+    }
   }
 
   p {
     font-size: 1rem;
     color: #666;
+
+    body.dark & {
+      color: #aaa;
+    }
     margin-bottom: 2rem;
   }
 
@@ -69,17 +93,18 @@ const projects = [
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); // 3 colunas fixas no desktop
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 0 2rem;
 
     @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr); // 2 colunas em tablet
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @media (max-width: 640px) {
-      grid-template-columns: 1fr; // 1 coluna no mobile
+      grid-template-columns: 1fr;
     }
   }
 }
+
 </style>

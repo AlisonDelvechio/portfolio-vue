@@ -11,7 +11,7 @@
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#projects">Projetos</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
