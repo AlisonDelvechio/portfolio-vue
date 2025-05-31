@@ -85,7 +85,6 @@ function toggleTheme() {
 onMounted(() => {
   toggleTheme()
 
-  // Referências dos elementos que queremos monitorar
   const navEl = document.querySelector('nav')
   const toggleBtn = document.querySelector('.menu-toggle')
 
@@ -240,38 +239,37 @@ onMounted(() => {
       left: 1rem;
     }
 
-  nav {
-    position: absolute;
-    top: 100%;
-    left: 1rem;
-    background: rgba(18, 18, 18, 0.95);
+    nav {
+      position: absolute;
+      top: 100%;
+      left: 1rem;
+      background: rgba(18, 18, 18, 0.95);
 
-    body.light & {
-      background: rgba(245, 245, 245, 0.95);
+      body.light & {
+        background: rgba(245, 245, 245, 0.95);
+      }
+
+      padding: 1rem 2rem;
+      border-radius: 8px;
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      pointer-events: none;
+
+      ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
 
-    padding: 1rem 2rem;
-    border-radius: 8px;
-
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    pointer-events: none;
-
-    ul {
-      flex-direction: column;
-      gap: 1rem;
+    nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      pointer-events: auto;
     }
-  }
-
-  nav.is-open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
   }
 
   @keyframes fadeInLeft {

@@ -55,7 +55,10 @@ onMounted(() => {
   text-align: center;
   background-image:
     url('@/assets/diagmonds-dark.png'),
-    linear-gradient(to right, rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.6));
+    linear-gradient(
+      to right, 
+      rgba(18, 18, 18, 0.85), 
+      rgba(18, 18, 18, 0.6));
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center center, center;
@@ -64,7 +67,10 @@ onMounted(() => {
   body.light & {
     background-image:
       url('@/assets/diagmonds-light.png'),
-      linear-gradient(to bottom, rgba(220,220,220,1) 0%, rgba(220,220,220,0.4) 70%, rgba(220,220,220,0) 100%);
+      linear-gradient(
+        to bottom, rgba(220,220,220,1) 0%, 
+        rgba(220,220,220,0.4) 70%, 
+        rgba(220,220,220,0) 100%);
   }
 
   h2 {

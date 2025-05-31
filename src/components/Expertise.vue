@@ -81,11 +81,6 @@ import { Icon } from '@iconify/vue'
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 2rem;
-    // background-color: vars.$secondary-color-dark;
-
-    // body.light & {
-    //   background-color: vars.$secondary-color-light;
-    // }
   }
 
   .expertise-item {
@@ -166,8 +161,6 @@ import { Icon } from '@iconify/vue'
 
   .code-description {
     font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-    // font-family: 'Consolas', 'Courier New', monospace;
-
     font-size: 1rem;
     background-color: #1e1e1e; 
     color: #f8f8f2; 

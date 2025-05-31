@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
   .mouse-dot {
     width: 6px;   
     height: 6px;
-    background-color: #3b82f6;
+    background-color: $accent-color;
     border-radius: 50%;
     transition: transform 0.08s ease-out;
   }

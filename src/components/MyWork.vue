@@ -110,7 +110,7 @@ onMounted(() => {
       svg {
         width: 100%;
         height: auto;
-        stroke: #3b82f6;
+        stroke: $accent-color;
         stroke-width: 2;
         fill: none;
         stroke-dasharray: 400;
@@ -154,14 +154,14 @@ onMounted(() => {
         .cursor {
           display: inline;
           margin-left: 2px;
-          color: #3b82f6;
+          color: $accent-color;
           animation: blink 1s steps(2, start) infinite;
           user-select: none;
           font-weight: bold;
         }
 
         :deep(.tag) {
-          color: #3b82f6;
+          color: $accent-color;
           font-weight: bold;
         }
 

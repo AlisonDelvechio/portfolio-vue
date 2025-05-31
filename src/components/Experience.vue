@@ -73,12 +73,11 @@ onMounted(() => {
 .timeline {
   display: flex;
   flex-direction: column;
-  // gap: 2.5rem;
   align-items: center;
 }
 
 .timeline-item {
-  border-left: 3px solid #3b82f6;
+  border-left: 3px solid $accent-color;
   padding-left: 1.5rem;
   position: relative;
   max-width: 600px; 
@@ -99,8 +98,8 @@ onMounted(() => {
     top: -0.8rem;
     width: 1rem;
     height: 1rem;
-    background: #3b82f6;
-    border: 2px solid #fff;
+    background: $accent-color;
+    border: 2px solid #f0f0f0;
     border-radius: 50%;
   }
 

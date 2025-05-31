@@ -69,7 +69,6 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
-  
 
   &:hover {
     transform: translateY(-8px);

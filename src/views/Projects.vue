@@ -152,18 +152,18 @@ function goBack() {
       padding: 0.4rem;
       border-radius: 50%;
       border: 1px solid vars.$primary-color-light;
-      color: vars.$primary-color-light; /* Light mode: cinza escuro */
+      color: vars.$primary-color-light;
       transition: background 0.3s ease, transform 0.3s ease;
 
       &:hover {
         background: vars.$primary-color-light;
-        color: white;
+        color: $primary-color-dark;
         transform: scale(1.1);
       }
 
       body.dark & {
-        border-color: vars.$primary-color-dark; /* Dark mode: borda branca */
-        color: vars.$primary-color-dark; /* Dark mode: ícone branco */
+        border-color: vars.$primary-color-dark; 
+        color: vars.$primary-color-dark; 
       }
     }
 
@@ -228,7 +228,7 @@ function goBack() {
     align-items: center;
     gap: 0.5rem;
     background: vars.$primary-color-light;
-    color: white;
+    color: $primary-color-dark;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     margin: 1rem 0;
@@ -274,7 +274,7 @@ function goBack() {
       border: none;
       border-radius: 8px;
       background: vars.$primary-color-light;
-      color: white;
+      color: $primary-color-dark;
       cursor: pointer;
 
       &:disabled {

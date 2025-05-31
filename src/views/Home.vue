@@ -8,7 +8,6 @@
   <ProjectsPreview />
   <ExperiencePreview />
   <Contact />
-  <!-- <div class="section-divider"></div> -->
   <ScrollTopButton />
 </template>
 
@@ -19,7 +18,7 @@ import Expertise from '@/components/Expertise.vue';
 import MyWork from '@/components/MyWork.vue';
 import ProjectsPreview from '@/components/ProjectsPreview.vue';
 import ExperiencePreview from '@/components/ExperiencePreview.vue'
-import Contact from '../components/Contact.vue';
+import Contact from '@/components/Contact.vue';
 </script>
 
 <style scoped lang="scss">
@@ -33,7 +32,12 @@ import Contact from '../components/Contact.vue';
 .hero-expertise-wrapper {
   background-image:
     url('@/assets/diagmonds-dark.png'),
-    linear-gradient(to bottom, rgba(31,31,31,1) 0%, rgba(31,31,31,0.4) 70%, rgba(31,31,31,0) 100%);
+    linear-gradient(
+      to bottom, 
+      rgba(31,31,31,1) 0%, 
+      rgba(31,31,31,0.4) 70%, 
+      rgba(31,31,31,0) 
+    100%);
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center top, center;
@@ -44,7 +48,12 @@ import Contact from '../components/Contact.vue';
   body.light & {
     background-image:
       url('@/assets/diagmonds-light.png'),
-      linear-gradient(to bottom, rgba(220,220,220,1) 0%, rgba(220,220,220,0.4) 70%, rgba(220,220,220,0) 100%);
+      linear-gradient(
+        to bottom, 
+        rgba(220,220,220,1) 0%, 
+        rgba(220,220,220,0.4) 70%, 
+        rgba(220,220,220,0) 
+      100%);
   }
 }
 
@@ -52,8 +61,8 @@ import Contact from '../components/Contact.vue';
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #3b82f6;
-  color: white;
+  background-color: $accent-color;
+  color: $primary-color-dark;
   border: none;
   border-radius: 50%;
   width: 40px;
