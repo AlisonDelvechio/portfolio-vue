@@ -23,10 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue'
+import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 
-const myWorkSection = ref<HTMLElement | null>(null);
-const inView = ref(false);
+const myWorkSection = ref<HTMLElement | null>(null)
+const inView = ref(false)
 
 const rawText = `<h4 class="title">Contribuições no Mundo Tech</h4>
 <p class="text">Entrego soluções que facilitam o dia a dia das equipes de tecnologia e elevam a qualidade dos produtos.</p>
@@ -34,61 +35,54 @@ const rawText = `<h4 class="title">Contribuições no Mundo Tech</h4>
   <li>Colaboração efetiva entre times multidisciplinares</li>
   <li>Foco em usabilidade e experiência do usuário</li>
   <li>Adaptação rápida às mudanças e desafios</li>
-</ul>`;
+</ul>`
 
 function escapeHtml(text: string) {
   return text.replace(/&/g, '&amp;')
              .replace(/</g, '&lt;')
-             .replace(/>/g, '&gt;');
+             .replace(/>/g, '&gt;')
 }
 
 function syntaxHighlight(text: string) {
-  let escaped = escapeHtml(text);
+  let escaped = escapeHtml(text)
 
-  // Destaca atributos e valores
   escaped = escaped.replace(/(\bclass\b)(=)("[^"]*")/g, (_, attr, eq, val) => {
-    return `<span class="attr">${attr}</span>${eq}<span class="value">${val}</span>`;
-  });
+    return `<span class="attr">${attr}</span>${eq}<span class="value">${val}</span>`
+  })
 
-  // Destaca outras tags
   escaped = escaped.replace(/(&lt;\/?[\w-]+[^&]*?&gt;)/g, match => {
-    return `<span class="tag">${match}</span>`;
-  });
+    return `<span class="tag">${match}</span>`
+  })
 
-  return escaped;
+  return escaped
 }
 
-const displayedText = ref('');
-let index = 0;
-let interval: number | undefined;
+const displayedText = ref('')
+let index = 0
+let interval: number | undefined
 
 function startTyping() {
-  displayedText.value = '';
-  index = 0;
+  displayedText.value = ''
+  index = 0
 
   interval = window.setInterval(() => {
-    index++;
-    displayedText.value = syntaxHighlight(rawText.slice(0, index));
-    if (index >= rawText.length) clearInterval(interval);
-  }, 25);
+    index++
+    displayedText.value = syntaxHighlight(rawText.slice(0, index))
+    if (index >= rawText.length) clearInterval(interval)
+  }, 25)
 }
 
-function handleIntersection(entries: IntersectionObserverEntry[]) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !inView.value) {
-      inView.value = true;
-      startTyping();
-    }
-  });
-}
-
-onMounted(() => {
-  const observer = new IntersectionObserver(handleIntersection, { threshold: 0.3 });
-  if (myWorkSection.value) observer.observe(myWorkSection.value);
-});
+useIntersectionObserver(myWorkSection, () => {
+  if (!inView.value) {
+    inView.value = true
+    startTyping()
+  }
+}, 0.3)
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/variables' as vars;
+
 .my-work {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -101,6 +95,11 @@ onMounted(() => {
     h2 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
+      color: vars.$primary-color-dark;
+
+      body.light & {
+        color: vars.$primary-color-light;
+      }
     }
   }
 
@@ -117,7 +116,7 @@ onMounted(() => {
       svg {
         width: 100%;
         height: auto;
-        stroke: $accent-color;
+        stroke: vars.$accent-color;
         stroke-width: 2;
         fill: none;
         stroke-dasharray: 400;
@@ -137,7 +136,7 @@ onMounted(() => {
         height: 84%;
         font-family: monospace;
         font-size: 0.9rem;
-        color: #f0f0f0;
+        color: vars.$text-color-dark;
         background: rgba(0, 0, 0, 0.7);
         border-radius: 25px;
         padding: 1rem;
@@ -161,14 +160,14 @@ onMounted(() => {
         .cursor {
           display: inline;
           margin-left: 2px;
-          color: $accent-color;
+          color: vars.$accent-color;
           animation: blink 1s steps(2, start) infinite;
           user-select: none;
           font-weight: bold;
         }
 
         :deep(.tag) {
-          color: $accent-color;
+          color: vars.$accent-color;
           font-weight: bold;
         }
 
@@ -185,11 +184,49 @@ onMounted(() => {
   }
 }
 
-body.dark {
+body.light {
   .my-work {
+    .text-content {
+      h2 {
+        color: vars.$primary-color-light;
+      }
+    }
     .visual-effect {
       .pc-frame {
         .typing {
+          color: vars.$text-color-light;
+          background: rgba(245, 245, 245, 0.8);
+        }
+
+        :deep(.tag) {
+          color: #d73a49; // vermelho suave
+          font-weight: bold;
+        }
+
+        :deep(.attr) {
+          color: #6f42c1; // roxo médio
+          font-weight: 600;
+        }
+
+        :deep(.value) {
+          color: #22863a; // verde vibrante
+        }
+      }
+    }
+  }
+}
+
+body.dark {
+  .my-work {
+    .text-content {
+      h2 {
+        color: vars.$primary-color-dark;
+      }
+    }
+    .visual-effect {
+      .pc-frame {
+        .typing {
+          color: vars.$text-color-dark;
           background: rgba(20, 20, 20, 0.8);
         }
       }
@@ -214,7 +251,7 @@ body.dark {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 1.5rem;
+      margin: 0 1rem 1.5rem 1rem;
 
       h2 {
         font-size: 2rem;
@@ -224,7 +261,7 @@ body.dark {
     .visual-effect {
       .pc-frame {
         width: 100%;
-        max-width: 350px; 
+        max-width: 350px;
         height: 250px;
 
         .typing {
@@ -240,5 +277,4 @@ body.dark {
     }
   }
 }
-
 </style>

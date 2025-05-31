@@ -25,7 +25,7 @@ import Contact from '@/components/Contact.vue';
 .section-divider {
   width: 100%;
   height: 2px;
-  background: rgba(255, 255, 255, 0.05);
+  background: $divider-color-light;
   margin: 3rem 0;
 }
 
@@ -33,11 +33,11 @@ import Contact from '@/components/Contact.vue';
   background-image:
     url('@/assets/diagmonds-dark.png'),
     linear-gradient(
-      to bottom, 
-      rgba(31,31,31,1) 0%, 
-      rgba(31,31,31,0.4) 70%, 
-      rgba(31,31,31,0) 
-    100%);
+      to bottom,
+      $bg-dark-strong 0%,
+      $bg-dark-medium 70%,
+      $bg-dark-transparent 100%
+    );
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center top, center;
@@ -49,11 +49,11 @@ import Contact from '@/components/Contact.vue';
     background-image:
       url('@/assets/diagmonds-light.png'),
       linear-gradient(
-        to bottom, 
-        rgba(220,220,220,1) 0%, 
-        rgba(220,220,220,0.4) 70%, 
-        rgba(220,220,220,0) 
-      100%);
+        to bottom,
+        $bg-light-strong 0%,
+        $bg-light-medium 70%,
+        $bg-light-transparent 100%
+      );
   }
 }
 

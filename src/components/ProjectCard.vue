@@ -3,10 +3,15 @@
     ref="cardRef"
     :class="['project-card', { visible: isVisible }]"
     :style="{ transitionDelay: `${delay}ms` }"
+    role="button"
+    tabindex="0"
+    :aria-label="`Abrir detalhes do projeto ${title}`"
     @click="goToProject"
+    @keydown.enter.prevent="goToProject"
+    @keydown.space.prevent="goToProject"
   >
     <div class="image-container">
-      <img :src="image" :alt="title" class="project-image" />
+      <img :src="image" :alt="`Imagem do projeto ${title}`" class="project-image" />
     </div>
     <div class="project-info">
       <h3 class="project-title">{{ title }}</h3>
@@ -16,40 +21,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 
 const props = defineProps<{
-  title: string;
-  description: string;
-  image: string;
-  delay: number;
-}>();
+  title: string
+  description: string
+  image: string
+  delay: number
+}>()
 
-const router = useRouter();
+const router = useRouter()
 
 function goToProject() {
-  router.push({ name: 'Projects', query: { project: props.title } });
+  router.push({ name: 'Projects', query: { project: props.title } })
 }
 
-const cardRef = ref<HTMLElement | null>(null);
-const isVisible = ref(false);
+const cardRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        isVisible.value = true;
-        observer.disconnect();
-      }
-    },
-    { threshold: 0.1 }
-  );
-
-  if (cardRef.value) {
-    observer.observe(cardRef.value);
-  }
-});
+useIntersectionObserver(cardRef, () => {
+  isVisible.value = true
+}, 0.1)
 </script>
 
 <style scoped lang="scss">
@@ -61,38 +55,39 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-  background-color: vars.$secondary-color-light; 
-  border: 1px solid #e0e0e0;
   cursor: pointer;
-
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: 
+    transform 0.6s ease,
+    opacity 0.6s ease;
 
-  &:hover {
-    transform: translateY(-8px);
-
-    .project-image {
-      transform: scale(1.10);
-      transition: transform 0.4s ease;
-    }
-  }
+  background-color: vars.$secondary-color-light; 
+  border: 1px solid #e0e0e0;
 
   &.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .image-container {
-    overflow: hidden;
+  &:hover {
+    transform: translateY(-8px);
+    transition: transform 0.2s ease;
+
+    .project-image {
+      transform: scale(1.10);
+    }
   }
 
-  .project-image {
-    width: 100%;
-    height: 15rem;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  .image-container {
+    overflow: hidden;
+
+    .project-image {
+      width: 100%;
+      height: 15rem;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
   }
 
   .project-info {

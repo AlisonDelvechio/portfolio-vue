@@ -117,12 +117,12 @@ onMounted(() => {
   width: 100%;
   z-index: 1000;
 
-  background: rgba(18, 18, 18, 0.8);
+  background: rgba(18, 18, 18, 0.8); // fundo dark
   backdrop-filter: blur(8px);
   padding: 1.5rem 0;
 
   body.light & {
-    background: rgba(245, 245, 245, 0.8);
+    background: rgba(245, 245, 245, 0.8); // fundo light
   }
 
   .container {
@@ -161,10 +161,10 @@ onMounted(() => {
       font-size: 1.2rem;
 
       li a {
-        color: vars.$primary-color-dark;
+        color: vars.$primary-color-dark; // default para dark theme: texto claro
 
         body.light & {
-          color: vars.$primary-color-light;
+          color: vars.$primary-color-light; // light theme: texto escuro
         }
 
         text-decoration: none;
@@ -176,10 +176,10 @@ onMounted(() => {
           display: block;
           width: 0;
           height: 2px;
-          background: vars.$primary-color-dark;
+          background: vars.$primary-color-light;
 
           body.light & {
-            background: vars.$primary-color-light;
+            background: vars.$primary-color-dark;
           }
 
           transition: width 0.3s;
@@ -206,10 +206,10 @@ onMounted(() => {
     .bar {
       width: 25px;
       height: 3px;
-      background: vars.$primary-color-dark;
+      background: vars.$primary-color-dark; // para dark, barra clara
 
       body.light & {
-        background: vars.$primary-color-light;
+        background: vars.$primary-color-light; // para light, barra escura
       }
 
       border-radius: 2px;
@@ -312,7 +312,7 @@ onMounted(() => {
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
 
-    background-color: #333;
+    background-color: #333; // dark mode default slider background
     border-radius: 34px;
     transition: background-color 0.4s;
 
@@ -367,5 +367,4 @@ onMounted(() => {
     }
   }
 }
-
 </style>

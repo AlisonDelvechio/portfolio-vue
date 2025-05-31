@@ -25,30 +25,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
+import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 
 const contactSection = ref<HTMLElement | null>(null)
 const animate = ref(false)
 
-onMounted(() => {
-  if (!contactSection.value) return
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        animate.value = true
-        observer.disconnect()
-      }
-    },
-    { threshold: 0.1 }
-  )
-
-  observer.observe(contactSection.value)
-})
+useIntersectionObserver(contactSection, () => {
+  animate.value = true
+}, 0.1)
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/variables' as vars;
+
 .contact {
   position: relative;
   padding: 4rem 2rem;
@@ -57,8 +48,9 @@ onMounted(() => {
     url('@/assets/diagmonds-dark.png'),
     linear-gradient(
       to right, 
-      rgba(18, 18, 18, 0.85), 
-      rgba(18, 18, 18, 0.6));
+      rgba(vars.$secondary-color-dark, 0.85), 
+      rgba(vars.$secondary-color-dark, 0.6)
+    );
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center center, center;
@@ -68,24 +60,31 @@ onMounted(() => {
     background-image:
       url('@/assets/diagmonds-light.png'),
       linear-gradient(
-        to bottom, rgba(220,220,220,1) 0%, 
-        rgba(220,220,220,0.4) 70%, 
-        rgba(220,220,220,0) 100%);
+        to bottom, 
+        rgba(vars.$secondary-color-light, 1), 
+        rgba(vars.$secondary-color-light, 0.4), 
+        rgba(vars.$secondary-color-light, 0)
+      );
   }
 
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: vars.$text-color-light;
+
+    body.dark & {
+      color: vars.$text-color-dark;
+    }
   }
 
   p {
     font-size: 1.1rem;
-    color: #666;
+    color: vars.$primary-color-light;
     max-width: 500px;
     margin: 0 auto 2rem;
 
     body.dark & {
-      color: #aaa;
+      color: vars.$primary-color-dark;
     }
   }
 
@@ -101,16 +100,16 @@ onMounted(() => {
       align-items: center;
       gap: 0.5rem;
       font-weight: 500;
-      color: #333;
+      color: vars.$primary-color-light;
       text-decoration: none;
       transition: color 0.3s, transform 0.3s;
 
       body.dark & {
-        color: #eee;
+        color: vars.$primary-color-dark;
       }
 
       &:hover {
-        color: #007bff;
+        color: vars.$accent-color;
         transform: translateY(-3px);
       }
     }

@@ -4,11 +4,12 @@
     <p>Uma coleção de projetos nos quais trabalhei</p>
     <div class="grid">
       <ProjectCard
-        v-for="(project, index) in projects"
+        v-for="(project, index) in orderedProjects"
         :key="index"
         :title="project.title"
         :description="project.description"
         :image="project.image"
+        :alt="`Imagem do projeto ${project.title}`"
         :delay="index * 100"
       />
     </div>
@@ -25,31 +26,38 @@ import Project5 from '@/assets/projects/Project_5.png';
 
 const projects = [
   {
+    order: 1,
     title: 'Star Blaster Game',
     description: `Um jogo de navegador estilo Shoot'em up usando apenas tecnologias básicas`,
     image: Project1
   },
   {
+    order: 2,
     title: 'League of Legends login screen',
     description: 'Uma recriação da tela de login do League of Legends',
     image: Project2
   },
   {
+    order: 3,
     title: 'Pokedex',
     description: 'Uma pokédex com funções de busca e listagem consumindo uma API.',
     image: Project3
   },
   {
+    order: 4,
     title: 'InventecTCC',
-    description: 'Programa de gerenciamento de patrimônio realizada para conclusão de curso e entregue a instituição',
+    description: 'Programa de gerenciamento de patrimônio realizada para conclusão de curso e entregue à instituição',
     image: Project4
   },
   {
+    order: 5,
     title: 'First Portfolio',
     description: 'Meu primeiro portfólio, feito sem usar frameworks, apenas em javascript, CSS e HTML',
     image: Project5
   }
 ];
+
+const orderedProjects = projects.slice().sort((a, b) => a.order - b.order);
 </script>
 
 <style scoped lang="scss">
@@ -85,23 +93,22 @@ const projects = [
 
   p {
     font-size: 1rem;
-    color: #666;
+    color: vars.$text-muted-light;
+    margin-bottom: 2rem;
 
     body.dark & {
-      color: #aaa;
+      color: vars.$text-muted-dark;
     }
-    margin-bottom: 2rem;
   }
 
   @media (max-width: 768px) {
-    padding: 0;
+    padding: 2rem 1rem;
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding: 0 2rem;
+    gap: 2rem; // mantém espaçamento entre os cards
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
@@ -112,5 +119,4 @@ const projects = [
     }
   }
 }
-
 </style>

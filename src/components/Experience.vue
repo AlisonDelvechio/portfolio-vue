@@ -70,6 +70,8 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/variables' as vars;
+
 .timeline {
   display: flex;
   flex-direction: column;
@@ -77,7 +79,7 @@ onMounted(() => {
 }
 
 .timeline-item {
-  border-left: 3px solid $accent-color;
+  border-left: 3px solid vars.$accent-color;
   padding-left: 1.5rem;
   position: relative;
   max-width: 600px; 
@@ -98,8 +100,8 @@ onMounted(() => {
     top: -0.8rem;
     width: 1rem;
     height: 1rem;
-    background: $accent-color;
-    border: 2px solid #f0f0f0;
+    background: vars.$accent-color;
+    border: 2px solid vars.$primary-color-dark;
     border-radius: 50%;
   }
 
@@ -112,18 +114,19 @@ onMounted(() => {
     .role {
       font-weight: 600;
       font-size: 1.25rem;
+      color: vars.$text-color-light;
+
+      body.dark & {
+        color: vars.$text-color-dark;
+      }
     }
 
     .date {
       font-size: 1.1rem; 
-      color: $primary-color-dark;
-    }
-  }
+      color: vars.$primary-color-dark;
 
-  body.light & {
-    .timeline-header {
-      .date {
-        color: $primary-color-light;
+      body.light & {
+        color: vars.$primary-color-light;
       }
     }
   }
@@ -153,11 +156,16 @@ onMounted(() => {
         align-items: center;
         gap: 0.5rem;
         font-weight: 500;
+        color: vars.$text-color-light;
+
+        body.dark & {
+          color: vars.$text-color-dark;
+        }
       }
 
       .description {
         color: #555;
-        text-align: left; 
+        text-align: left;
 
         body.dark & {
           color: #ccc;
@@ -170,8 +178,8 @@ onMounted(() => {
         gap: 0.5rem;
 
         .tag {
-          background: $accent-color;
-          color: $primary-color-dark;
+          background: vars.$accent-color;
+          color: vars.$primary-color-dark;
           padding: 0.25rem 0.5rem;
           border-radius: 8px;
           font-size: 0.75rem;
@@ -183,6 +191,14 @@ onMounted(() => {
       width: 50px;
       height: 50px;
       object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-content {
+    .logo {
+      display: none; 
     }
   }
 }

@@ -1,7 +1,16 @@
 <template>
   <section class="project-page" :class="{ 'enter-active': isVisible }">
     <div class="project-header">
-      <Icon icon="mdi:arrow-left" class="back-icon" @click="goBack" />
+      <!-- Botão de voltar -->
+      <Icon 
+        icon="mdi:arrow-left" 
+        class="back-icon" 
+        @click="goBack" 
+        role="button" 
+        tabindex="0" 
+        aria-label="Voltar para a página anterior" 
+        @keyup.enter="goBack" 
+      />
       <h1>{{ project.title }}</h1>
     </div>
     
@@ -16,7 +25,12 @@
       <span v-for="(tag, index) in project.tags" :key="index" class="tag">{{ tag }}</span>
     </div>
 
-    <a :href="project.repo" target="_blank" class="repo-btn">
+    <a 
+      :href="project.repo" 
+      target="_blank" 
+      class="repo-btn"
+      :aria-label="`Ver repositório do projeto ${project.title} no GitHub (abre em nova aba)`"
+    >
       <Icon icon="mdi:github" class="icon" />
       Ver repositório
     </a>
@@ -26,15 +40,23 @@
         v-for="(image, index) in project.images" 
         :key="index" 
         :src="image" 
-        :alt="`Imagem ${index + 1}`" 
+        :alt="`${project.title} - imagem ${index + 1}`" 
       />
     </div>
 
     <div class="nav-buttons">
-      <button @click="prevProject" :disabled="currentIndex === 0">
+      <button 
+        @click="prevProject" 
+        :disabled="currentIndex === 0"
+        aria-label="Projeto anterior"
+      >
         <Icon icon="mdi:arrow-left-bold" /> Anterior
       </button>
-      <button @click="nextProject" :disabled="currentIndex === projects.length - 1">
+      <button 
+        @click="nextProject" 
+        :disabled="currentIndex === projects.length - 1"
+        aria-label="Próximo projeto"
+      >
         Próximo <Icon icon="mdi:arrow-right-bold" />
       </button>
     </div>
@@ -80,42 +102,42 @@ const route = useRoute();
 const projects = [
   {
     title: 'Star Blaster Game',
-    description: 'A Shoot\'em up style browser game using only basic technologies.',
-    date: '2025-05-30',
+    description: 'Um jogo de nave no estilo shoot\'em up, desenvolvido para rodar diretamente no navegador utilizando apenas HTML, CSS e JavaScript puro. O principal desafio foi criar a mecânica de movimentação fluida, colisões e efeitos gráficos utilizando a API Canvas.',
+    date: '27/09/2024',
     tags: ['JavaScript', 'Game', 'Canvas'],
     repo: 'https://github.com/AlisonDelvechio/star-blaster-game',
     images: [Project1_1, Project1_2, Project1_3, Project1_4, Project1_5]
   },
   {
-    title: 'League of Legends login screen',
-    description: 'A recreation of the League of Legends login screen.',
-    date: '2025-05-20',
-    tags: ['Vue', 'CSS'],
-    repo: 'https://github.com/seuuser/league-login',
+    title: 'Tela de Login League of Legends',
+    description: 'Recriação fiel da icônica tela de login do League of Legends, com foco em animações e responsividade. O projeto explora a manipulação do DOM e estilização avançada com CSS para simular a interface original.',
+    date: '21/01/2023',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    repo: 'https://github.com/AlisonDelvechio/league-of-legends-login-screen',
     images: [Project2_1, Project2_2]
   },
   {
-    title: 'Pokedex',
-    description: 'A Pokedex app with search and listing functions consuming an API.',
-    date: '2025-05-15',
-    tags: ['Vue', 'API', 'Pokedex'],
-    repo: 'https://github.com/seuuser/pokedex',
+    title: 'Pokédex',
+    description: 'Aplicação web que consome a PokéAPI para listar e pesquisar Pokémon, utilizando JavaScript para manipulação dinâmica dos dados e renderização das informações. O projeto reforça o consumo de APIs REST e manipulação de elementos via JavaScript.',
+    date: '07/01/2023',
+    tags: ['CSS', 'JavaScript', 'API'],
+    repo: 'https://github.com/AlisonDelvechio/simple-pokedex',
     images: [Project3_1, Project3_2, Project3_3]
   },
   {
     title: 'InventecTCC',
-    description: 'A Pokedex app with search and listing functions consuming an API.',
-    date: '2025-05-15',
-    tags: ['Vue', 'API', 'Pokedex'],
-    repo: 'https://github.com/seuuser/pokedex',
+    description: 'Sistema web completo para gerenciamento de inventário e controle de estoque, desenvolvido como Trabalho de Conclusão de Curso (TCC). Utiliza PHP com integração ao banco de dados MySQL, além de recursos dinâmicos com jQuery e Ajax para melhor experiência do usuário.',
+    date: '15/05/2021',
+    tags: ['PHP', 'MySQL', 'Bootstrap', 'CSS', 'JavaScript', 'jQuery', 'Ajax'],
+    repo: 'https://github.com/AlisonDelvechio/InventecTCC',
     images: [Project4_1, Project4_2, Project4_3, Project4_4]
   },
   {
-    title: 'First Portfolio',
-    description: 'A Pokedex app with search and listing functions consuming an API.',
-    date: '2025-05-15',
-    tags: ['Vue', 'API', 'Pokedex'],
-    repo: 'https://github.com/seuuser/pokedex',
+    title: 'Primeiro Portfólio',
+    description: 'Meu primeiro portfólio desenvolvido para apresentar projetos e habilidades. Estruturado com HTML, CSS e JavaScript, com foco em boas práticas de responsividade e design. Esse projeto marcou minha introdução no desenvolvimento web e na criação de interfaces visuais.',
+    date: '02/07/2021',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    repo: 'https://github.com/AlisonDelvechio/Portfolio',
     images: [Project5_1, Project5_2, Project5_3, Project5_4, Project5_5, Project5_6]
   }
 ];
@@ -188,13 +210,13 @@ function goBack() {
 
       &:hover {
         background: vars.$primary-color-light;
-        color: $primary-color-dark;
+        color: vars.$primary-color-dark;
         transform: scale(1.1);
       }
 
       body.dark & {
-        border-color: vars.$primary-color-dark; 
-        color: vars.$primary-color-dark; 
+        border-color: vars.$primary-color-dark;
+        color: vars.$primary-color-dark;
       }
     }
 
@@ -238,8 +260,8 @@ function goBack() {
 
     .tag {
       display: inline-block;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: vars.$tag-bg-light;
+      border: 1px solid vars.$tag-border-light;
       border-radius: 20px;
       padding: 0.3rem 0.8rem;
       font-size: 0.8rem;
@@ -247,8 +269,8 @@ function goBack() {
       color: vars.$text-color-light;
 
       body.dark & {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
+        background: vars.$tag-bg-dark;
+        border-color: vars.$tag-border-dark;
         color: vars.$text-color-dark;
       }
     }
@@ -259,7 +281,7 @@ function goBack() {
     align-items: center;
     gap: 0.5rem;
     background: vars.$primary-color-light;
-    color: $primary-color-dark;
+    color: vars.$primary-color-dark;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     margin: 1rem 0;
@@ -267,7 +289,7 @@ function goBack() {
     transition: background 0.3s ease, transform 0.2s ease;
 
     &:hover {
-      background: vars.$primary-color-light; 
+      background: vars.$primary-color-light;
       transform: translateY(-2px);
     }
   }
@@ -282,7 +304,7 @@ function goBack() {
     img {
       width: 100%;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px vars.$shadow-light;
       transition: transform 0.3s ease;
 
       &:hover {
@@ -304,7 +326,7 @@ function goBack() {
       border: none;
       border-radius: 8px;
       background: vars.$primary-color-light;
-      color: $primary-color-dark;
+      color: vars.$primary-color-dark;
       cursor: pointer;
 
       &:disabled {
@@ -315,7 +337,7 @@ function goBack() {
       &:hover:not(:disabled) {
         background: vars.$primary-color-light;
         transform: translateY(-2px);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px vars.$shadow-light;
       }
     }
   }

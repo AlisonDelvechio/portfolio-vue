@@ -4,13 +4,31 @@
 $accent-color: #3b82f6;
 $font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $font-code: "Roboto Mono", monospace;
+$shadow-light: rgba(0, 0, 0, 0.1);
 
 // Tema Dark
 $primary-color-dark: #f0f0f0;
 $secondary-color-dark: #121212;
-$text-color-dark: #f0f0f0; 
+$text-color-dark: #f0f0f0;
+$tag-bg-dark: rgba(255, 255, 255, 0.1);
+$tag-border-dark: rgba(255, 255, 255, 0.2);
+$bg-dark-strong: rgba(31, 31, 31, 1);
+$bg-dark-medium: rgba(31, 31, 31, 0.4);
+$bg-dark-transparent: rgba(31, 31, 31, 0);
+$background-dark: #121212;
+$text-color-dark: #ddd;
+$text-muted-dark: #aaaaaa;
 
 // Tema Light
-$primary-color-light: #272727; 
+$primary-color-light: #272727;
 $secondary-color-light: #f0f0f0;
-$text-color-light: #333333; 
+$text-color-light: #333333;
+$divider-color-light: rgba(255, 255, 255, 0.05);
+$tag-bg-light: rgba(0, 0, 0, 0.05);
+$tag-border-light: rgba(0, 0, 0, 0.1);
+$bg-light-strong: rgba(220, 220, 220, 1);
+$bg-light-medium: rgba(220, 220, 220, 0.4);
+$bg-light-transparent: rgba(220, 220, 220, 0);
+$background-light: #f5f5f5;
+$text-color-light: #333;
+$text-muted-light: #666666;

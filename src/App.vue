@@ -77,4 +77,10 @@ onBeforeUnmount(() => {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .mouse-follower {
+    display: none;
+  }
+}
 </style>

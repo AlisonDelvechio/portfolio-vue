@@ -40,7 +40,7 @@
           <span>Front-end Engineering</span>
         </div>
         <h3 class="code-description">
-          | Apaixonado por UI/UX. Mais de 5 anos de experiência em desenvolvimento com frameworks. |
+          | Apaixonado por UI/UX. Mais de <strong>5 anos</strong> de experiência em desenvolvimento com frameworks. |
         </h3>
         <div class="specialties">
           <span>HTML</span>
@@ -84,6 +84,7 @@ import { Icon } from '@iconify/vue'
   }
 
   .expertise-item {
+    position: relative;
     border: 1px solid vars.$primary-color-dark;
 
     body.light & {
@@ -216,6 +217,10 @@ import { Icon } from '@iconify/vue'
 
   @media (max-width: 768px) {
     padding: 1rem 0;
+
+    .expertise-title {
+      font-size: 2rem;
+    }
 
     .expertise-grid {
       grid-template-columns: 1fr;
