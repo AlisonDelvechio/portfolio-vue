@@ -1,50 +1,53 @@
 <template>
-  <div>
+  <section class="hero-expertise-wrapper">
     <Hero />
     <Expertise />
-    <MyWork />
-    <ProjectsPreview />
-    <ExperiencePreview />
-    <Contact />
-    <button 
-      class="scroll-top" 
-      v-show="showScrollTop" 
-      @click="scrollToTop">
-        <Icon :icon="'mdi:arrow-up'" width="24" height="24" />
-    </button>
-  </div>
+  </section>
+  <div class="section-divider"></div>
+  <MyWork />
+  <ProjectsPreview />
+  <ExperiencePreview />
+  <Contact />
+  <!-- <div class="section-divider"></div> -->
+  <ScrollTopButton />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { Icon } from '@iconify/vue';
+import ScrollTopButton from '@/components/ScrollTopButton.vue';
 import Hero from '@/components/Hero.vue';
 import Expertise from '@/components/Expertise.vue';
 import MyWork from '@/components/MyWork.vue';
 import ProjectsPreview from '@/components/ProjectsPreview.vue';
 import ExperiencePreview from '@/components/ExperiencePreview.vue'
 import Contact from '../components/Contact.vue';
-
-const showScrollTop = ref(false);
-
-function handleScroll() {
-  showScrollTop.value = window.scrollY > 100;
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
 </script>
 
 <style scoped lang="scss">
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 3rem 0;
+}
+
+.hero-expertise-wrapper {
+  background-image:
+    url('@/assets/diagmonds-dark.png'),
+    linear-gradient(to bottom, rgba(31,31,31,1) 0%, rgba(31,31,31,0.4) 70%, rgba(31,31,31,0) 100%);
+  background-repeat: repeat, no-repeat;
+  background-size: 150px 150px, cover;
+  background-position: center top, center;
+  background-blend-mode: overlay;
+  padding-bottom: 4rem;
+
+  // Modo light
+  body.light & {
+    background-image:
+      url('@/assets/diagmonds-light.png'),
+      linear-gradient(to bottom, rgba(220,220,220,1) 0%, rgba(220,220,220,0.4) 70%, rgba(220,220,220,0) 100%);
+  }
+}
+
 .scroll-top {
   position: fixed;
   bottom: 20px;

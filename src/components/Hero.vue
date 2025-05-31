@@ -40,20 +40,20 @@ section {
   padding: 2rem;
 
   // Fundo gradiente + textura (dark)
-  background-image: 
-    linear-gradient(
-      to bottom,
-      vars.$secondary-color-dark 0%,
-      #1f1f1f 30%,
-      #1c365e 60%,
-      vars.$secondary-color-dark 100%
-    ),
-    url('@/assets/diagmonds-dark.png');
+  // background-image: 
+  //   linear-gradient(
+  //     to bottom,
+  //     vars.$secondary-color-dark 0%,
+  //     #1f1f1f 30%,
+  //     #1c365e 60%,
+  //     vars.$secondary-color-dark 100%
+  //   ),
+  //   url('@/assets/diagmonds-dark.png');
   
-  background-repeat: no-repeat, repeat;
-  background-size: cover, 150px 150px;
-  background-position: center, center;
-  background-blend-mode: overlay;
+  // background-repeat: no-repeat, repeat;
+  // background-size: cover, 150px 150px;
+  // background-position: center, center;
+  // background-blend-mode: overlay;
 
   .hero-content {
     max-width: 800px;
@@ -68,15 +68,15 @@ section {
 
   // Light mode 
   body.light & {
-    background-image: 
-      linear-gradient(
-        to bottom,
-        vars.$secondary-color-light 0%,
-        #dcdcdc 30%,
-        #a0c4ff 60%,
-        vars.$secondary-color-light 100%
-      ),
-      url('@/assets/diagmonds-light.png');
+    // background-image: 
+    //   linear-gradient(
+    //     to bottom,
+    //     vars.$secondary-color-light 0%,
+    //     #dcdcdc 30%,
+    //     #a0c4ff 60%,
+    //     vars.$secondary-color-light 100%
+    //   ),
+    //   url('@/assets/diagmonds-light.png');
 
     // background-image: 
     //   linear-gradient(
@@ -87,10 +87,10 @@ section {
     //   ),
     //   url('@/assets/diagmonds-light.png');
 
-    background-repeat: no-repeat, repeat;
-    background-size: cover, 150px 150px;
-    background-position: center, center;
-    background-blend-mode: overlay;
+    // background-repeat: no-repeat, repeat;
+    // background-size: cover, 150px 150px;
+    // background-position: center, center;
+    // background-blend-mode: overlay;
   }
 
   @media (max-width: 768px) {

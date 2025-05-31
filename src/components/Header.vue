@@ -2,17 +2,17 @@
   <header class="header">
     <div class="container">
       <!-- Logo -->
-      <div class="logo" @click="scrollToTop">
+      <div class="logo" @click="goToHomeSection">
         <img :src="logoSrc" alt="Logo Alison" class="logo-img" />
       </div>
 
       <!-- Navegação -->
       <nav :class="{ 'is-open': menuOpen }" aria-label="Main Navigation">
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#projects">Projetos</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="#expertise">Expertise</router-link></li>
+          <li><router-link to="#projects">Projetos</router-link></li>
+          <li><router-link to="#contato">Contato</router-link></li>
         </ul>
       </nav>
 
@@ -49,8 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
 import LogoAlisonLight from '@/assets/Logo-Alison-V1.svg'
 import LogoAlisonDark from '@/assets/Logo-Alison-V1-Black.svg'
 
@@ -65,8 +66,10 @@ function toggleMenu() {
   menuOpen.value = !menuOpen.value
 }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const router = useRouter();
+
+function goToHomeSection() {
+  router.push({ path: '/', hash: '#home' })
 }
 
 function toggleTheme() {
@@ -81,6 +84,27 @@ function toggleTheme() {
 
 onMounted(() => {
   toggleTheme()
+
+  // Referências dos elementos que queremos monitorar
+  const navEl = document.querySelector('nav')
+  const toggleBtn = document.querySelector('.menu-toggle')
+
+  function handleClickOutside(event: MouseEvent) {
+    if (
+      menuOpen.value &&
+      navEl && toggleBtn &&
+      !navEl.contains(event.target as Node) &&
+      !toggleBtn.contains(event.target as Node)
+    ) {
+      menuOpen.value = false
+    }
+  }
+
+  document.addEventListener('click', handleClickOutside)
+
+  onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside)
+  })
 })
 </script>
 
@@ -199,6 +223,7 @@ onMounted(() => {
     }
 
     .logo {
+      margin-right: 2rem;
       position: static; 
       order: 2; 
 
@@ -215,30 +240,38 @@ onMounted(() => {
       left: 1rem;
     }
 
-    nav {
-      position: absolute;
-      top: 100%;
-      left: 1rem;
-      background: rgba(18, 18, 18, 0.95);
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 1rem;
+    background: rgba(18, 18, 18, 0.95);
 
-      body.light & {
-        background: rgba(245, 245, 245, 0.95);
-      }
-
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      display: none;
-
-      ul {
-        flex-direction: column;
-        gap: 1rem;
-      }
+    body.light & {
+      background: rgba(245, 245, 245, 0.95);
     }
 
-    nav.is-open {
-      display: block;
-      animation: fadeInLeft 0.3s ease forwards;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    pointer-events: none;
+
+    ul {
+      flex-direction: column;
+      gap: 1rem;
     }
+  }
+
+  nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
   }
 
   @keyframes fadeInLeft {

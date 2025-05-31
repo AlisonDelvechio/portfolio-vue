@@ -3,6 +3,7 @@
     ref="cardRef"
     :class="['project-card', { visible: isVisible }]"
     :style="{ transitionDelay: `${delay}ms` }"
+    @click="goToProject"
   >
     <div class="image-container">
       <img :src="image" :alt="title" class="project-image" />
@@ -16,13 +17,20 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
-defineProps<{
-  title: string
-  description: string
-  image: string
-  delay: number
+const props = defineProps<{
+  title: string;
+  description: string;
+  image: string;
+  delay: number;
 }>();
+
+const router = useRouter();
+
+function goToProject() {
+  router.push({ name: 'Projects', query: { project: props.title } });
+}
 
 const cardRef = ref<HTMLElement | null>(null);
 const isVisible = ref(false);
@@ -32,7 +40,7 @@ onMounted(() => {
     ([entry]) => {
       if (entry.isIntersecting) {
         isVisible.value = true;
-        observer.disconnect();  // Remove o observer depois
+        observer.disconnect();
       }
     },
     { threshold: 0.1 }

@@ -10,6 +10,22 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // Voltar para posição salva
+      return savedPosition;
+    } else if (to.hash) {
+      // Se URL tem hash, tenta fazer scroll para o id correspondente
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      };
+    } else {
+      // Scroll para topo da página
+      return { top: 0 };
+    }
+  }
 });
 
 export default router;

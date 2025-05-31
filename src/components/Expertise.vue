@@ -81,11 +81,11 @@ import { Icon } from '@iconify/vue'
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 2rem;
-    background-color: vars.$secondary-color-dark;
+    // background-color: vars.$secondary-color-dark;
 
-    body.light & {
-      background-color: vars.$secondary-color-light;
-    }
+    // body.light & {
+    //   background-color: vars.$secondary-color-light;
+    // }
   }
 
   .expertise-item {
@@ -215,7 +215,6 @@ import { Icon } from '@iconify/vue'
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
-    margin-top: 2rem;
     margin-bottom: 2rem;
     opacity: 0;
     transform: translateY(20px);

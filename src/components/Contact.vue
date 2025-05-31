@@ -1,11 +1,11 @@
 <template>
-  <section id="contato" class="contact">
-    <h2 class="fade-up">Contato</h2>
-    <p class="fade-up delay-1">
+  <section id="contato" class="contact" ref="contactSection">
+    <h2 :class="{ 'fade-up': animate }">Contato</h2>
+    <p :class="['fade-up', 'delay-1', { 'fade-up': animate }]">
       Quer conversar ou colaborar? Me mande um e-mail ou me encontre nas redes:
     </p>
 
-    <div class="contact-links fade-up delay-2">
+    <div :class="['contact-links', 'fade-up', 'delay-2', { 'fade-up': animate }]">
       <a href="mailto:alison.dev@email.com" class="contact-link">
         <Icon icon="mdi:email-outline" width="24" />
         <span>Email</span>
@@ -25,18 +25,46 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { ref, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
+
+const contactSection = ref<HTMLElement | null>(null)
+const animate = ref(false)
+
+onMounted(() => {
+  if (!contactSection.value) return
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        animate.value = true
+        observer.disconnect()
+      }
+    },
+    { threshold: 0.1 }
+  )
+
+  observer.observe(contactSection.value)
+})
 </script>
 
 <style scoped lang="scss">
 .contact {
+  position: relative;
   padding: 4rem 2rem;
   text-align: center;
-  background: linear-gradient(to right, rgba(0,0,0,0.05) 0%, transparent 70%);
-  border-radius: 1rem;
+  background-image:
+    url('@/assets/diagmonds-dark.png'),
+    linear-gradient(to right, rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.6));
+  background-repeat: repeat, no-repeat;
+  background-size: 150px 150px, cover;
+  background-position: center center, center;
+  background-blend-mode: overlay;
 
-  body.dark & {
-    background: linear-gradient(to right, rgba(255,255,255,0.05) 0%, transparent 70%);
+  body.light & {
+    background-image:
+      url('@/assets/diagmonds-light.png'),
+      linear-gradient(to bottom, rgba(220,220,220,1) 0%, rgba(220,220,220,0.4) 70%, rgba(220,220,220,0) 100%);
   }
 
   h2 {
@@ -81,24 +109,22 @@ import { Icon } from '@iconify/vue';
       }
     }
   }
-
 }
 
-/* Animations */
 .fade-up {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s ease forwards;
+  transform: translateX(-50px);
+  animation: fadeLeftToCenter 1s ease forwards;
 }
 
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.4s; }
 .delay-3 { animation-delay: 0.6s; }
 
-@keyframes fadeUp {
+@keyframes fadeLeftToCenter {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
