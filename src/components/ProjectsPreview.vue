@@ -1,7 +1,7 @@
 <template>
   <section class="projects-preview" id="projects">
     <h2>Projetos</h2>
-    <p>A collection of projects I've worked on.</p>
+    <p>Uma coleção de projetos nos quais trabalhei</p>
     <div class="grid">
       <ProjectCard
         v-for="(project, index) in projects"
@@ -17,31 +17,37 @@
 
 <script setup lang="ts">
 import ProjectCard from '@/components/ProjectCard.vue';
-import Project1 from '@/assets/projects/Screenshot_2.png';
-import Project2 from '@/assets/projects/Screenshot_3.png';
-import Project3 from '@/assets/projects/Screenshot_4.png';
-import Project4 from '@/assets/projects/Screenshot_5.png';
+import Project1 from '@/assets/projects/Project_1.png';
+import Project2 from '@/assets/projects/Project_2.png';
+import Project3 from '@/assets/projects/Project_3.png';
+import Project4 from '@/assets/projects/Project_4.png';
+import Project5 from '@/assets/projects/Project_5.png';
 
 const projects = [
   {
     title: 'Star Blaster Game',
-    description: `A Shoot'em up style browser game using only basic technologies`,
+    description: `Um jogo de navegador estilo Shoot'em up usando apenas tecnologias básicas`,
     image: Project1
   },
   {
     title: 'League of Legends login screen',
-    description: 'A recreation of the league of legends login screen',
+    description: 'Uma recriação da tela de login do League of Legends',
     image: Project2
   },
   {
     title: 'Pokedex',
-    description: 'The project is about creating a pokedex with search and listing functions consuming an API.',
+    description: 'Uma pokédex com funções de busca e listagem consumindo uma API.',
     image: Project3
   },
   {
-    title: 'Pokedex',
-    description: 'The project is about creating a pokedex with search and listing functions consuming an API.',
+    title: 'InventecTCC',
+    description: 'Programa de gerenciamento de patrimônio realizada para conclusão de curso e entregue a instituição',
     image: Project4
+  },
+  {
+    title: 'First Portfolio',
+    description: 'Meu primeiro portfólio, feito sem usar frameworks, apenas em javascript, CSS e HTML',
+    image: Project5
   }
 ];
 </script>

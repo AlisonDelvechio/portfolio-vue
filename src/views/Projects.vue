@@ -48,16 +48,31 @@ import { useRoute, useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import ScrollTopButton from '../components/ScrollTopButton.vue';
 
-import Project1_1 from '@/assets/projects/Screenshot_1.png';
-import Project1_2 from '@/assets/projects/Screenshot_2.png';
-import Project1_3 from '@/assets/projects/Screenshot_3.png';
+// Imagens
+import Project1_1 from '@/assets/projects/Project-1/Screenshot_1.png';
+import Project1_2 from '@/assets/projects/Project-1/Screenshot_2.png';
+import Project1_3 from '@/assets/projects/Project-1/Screenshot_3.png';
+import Project1_4 from '@/assets/projects/Project-1/Screenshot_4.png';
+import Project1_5 from '@/assets/projects/Project-1/Screenshot_5.png';
 
-import Project2_1 from '@/assets/projects/Screenshot_3.png';
-import Project2_2 from '@/assets/projects/Screenshot_3.png';
+import Project2_1 from '@/assets/projects/Project-2/Screenshot_1.png';
+import Project2_2 from '@/assets/projects/Project-2/Screenshot_2.png';
 
-import Project3_1 from '@/assets/projects/Screenshot_4.png';
-import Project3_2 from '@/assets/projects/Screenshot_4.png';
-import Project3_3 from '@/assets/projects/Screenshot_4.png';
+import Project3_1 from '@/assets/projects/Project-3/Screenshot_1.png';
+import Project3_2 from '@/assets/projects/Project-3/Screenshot_2.png';
+import Project3_3 from '@/assets/projects/Project-3/Screenshot_3.png';
+
+import Project4_1 from '@/assets/projects/Project-4/Screenshot_1.png';
+import Project4_2 from '@/assets/projects/Project-4/Screenshot_2.png';
+import Project4_3 from '@/assets/projects/Project-4/Screenshot_3.png';
+import Project4_4 from '@/assets/projects/Project-4/Screenshot_4.png';
+
+import Project5_1 from '@/assets/projects/Project-5/Screenshot_1.png';
+import Project5_2 from '@/assets/projects/Project-5/Screenshot_2.png';
+import Project5_3 from '@/assets/projects/Project-5/Screenshot_3.png';
+import Project5_4 from '@/assets/projects/Project-5/Screenshot_4.png';
+import Project5_5 from '@/assets/projects/Project-5/Screenshot_5.png';
+import Project5_6 from '@/assets/projects/Project-5/Screenshot_6.png';
 
 const router = useRouter();
 const route = useRoute();
@@ -68,11 +83,11 @@ const projects = [
     description: 'A Shoot\'em up style browser game using only basic technologies.',
     date: '2025-05-30',
     tags: ['JavaScript', 'Game', 'Canvas'],
-    repo: 'https://github.com/seuuser/star-blaster',
-    images: [Project1_1, Project1_2, Project1_3]
+    repo: 'https://github.com/AlisonDelvechio/star-blaster-game',
+    images: [Project1_1, Project1_2, Project1_3, Project1_4, Project1_5]
   },
   {
-    title: 'League of Legends Login',
+    title: 'League of Legends login screen',
     description: 'A recreation of the League of Legends login screen.',
     date: '2025-05-20',
     tags: ['Vue', 'CSS'],
@@ -86,6 +101,22 @@ const projects = [
     tags: ['Vue', 'API', 'Pokedex'],
     repo: 'https://github.com/seuuser/pokedex',
     images: [Project3_1, Project3_2, Project3_3]
+  },
+  {
+    title: 'InventecTCC',
+    description: 'A Pokedex app with search and listing functions consuming an API.',
+    date: '2025-05-15',
+    tags: ['Vue', 'API', 'Pokedex'],
+    repo: 'https://github.com/seuuser/pokedex',
+    images: [Project4_1, Project4_2, Project4_3, Project4_4]
+  },
+  {
+    title: 'First Portfolio',
+    description: 'A Pokedex app with search and listing functions consuming an API.',
+    date: '2025-05-15',
+    tags: ['Vue', 'API', 'Pokedex'],
+    repo: 'https://github.com/seuuser/pokedex',
+    images: [Project5_1, Project5_2, Project5_3, Project5_4, Project5_5, Project5_6]
   }
 ];
 
@@ -250,7 +281,6 @@ function goBack() {
 
     img {
       width: 100%;
-      max-width: 600px;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;

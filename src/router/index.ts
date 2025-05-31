@@ -11,7 +11,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
       // Voltar para posição salva
       return savedPosition;

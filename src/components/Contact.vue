@@ -6,17 +6,17 @@
     </p>
 
     <div :class="['contact-links', 'fade-up', 'delay-2', { 'fade-up': animate }]">
-      <a href="mailto:alison.dev@email.com" class="contact-link">
+      <a href="mailto:alisondelvechio@outlook.com" class="contact-link">
         <Icon icon="mdi:email-outline" width="24" />
         <span>Email</span>
       </a>
 
-      <a href="#" target="_blank" class="contact-link">
+      <a href="https://github.com/AlisonDelvechio" target="_blank" class="contact-link">
         <Icon icon="mdi:github" width="24" />
         <span>GitHub</span>
       </a>
 
-      <a href="#" target="_blank" class="contact-link">
+      <a href="https://www.linkedin.com/in/alison-delvechio-64094b172/" target="_blank" class="contact-link">
         <Icon icon="mdi:linkedin" width="24" />
         <span>LinkedIn</span>
       </a>

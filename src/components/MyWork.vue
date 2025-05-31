@@ -1,9 +1,11 @@
 <template>
   <section class="my-work" ref="myWorkSection">
     <div class="text-content">
-      <h2>My Work</h2>
+      <h2>Meu trabalho</h2>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+        Ao longo da minha carreira, atuei em diversos projetos que me permitiram desenvolver soluções práticas e escaláveis, sempre com foco na qualidade e na experiência do usuário. Trabalhei em equipes multidisciplinares, entregando desde funcionalidades específicas até integrações complexas, sempre buscando alinhar tecnologia e necessidades reais dos clientes.
+        <br><br>
+        Essa trajetória me proporcionou uma visão ampla sobre o desenvolvimento front-end e suas aplicações, além da habilidade de adaptar rapidamente a diferentes contextos e desafios. Cada projeto foi uma oportunidade de aprendizado e crescimento, reforçando minha paixão por criar interfaces eficientes e funcionais.
       </p>
     </div>
     <div class="visual-effect">
@@ -26,8 +28,13 @@ import { ref, onMounted } from 'vue';
 const myWorkSection = ref<HTMLElement | null>(null);
 const inView = ref(false);
 
-const rawText = `<h3>Lorem Ipsum</h3>
-<p class="example">Texto de exemplo com <strong>negrito</strong> e <em>itálico</em>.</p>`;
+const rawText = `<h4 class="title">Contribuições no Mundo Tech</h4>
+<p class="text">Entrego soluções que facilitam o dia a dia das equipes de tecnologia e elevam a qualidade dos produtos.</p>
+<ul class="list">
+  <li>Colaboração efetiva entre times multidisciplinares</li>
+  <li>Foco em usabilidade e experiência do usuário</li>
+  <li>Adaptação rápida às mudanças e desafios</li>
+</ul>`;
 
 function escapeHtml(text: string) {
   return text.replace(/&/g, '&amp;')

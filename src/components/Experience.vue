@@ -116,7 +116,15 @@ onMounted(() => {
 
     .date {
       font-size: 1.1rem; 
-      color: #777;
+      color: $primary-color-dark;
+    }
+  }
+
+  body.light & {
+    .timeline-header {
+      .date {
+        color: $primary-color-light;
+      }
     }
   }
 
