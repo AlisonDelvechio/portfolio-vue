@@ -9,10 +9,10 @@
       <!-- Navegação -->
       <nav :class="{ 'is-open': menuOpen }" aria-label="Main Navigation">
         <ul>
-          <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="#expertise">Expertise</router-link></li>
-          <li><router-link to="#projects">Projetos</router-link></li>
-          <li><router-link to="#contato">Contato</router-link></li>
+          <li><router-link to="/" @click="closeMenu">Home</router-link></li>
+          <li><router-link to="#expertise" @click="closeMenu">Expertise</router-link></li>
+          <li><router-link to="#projects" @click="closeMenu">Projetos</router-link></li>
+          <li><router-link to="#contato" @click="closeMenu">Contato</router-link></li>
         </ul>
       </nav>
 
@@ -66,7 +66,11 @@ function toggleMenu() {
   menuOpen.value = !menuOpen.value
 }
 
-const router = useRouter();
+function closeMenu() {
+  menuOpen.value = false
+}
+
+const router = useRouter()
 
 function goToHomeSection() {
   router.push({ path: '/', hash: '#home' })
@@ -161,10 +165,10 @@ onMounted(() => {
       font-size: 1.2rem;
 
       li a {
-        color: vars.$primary-color-dark; // default para dark theme: texto claro
+        color: vars.$primary-color-dark; 
 
         body.light & {
-          color: vars.$primary-color-light; // light theme: texto escuro
+          color: vars.$primary-color-light;
         }
 
         text-decoration: none;
@@ -176,10 +180,10 @@ onMounted(() => {
           display: block;
           width: 0;
           height: 2px;
-          background: vars.$primary-color-light;
+          background: vars.$primary-color-dark;
 
           body.light & {
-            background: vars.$primary-color-dark;
+            background: vars.$primary-color-light;
           }
 
           transition: width 0.3s;

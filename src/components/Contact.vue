@@ -134,9 +134,10 @@ useIntersectionObserver(contactSection, () => {
 }
 
 /* Responsivo */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .contact-links {
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
   }
 }

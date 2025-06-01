@@ -28,25 +28,25 @@ const experiences: Experience[] = [
     date: '2023 – 2025',
     location: 'Bradesco Seguros - The Bridge Social',
     icon: 'mdi:office-building',
-    description: 'Desenvolvimento de bibliotecas, plugins para Figma, integrações com Zeroheight e funcionalidades de acessibilidade para Design System.',
+    description: 'Contribuí para o desenvolvimento de bibliotecas e integrações entre Zeroheight e Storybook, impulsionando a padronização do Design System. Implementei recursos de acessibilidade e ofereci suporte técnico às equipes de design e desenvolvimento, colaborando na construção de aplicações escaláveis.',
     logo: LogoBradesco,
-    technologies: ['Vue.js', 'TypeScript', 'Figma', 'Zeroheight', 'Acessibilidade']
+    technologies: ['Vue.js', 'Figma', 'Zeroheight', 'Acessibilidade', 'Storybook']
   },
   {
     role: 'Desenvolvedor Front-End',
     date: '2021 – 2023',
     location: 'Bradesco Seguros - Sabion Digital',
     icon: 'mdi:office-building',
-    description: 'Criação e implementação de componentes e páginas seguindo o Design System. Atuei no desenvolvimento de uma biblioteca de componentes e participei da construção do site oficial do evento Design Conf.',
+    description: 'Desenvolvi componentes reutilizáveis com base no Design System, garantindo consistência entre produtos. Estruturei uma biblioteca de componentes, criei templates utilizados por outros canais e colaborei na correção e melhoria de projetos, aprimorando a qualidade e a eficiência das entregas.',
     logo: LogoBradesco,
-    technologies: ['Vue.js', 'Storybook', 'Firebase', 'Web Components']
+    technologies: ['Vue.js', 'Firebase', 'Web Components', 'Templates']
   },
   {
     role: 'Desenvolvedor Full Stack',
     date: '2020 – 2021',
     location: 'BSN Tecnologia',
     icon: 'mdi:office-building',
-    description: 'Desenvolvimento e suporte para aplicações mobile e web, incluindo implementação e administração de bancos de dados.',
+    description: 'Desenvolvi e dei suporte a aplicações web e mobile, atuando na implementação de funcionalidades e administração de bancos de dados.',
     logo: LogoBSN,
     technologies: ['Angular', 'Ionic', 'PHP', 'Laravel', 'MySQL']
   },
@@ -55,12 +55,11 @@ const experiences: Experience[] = [
     date: '2019 – 2020',
     location: 'BSN Tecnologia',
     icon: 'mdi:office-building',
-    description: 'Elaboração e execução de planos de teste, documentação e avaliação da qualidade dos softwares.',
+    description: 'Elaborei e executei planos de teste, documentei processos e identifiquei falhas para garantir a qualidade dos softwares. Também apoiei no desenvolvimento quando possível.',
     logo: LogoBSN,
-    technologies: ['Testes de Software', 'Documentação', 'QA']
+    technologies: ['Testes de Software', 'Documentação', 'QA', 'Git', 'Revisão de Código']
   }
 ]
-
 </script>
 
 <style scoped lang="scss">

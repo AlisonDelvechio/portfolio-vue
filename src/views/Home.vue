@@ -25,8 +25,12 @@ import Contact from '@/components/Contact.vue';
 .section-divider {
   width: 100%;
   height: 2px;
-  background: $divider-color-light;
+  background: $divider-color-dark;
   margin: 3rem 0;
+
+  body.light & {
+    background: $divider-color-light;
+  }
 }
 
 .hero-expertise-wrapper {

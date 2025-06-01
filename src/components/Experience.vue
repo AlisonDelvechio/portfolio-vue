@@ -24,7 +24,7 @@
             </span>
           </div>
         </div>
-        <img :src="exp.logo" alt="logo" class="logo" />
+        <img :src="exp.logo" :alt="`Logo de ${exp.location}`" class="logo" />
       </div>
     </div>
   </div>
@@ -110,7 +110,8 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
-
+    margin-left: 1rem;
+    
     .role {
       font-weight: 600;
       font-size: 1.25rem;
@@ -199,6 +200,13 @@ onMounted(() => {
   .timeline-content {
     .logo {
       display: none; 
+    }
+  }
+
+  .timeline-item {
+    .timeline-header {
+      flex-direction: column;
+      margin-left: 0;
     }
   }
 }
