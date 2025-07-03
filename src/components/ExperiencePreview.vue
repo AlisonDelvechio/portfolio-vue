@@ -24,6 +24,15 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    role: 'Analista de Desenvolvimento Front-End',
+    date: '2025 – Atual',
+    location: 'Bradesco Seguros - Stefanini IT Solutions',
+    icon: 'mdi:office-building',
+    description: 'Faço parte do time de Design System e colaboro na construção de uma biblioteca de componentes reutilizáveis.',
+    logo: LogoBradesco,
+    technologies: ['Angular', 'Ionic', 'Figma', 'Acessibilidade', 'Stencil']
+  },
+  {
     role: 'Desenvolvedor Front-End',
     date: '2023 – 2025',
     location: 'Bradesco Seguros - The Bridge Social',
