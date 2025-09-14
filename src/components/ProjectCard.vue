@@ -30,17 +30,17 @@ const props = defineProps<{
   description: string
   image: string
   delay: number
+  slug?: string
 }>()
 
 const router = useRouter()
 
 function goToProject() {
-  router.push({ name: 'Projects', query: { project: props.title } })
+  router.push({ name: 'Projects', query: { project: props.slug ?? props.title } })
 }
 
 const cardRef = ref<HTMLElement | null>(null)
 const isVisible = ref(false)
-
 useIntersectionObserver(cardRef, () => {
   isVisible.value = true
 }, 0.1)
@@ -54,15 +54,13 @@ useIntersectionObserver(cardRef, () => {
   flex-direction: column;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
-  transition: 
-    transform 0.6s ease,
-    opacity 0.6s ease;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 
-  background-color: vars.$secondary-color-light; 
+  background-color: vars.$secondary-color-light;
   border: 1px solid #e0e0e0;
 
   &.visible {
@@ -71,11 +69,11 @@ useIntersectionObserver(cardRef, () => {
   }
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     transition: transform 0.2s ease;
 
     .project-image {
-      transform: scale(1.10);
+      transform: scale(1.1);
     }
   }
 
@@ -107,7 +105,6 @@ useIntersectionObserver(cardRef, () => {
     }
   }
 
-  // DARK MODE
   body.dark & {
     background-color: vars.$secondary-color-dark;
     border: 1px solid #333;
