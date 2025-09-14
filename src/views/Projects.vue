@@ -96,6 +96,12 @@ import Project5_4 from '@/assets/projects/Project-5/Screenshot_4.png';
 import Project5_5 from '@/assets/projects/Project-5/Screenshot_5.png';
 import Project5_6 from '@/assets/projects/Project-5/Screenshot_6.png';
 
+import Project6_1 from '@/assets/projects/Project-6/Screenshot_1.png';
+import Project6_2 from '@/assets/projects/Project-6/Screenshot_2.png';
+import Project6_3 from '@/assets/projects/Project-6/Screenshot_3.png';
+import Project6_4 from '@/assets/projects/Project-6/Screenshot_4.png';
+import Project6_5 from '@/assets/projects/Project-6/Screenshot_5.png';
+
 const router = useRouter();
 const route = useRoute();
 
@@ -139,6 +145,14 @@ const projects = [
     tags: ['HTML', 'CSS', 'JavaScript'],
     repo: 'https://github.com/AlisonDelvechio/Portfolio',
     images: [Project5_1, Project5_2, Project5_3, Project5_4, Project5_5, Project5_6]
+  },
+  {
+    title: 'Atom UI',
+    description: 'Biblioteca de Web Components criada com Stencil.js e SCSS, com foco em modularidade, responsividade e integração com frameworks modernos como Angular. Inclui componentes como alertas customizáveis e menu accordion, utilizando Shadow DOM, suporte a props e slots, variáveis globais com SCSS e integração via monorepo.',
+    date: '11/06/2025',
+    tags: ['Stencil.js', 'Web Components', 'SCSS', 'Angular 19'],
+    repo: 'https://github.com/AlisonDelvechio/atom-ui-labs',
+    images: [Project6_1, Project6_2, Project6_3, Project6_4, Project6_5]
   }
 ];
 

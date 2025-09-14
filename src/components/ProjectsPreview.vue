@@ -23,36 +23,43 @@ import Project2 from '@/assets/projects/Project_2.png';
 import Project3 from '@/assets/projects/Project_3.png';
 import Project4 from '@/assets/projects/Project_4.png';
 import Project5 from '@/assets/projects/Project_5.png';
+import Project6 from '@/assets/projects/Project_6.png';
 
 const projects = [
   {
     order: 1,
-    title: 'Star Blaster Game',
-    description: `Um jogo de navegador estilo Shoot'em up usando apenas tecnologias básicas`,
-    image: Project1
+    title: 'Atom UI',
+    description: 'Uma biblioteca de Web Components desenvolvida com Stencil, pensada para ser utilizada de forma agnóstica em qualquer framework, incluindo Angular.',
+    image: Project6
   },
   {
     order: 2,
-    title: 'League of Legends login screen',
-    description: 'Uma recriação da tela de login do League of Legends',
-    image: Project2
+    title: 'Star Blaster Game',
+    description: `Um jogo de navegador estilo Shoot'em up usando apenas tecnologias básicas.`,
+    image: Project1
   },
   {
     order: 3,
+    title: 'League of Legends login screen',
+    description: 'Uma recriação da tela de login do League of Legends.',
+    image: Project2
+  },
+  {
+    order: 4,
     title: 'Pokedex',
     description: 'Uma pokédex com funções de busca e listagem consumindo uma API.',
     image: Project3
   },
   {
-    order: 4,
+    order: 5,
     title: 'InventecTCC',
-    description: 'Programa de gerenciamento de patrimônio realizada para conclusão de curso e entregue à instituição',
+    description: 'Programa de gerenciamento de patrimônio realizada para conclusão de curso e entregue à instituição.',
     image: Project4
   },
   {
-    order: 5,
+    order: 6,
     title: 'First Portfolio',
-    description: 'Meu primeiro portfólio, feito sem usar frameworks, apenas em javascript, CSS e HTML',
+    description: 'Meu primeiro portfólio, feito sem usar frameworks, apenas em javascript, CSS e HTML.',
     image: Project5
   }
 ];
