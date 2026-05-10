@@ -1,15 +1,19 @@
 <template>
   <section class="experience-section">
     <h2 class="section-title">Experiência <br /> Profissional</h2>
+
     <Experience :experiences="experiences" />
   </section>
-
 </template>
 
 <script setup lang="ts">
 import Experience from './Experience.vue'
+
 import LogoBradesco from '@/assets/Bradesco-Seguros_logo.png'
-// import LogoQiBit from '@/assets/QiBit_logo.png'
+import LogoGFT from '@/assets/GFT_Technologies_logo.jpg'
+import LogoStefanini from '@/assets/Stefanini_Brasil_logo.jpg'
+import LogoQiBit from '@/assets/QiBit_logo.png'
+import LogoSabion from '@/assets/Sabion_Digital_logo.jpg'
 import LogoBSN from '@/assets/BSN_logo.png'
 
 interface Experience {
@@ -18,36 +22,55 @@ interface Experience {
   location: string
   icon: string
   description: string
-  logo: string
+  logos: string[]
   technologies: string[]
 }
 
 const experiences: Experience[] = [
   {
+    role: 'Desenvolvedor Front-End',
+    date: '2026 – Atual',
+    location: 'Bradesco Seguros - GFT Technology',
+    icon: 'mdi:office-building',
+    description:
+      'Atuo no desenvolvimento e evolução do Design System, criando componentes reutilizáveis e contribuindo para a padronização e escalabilidade das aplicações.',
+    logos: [LogoBradesco, LogoGFT],
+    technologies: ['Angular', 'Ionic', 'Figma', 'Acessibilidade', 'Stencil']
+  },
+  {
     role: 'Analista de Desenvolvimento Front-End',
-    date: '2025 – Atual',
+    date: '2025 – 2026',
     location: 'Bradesco Seguros - Stefanini IT Solutions',
     icon: 'mdi:office-building',
-    description: 'Faço parte do time de Design System e colaboro na construção de uma biblioteca de componentes reutilizáveis.',
-    logo: LogoBradesco,
+    description:
+      'Faço parte do time de Design System e colaboro na construção de uma biblioteca de componentes reutilizáveis.',
+    logos: [LogoBradesco, LogoStefanini],
     technologies: ['Angular', 'Ionic', 'Figma', 'Acessibilidade', 'Stencil']
   },
   {
     role: 'Desenvolvedor Front-End',
     date: '2023 – 2025',
-    location: 'Bradesco Seguros - The Bridge Social',
+    location: 'Bradesco Seguros - QiBit',
     icon: 'mdi:office-building',
-    description: 'Contribuí para o desenvolvimento de bibliotecas e integrações entre Zeroheight e Storybook, impulsionando a padronização do Design System. Implementei recursos de acessibilidade e ofereci suporte técnico às equipes de design e desenvolvimento, colaborando na construção de aplicações escaláveis.',
-    logo: LogoBradesco,
-    technologies: ['Vue.js', 'Figma', 'Zeroheight', 'Acessibilidade', 'Storybook']
+    description:
+      'Contribuí para o desenvolvimento de bibliotecas e integrações entre Zeroheight e Storybook, impulsionando a padronização do Design System. Implementei recursos de acessibilidade e ofereci suporte técnico às equipes de design e desenvolvimento, colaborando na construção de aplicações escaláveis.',
+    logos: [LogoBradesco, LogoQiBit],
+    technologies: [
+      'Vue.js',
+      'Figma',
+      'Zeroheight',
+      'Acessibilidade',
+      'Storybook'
+    ]
   },
   {
     role: 'Desenvolvedor Front-End',
     date: '2021 – 2023',
     location: 'Bradesco Seguros - Sabion Digital',
     icon: 'mdi:office-building',
-    description: 'Desenvolvi componentes reutilizáveis com base no Design System, garantindo consistência entre produtos. Estruturei uma biblioteca de componentes, criei templates utilizados por outros canais e colaborei na correção e melhoria de projetos, aprimorando a qualidade e a eficiência das entregas.',
-    logo: LogoBradesco,
+    description:
+      'Desenvolvi componentes reutilizáveis com base no Design System, garantindo consistência entre produtos. Estruturei uma biblioteca de componentes, criei templates utilizados por outros canais e colaborei na correção e melhoria de projetos, aprimorando a qualidade e a eficiência das entregas.',
+    logos: [LogoBradesco, LogoSabion],
     technologies: ['Vue.js', 'Firebase', 'Web Components', 'Templates']
   },
   {
@@ -55,8 +78,9 @@ const experiences: Experience[] = [
     date: '2020 – 2021',
     location: 'BSN Tecnologia',
     icon: 'mdi:office-building',
-    description: 'Desenvolvi e dei suporte a aplicações web e mobile, atuando na implementação de funcionalidades e administração de bancos de dados.',
-    logo: LogoBSN,
+    description:
+      'Desenvolvi e dei suporte a aplicações web e mobile, atuando na implementação de funcionalidades e administração de bancos de dados.',
+    logos: [LogoBSN],
     technologies: ['Angular', 'Ionic', 'PHP', 'Laravel', 'MySQL']
   },
   {
@@ -64,9 +88,16 @@ const experiences: Experience[] = [
     date: '2019 – 2020',
     location: 'BSN Tecnologia',
     icon: 'mdi:office-building',
-    description: 'Elaborei e executei planos de teste, documentei processos e identifiquei falhas para garantir a qualidade dos softwares. Também apoiei no desenvolvimento quando possível.',
-    logo: LogoBSN,
-    technologies: ['Testes de Software', 'Documentação', 'QA', 'Git', 'Revisão de Código']
+    description:
+      'Elaborei e executei planos de teste, documentei processos e identifiquei falhas para garantir a qualidade dos softwares. Também apoiei no desenvolvimento quando possível.',
+    logos: [LogoBSN],
+    technologies: [
+      'Testes de Software',
+      'Documentação',
+      'QA',
+      'Git',
+      'Revisão de Código'
+    ]
   }
 ]
 </script>

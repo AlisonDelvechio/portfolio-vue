@@ -11,20 +11,36 @@
         <h3 class="role">{{ exp.role }}</h3>
         <span class="date">{{ exp.date }}</span>
       </div>
+
       <div class="timeline-content">
         <div class="info">
           <div class="location">
             <Icon :icon="exp.icon" />
             <span>{{ exp.location }}</span>
           </div>
+
           <p class="description">{{ exp.description }}</p>
+
           <div class="tech-tags">
-            <span v-for="(tech, i) in exp.technologies" :key="i" class="tag">
+            <span
+              v-for="(tech, i) in exp.technologies"
+              :key="i"
+              class="tag"
+            >
               {{ tech }}
             </span>
           </div>
         </div>
-        <img :src="exp.logo" :alt="`Logo de ${exp.location}`" class="logo" />
+
+        <div class="logos">
+          <img
+            v-for="(logo, i) in exp.logos"
+            :key="i"
+            :src="logo"
+            :alt="`Logo de ${exp.location}`"
+            class="logo"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +56,7 @@ interface Experience {
   location: string
   icon: string
   description: string
-  logo: string
+  logos: string[]
   technologies: string[]
 }
 
@@ -64,6 +80,7 @@ onMounted(() => {
       },
       { threshold: 0.1 }
     )
+
     observer.observe(el)
   })
 })
@@ -82,7 +99,7 @@ onMounted(() => {
   border-left: 3px solid vars.$accent-color;
   padding-left: 1.5rem;
   position: relative;
-  max-width: 600px; 
+  max-width: 600px;
 
   opacity: 0;
   transform: translateY(20px);
@@ -111,7 +128,7 @@ onMounted(() => {
     align-items: center;
     margin-bottom: 0.5rem;
     margin-left: 1rem;
-    
+
     .role {
       font-weight: 600;
       font-size: 1.25rem;
@@ -123,7 +140,7 @@ onMounted(() => {
     }
 
     .date {
-      font-size: 1.1rem; 
+      font-size: 1.1rem;
       color: vars.$primary-color-dark;
 
       body.light & {
@@ -188,25 +205,31 @@ onMounted(() => {
       }
     }
 
-    .logo {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
+    .logos {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
-  .timeline-content {
-    .logo {
-      display: none; 
-    }
-  }
-
   .timeline-item {
     .timeline-header {
       flex-direction: column;
       margin-left: 0;
+    }
+
+    .timeline-content {
+      .logos {
+        display: none;
+      }
     }
   }
 }
