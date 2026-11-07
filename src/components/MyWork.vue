@@ -8,15 +8,16 @@
         Essa trajetória me proporcionou uma visão ampla sobre o desenvolvimento front-end e suas aplicações, além da habilidade de adaptar rapidamente a diferentes contextos e desafios. Cada projeto foi uma oportunidade de aprendizado e crescimento, reforçando minha paixão por criar interfaces eficientes e funcionais.
       </p>
     </div>
-    <div class="visual-effect">
-      <div class="pc-frame" :class="{ animate: inView }">
-        <svg viewBox="0 0 64 48" aria-hidden="true">
-          <rect x="2" y="2" width="60" height="40" rx="4" ry="4" />
-          <rect x="24" y="44" width="16" height="2" />
-        </svg>
-        <div class="typing" v-if="inView" aria-hidden="true">
-          <pre><code v-html="displayedText"></code><span class="cursor">|</span></pre>
+    <div class="visual-effect" aria-hidden="true">
+      <div class="monitor" :class="{ animate: inView }">
+        <div class="screen">
+          <!-- O texto completo, invisível, reserva o tamanho final da tela:
+               ela não cresce nem rola enquanto o texto é digitado. -->
+          <pre class="ghost"><code v-html="fullText"></code></pre>
+          <pre v-if="inView" class="typed"><code v-html="displayedText"></code><span class="cursor">|</span></pre>
         </div>
+        <div class="stand"></div>
+        <div class="base"></div>
       </div>
     </div>
   </section>
@@ -57,6 +58,7 @@ function syntaxHighlight(text: string) {
   return escaped
 }
 
+const fullText = syntaxHighlight(rawText)
 const displayedText = ref('')
 let index = 0
 let interval: number | undefined
@@ -64,7 +66,7 @@ let interval: number | undefined
 function startTyping() {
   // Com redução de movimento, mostra o texto pronto em vez de digitar.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    displayedText.value = syntaxHighlight(rawText)
+    displayedText.value = fullText
     return
   }
   displayedText.value = ''
@@ -88,201 +90,135 @@ useIntersectionObserver(myWorkSection, () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .my-work {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-  gap: 2rem;
-  padding: 4rem clamp(1rem, 6vw, 12rem);
-  justify-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: 4rem clamp(1rem, 6vw, 8rem);
   max-width: 1400px;
   margin: 0 auto;
 
-  .text-content {
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: vars.$primary-color-dark;
-
-      body.light & {
-        color: vars.$primary-color-light;
-      }
-    }
+  .text-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-fg);
   }
 
-  .visual-effect {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .pc-frame {
-      position: relative;
-      width: min(500px, 100%);
-      aspect-ratio: 500 / 350;
-
-      svg {
-        width: 100%;
-        height: auto;
-        stroke: vars.$accent-color;
-        stroke-width: 2;
-        fill: none;
-        stroke-dasharray: 400;
-        stroke-dashoffset: 400;
-        transition: stroke-dashoffset 6s ease;
-      }
-
-      &.animate svg {
-        stroke-dashoffset: 0;
-      }
-
-      .typing {
-        position: absolute;
-        top: 7%;
-        left: 5%;
-        width: 90%;
-        height: 84%;
-        font-family: vars.$font-code;
-        font-size: 0.9rem;
-        color: vars.$text-color-dark;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 25px;
-        padding: 1rem;
-        overflow-y: auto;
-        overflow-x: hidden;
-        white-space: pre-wrap;
-        box-sizing: border-box;
-
-        pre {
-          margin: 0;
-          display: block;
-          white-space: pre-wrap;
-          word-break: break-word;
-        }
-
-        code {
-          display: inline;
-          white-space: pre-wrap;
-        }
-
-        .cursor {
-          display: inline;
-          margin-left: 2px;
-          color: vars.$accent-color;
-          animation: blink 1s steps(2, start) infinite;
-          user-select: none;
-          font-weight: bold;
-        }
-
-        :deep(.tag) {
-          color: vars.$accent-color;
-          font-weight: bold;
-        }
-
-        :deep(.attr) {
-          color: #c792ea;
-          font-weight: 600;
-        }
-
-        :deep(.value) {
-          color: #89ddff;
-        }
-      }
-    }
+  .text-content p {
+    line-height: 1.6;
   }
 }
 
-body.light {
-  .my-work {
-    .text-content {
-      h2 {
-        color: vars.$primary-color-light;
-      }
-    }
-    .visual-effect {
-      .pc-frame {
-        .typing {
-          color: vars.$text-color-light;
-          background: rgba(245, 245, 245, 0.8);
-        }
+.visual-effect {
+  display: flex;
+  justify-content: center;
+}
 
-        :deep(.tag) {
-          color: #d73a49; // vermelho suave
-          font-weight: bold;
-        }
+.monitor {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 
-        :deep(.attr) {
-          color: #6f42c1; // roxo médio
-          font-weight: 600;
-        }
-
-        :deep(.value) {
-          color: #22863a; // verde vibrante
-        }
-      }
-    }
+  &.animate {
+    opacity: 1;
+    transform: none;
   }
 }
 
-body.dark {
-  .my-work {
-    .text-content {
-      h2 {
-        color: vars.$primary-color-dark;
-      }
-    }
-    .visual-effect {
-      .pc-frame {
-        .typing {
-          color: vars.$text-color-dark;
-          background: rgba(20, 20, 20, 0.8);
-        }
-      }
-    }
+.screen {
+  width: 100%;
+  display: grid;
+  padding: 1.25rem 1.5rem;
+  border: 6px solid var(--color-accent);
+  border-radius: 20px;
+  background: var(--color-terminal-bg);
+  color: var(--color-terminal-fg);
+  font-family: $font-code;
+  font-size: 0.95rem;
+  line-height: 1.55;
+
+  pre {
+    grid-area: 1 / 1;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font: inherit;
   }
+
+  .ghost {
+    visibility: hidden;
+  }
+
+  .cursor {
+    margin-left: 2px;
+    color: var(--color-accent);
+    animation: blink 1s steps(2, start) infinite;
+    font-weight: bold;
+  }
+
+  :deep(.tag) {
+    color: var(--color-syntax-tag);
+    font-weight: bold;
+  }
+
+  :deep(.attr) {
+    color: var(--color-syntax-attr);
+    font-weight: 600;
+  }
+
+  :deep(.value) {
+    color: var(--color-syntax-value);
+  }
+}
+
+.stand {
+  width: 18%;
+  height: 22px;
+  background: var(--color-accent);
+  opacity: 0.85;
+}
+
+.base {
+  width: 34%;
+  height: 8px;
+  border-radius: 8px 8px 2px 2px;
+  background: var(--color-accent);
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-/* Responsividade */
 @media (max-width: 1100px) {
   .my-work {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
     padding: 2rem 1rem;
-    align-items: center;
 
     .text-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 0 1rem 1.5rem 1rem;
+      margin: 0 1rem;
 
       h2 {
         font-size: 2rem;
       }
     }
+  }
 
-    .visual-effect {
-      .pc-frame {
-        width: 100%;
-        max-width: 420px;
-
-        .typing {
-          top: 6%;
-          left: 5%;
-          width: 90%;
-          height: 70%;
-          font-size: 0.8rem;
-          border-radius: 15px;
-          padding: 0.75rem;
-        }
-      }
-    }
+  .screen {
+    font-size: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-width: 5px;
   }
 }
 </style>

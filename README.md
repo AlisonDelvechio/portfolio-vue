@@ -16,7 +16,7 @@ Você pode acessar o portfólio online aqui: **[https://alison-delvechio-portfol
 - Vue 3 (`<script setup>`) + TypeScript
 - Vite
 - Vue Router (uma rota por projeto: `/projects/<slug>`)
-- SCSS (com variáveis)
+- SCSS + variáveis CSS para o tema (`src/styles/_theme.scss`)
 - Iconify com ícones locais (sem requisições externas)
 - Modo dark/light salvo no navegador, seguindo a preferência do sistema na primeira visita
 
@@ -46,6 +46,7 @@ public/
 
 - **Novo projeto:** crie `src/assets/projects/<slug>/` com `cover.webp` (cerca de 800px de largura) e as capturas `01.webp`, `02.webp`... (até 1600px), e adicione o projeto em `src/data/projects.ts`. A ordem do array é a ordem de exibição; `demo` é opcional e mostra o botão "Ver site".
 - **Experiência:** edite `src/data/experiences.ts`. O "mais de N anos" da seção de expertise é calculado a partir de `CAREER_START_YEAR`.
+- **Cores e tema:** os componentes usam variáveis CSS (`var(--color-fg)`, `var(--color-accent)`...) definidas em `src/styles/_theme.scss`, com um bloco para o tema escuro e outro para o claro. Para mudar uma cor, altere só esse arquivo.
 - **Novo ícone:** adicione o nome em `scripts/build-icons.mjs` e rode `npm run icons`.
 
 ## 💻 Como rodar localmente

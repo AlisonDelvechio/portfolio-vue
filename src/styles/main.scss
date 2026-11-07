@@ -1,4 +1,5 @@
 @use './reset';
+@use './theme';
 
 html {
   scroll-behavior: smooth;
@@ -6,7 +7,7 @@ html {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(150, 150, 150, 0.5) rgba(0, 0, 0, 0.1);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 #app {
@@ -21,57 +22,31 @@ body {
   width: 100%;
   min-height: 100vh;
   display: block;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
-body.dark {
-  background-color: $secondary-color-dark;
-  color: $text-color-dark;
-  
-  a {
-    color: $primary-color-dark;
-  }
-  
+body a {
+  color: var(--color-fg);
 }
 
-body.light {
-  background-color: $secondary-color-light;
-  color: $text-color-light;
-  
-  a {
-    color: $primary-color-light;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: rgba(240, 240, 240, 0.8);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(100, 100, 100, 0.5);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(100, 100, 100, 0.8);
-  }
-}
-
-// Scrollbar
-/* Chrome, Safari e derivados */
+// Barra de rolagem: Chrome, Safari e derivados
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.5);
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
   transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 150, 150, 0.8);
+  background: var(--scrollbar-thumb-hover);
 }
 
 // Seções com âncora não ficam escondidas atrás do header fixo.

@@ -71,12 +71,7 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
 
   h2 {
     font-size: 2.5rem;
-    color: vars.$primary-color-dark;
-
-    body.light & {
-      color: vars.$primary-color-light;
-    }
-
+    color: var(--color-fg);
     margin-bottom: 3rem;
   }
 
@@ -91,12 +86,7 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
 
   .expertise-item {
     position: relative;
-    border: 1px solid vars.$primary-color-dark;
-
-    body.light & {
-      border-color: vars.$primary-color-light;
-    }
-
+    border: 1px solid var(--color-fg);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -125,7 +115,7 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
       top: 8px;
       width: 4px;
       height: 90%;
-      background-color: vars.$accent-color;
+      background-color: var(--color-accent);
     }
 
     .icon-title {
@@ -133,34 +123,19 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
       align-items: center;
       gap: 0.5rem;
       font-size: 1.2rem;
-      color: vars.$primary-color-dark;
+      color: var(--color-fg);
       font-weight: bold;
-
-      body.light & {
-        color: vars.$primary-color-light;
-      }
-
       margin-bottom: 1rem;
 
       svg {
-        fill: vars.$primary-color-dark;
-
-        body.light & {
-          fill: vars.$primary-color-light;
-        }
-
+        fill: var(--color-fg);
         width: 32px;
         height: 32px;
       }
     }
 
     p {
-      color: vars.$text-color-dark;
-
-      body.light & {
-        color: vars.$text-color-light;
-      }
-
+      color: var(--color-text);
       font-size: 1rem;
       text-align: center;
     }
@@ -169,24 +144,15 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
   .code-description {
     font-family: vars.$font-code;
     font-size: 1rem;
-    background-color: #1e1e1e; 
-    color: #f8f8f2; 
+    background-color: var(--color-code-bg);
+    color: var(--color-code-fg);
     padding: 0.5rem 1rem;
     margin: 1rem 0;
     white-space: pre-wrap; 
     position: relative;
 
     strong {
-      color: #ff79c6;
-    }
-
-    body.light & {
-      color: vars.$primary-color-light;
-      background-color: #c2c2c2; 
-
-      strong {
-        color: #ca3d8d;
-      }
+      color: var(--color-code-highlight);
     }
   }
 
@@ -197,17 +163,12 @@ const years = new Date().getFullYear() - CAREER_START_YEAR
     flex-wrap: wrap;
 
     span {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--color-chip-bg);
       padding: 0.25rem 0.5rem;
       border-radius: 0.25rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: vars.$primary-color-dark;
-
-      body.light & {
-        background-color: rgba(0, 0, 0, 0.1);
-        color: vars.$primary-color-light;
-      }
+      color: var(--color-fg);
     }
   }
 

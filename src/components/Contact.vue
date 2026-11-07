@@ -40,54 +40,27 @@ useIntersectionObserver(contactSection, () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .contact {
   position: relative;
   padding: 4rem 2rem;
   text-align: center;
-  background-image:
-    url('@/assets/diagmonds-dark.png'),
-    linear-gradient(
-      to right, 
-      rgba(vars.$secondary-color-dark, 0.85), 
-      rgba(vars.$secondary-color-dark, 0.6)
-    );
+  background-image: var(--bg-pattern), var(--bg-contact);
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center center, center;
   background-blend-mode: overlay;
 
-  body.light & {
-    background-image:
-      url('@/assets/diagmonds-light.png'),
-      linear-gradient(
-        to bottom, 
-        rgba(vars.$secondary-color-light, 1), 
-        rgba(vars.$secondary-color-light, 0.4), 
-        rgba(vars.$secondary-color-light, 0)
-      );
-  }
-
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: vars.$text-color-light;
-
-    body.dark & {
-      color: vars.$text-color-dark;
-    }
+    color: var(--color-text);
   }
 
   p {
     font-size: 1.1rem;
-    color: vars.$primary-color-light;
+    color: var(--color-fg);
     max-width: 500px;
     margin: 0 auto 2rem;
-
-    body.dark & {
-      color: vars.$primary-color-dark;
-    }
   }
 
   .contact-links {
@@ -102,16 +75,12 @@ useIntersectionObserver(contactSection, () => {
       align-items: center;
       gap: 0.5rem;
       font-weight: 500;
-      color: vars.$primary-color-light;
+      color: var(--color-fg);
       text-decoration: none;
       transition: color 0.3s, transform 0.3s;
 
-      body.dark & {
-        color: vars.$primary-color-dark;
-      }
-
       &:hover {
-        color: vars.$accent-color;
+        color: var(--color-accent);
         transform: translateY(-3px);
       }
     }

@@ -83,8 +83,6 @@ onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .timeline {
   display: flex;
   flex-direction: column;
@@ -92,10 +90,16 @@ onBeforeUnmount(() => observer?.disconnect())
 }
 
 .timeline-item {
-  border-left: 3px solid vars.$accent-color;
+  border-left: 3px solid var(--color-accent);
   padding-left: 1.5rem;
   position: relative;
-  max-width: 600px;
+  width: 100%;
+  max-width: 760px;
+  padding-bottom: 2.5rem;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 
   opacity: 0;
   transform: translateY(20px);
@@ -113,8 +117,8 @@ onBeforeUnmount(() => observer?.disconnect())
     top: -0.8rem;
     width: 1rem;
     height: 1rem;
-    background: vars.$accent-color;
-    border: 2px solid vars.$primary-color-dark;
+    background: var(--color-accent);
+    border: 2px solid var(--color-on-accent);
     border-radius: 50%;
   }
 
@@ -128,20 +132,12 @@ onBeforeUnmount(() => observer?.disconnect())
     .role {
       font-weight: 600;
       font-size: 1.25rem;
-      color: vars.$text-color-light;
-
-      body.dark & {
-        color: vars.$text-color-dark;
-      }
+      color: var(--color-text);
     }
 
     .date {
       font-size: 1.1rem;
-      color: vars.$primary-color-dark;
-
-      body.light & {
-        color: vars.$primary-color-light;
-      }
+      color: var(--color-fg);
     }
   }
 
@@ -150,7 +146,7 @@ onBeforeUnmount(() => observer?.disconnect())
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--color-surface-subtle);
     padding: 1rem;
     border-radius: 12px;
 
@@ -161,6 +157,9 @@ onBeforeUnmount(() => observer?.disconnect())
     }
 
     .info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -170,20 +169,12 @@ onBeforeUnmount(() => observer?.disconnect())
         align-items: center;
         gap: 0.5rem;
         font-weight: 500;
-        color: vars.$text-color-light;
-
-        body.dark & {
-          color: vars.$text-color-dark;
-        }
+        color: var(--color-text);
       }
 
       .description {
-        color: #555;
+        color: var(--color-text-soft);
         text-align: left;
-
-        body.dark & {
-          color: #ccc;
-        }
       }
 
       .tech-tags {
@@ -192,8 +183,8 @@ onBeforeUnmount(() => observer?.disconnect())
         gap: 0.5rem;
 
         .tag {
-          background: vars.$accent-color;
-          color: vars.$primary-color-dark;
+          background: var(--color-accent);
+          color: var(--color-on-accent);
           padding: 0.25rem 0.5rem;
           border-radius: 8px;
           font-size: 0.75rem;
@@ -201,15 +192,21 @@ onBeforeUnmount(() => observer?.disconnect())
       }
     }
 
+    // Logos em "fichas" do mesmo tamanho, que não encolhem nem saem do card.
     .logos {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       gap: 0.5rem;
 
       .logo {
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
+        padding: 6px;
         object-fit: contain;
+        background: #fff;
+        border: 1px solid var(--color-card-border);
+        border-radius: 10px;
       }
     }
   }
@@ -219,13 +216,13 @@ onBeforeUnmount(() => observer?.disconnect())
   .timeline-item {
     .timeline-header {
       flex-direction: column;
+      align-items: flex-start;
       margin-left: 0;
     }
 
-    .timeline-content {
-      .logos {
-        display: none;
-      }
+    .timeline-content .logos .logo {
+      width: 44px;
+      height: 44px;
     }
   }
 }

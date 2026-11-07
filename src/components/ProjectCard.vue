@@ -45,8 +45,6 @@ useIntersectionObserver(cardEl, () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .project-card {
   display: flex;
   text-decoration: none;
@@ -54,14 +52,14 @@ useIntersectionObserver(cardEl, () => {
   flex-direction: column;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
   transition: transform 0.6s ease, opacity 0.6s ease;
 
-  background-color: vars.$secondary-color-light;
-  border: 1px solid #e0e0e0;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
 
   &.visible {
     opacity: 1;
@@ -90,35 +88,18 @@ useIntersectionObserver(cardEl, () => {
 
   .project-info {
     padding: 1rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--color-card-divider);
 
     .project-title {
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: vars.$primary-color-light;
+      color: var(--color-fg);
     }
 
     .project-description {
       font-size: 1rem;
-      color: vars.$text-color-light;
-    }
-  }
-
-  body.dark & {
-    background-color: vars.$secondary-color-dark;
-    border: 1px solid #333;
-
-    .project-info {
-      border-top: 1px solid #444;
-
-      .project-title {
-        color: vars.$primary-color-dark;
-      }
-
-      .project-description {
-        color: vars.$text-color-dark;
-      }
+      color: var(--color-text);
     }
   }
 }
