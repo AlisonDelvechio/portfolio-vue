@@ -9,18 +9,11 @@ const year = new Date().getFullYear()
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .footer {
-  background: rgba(vars.$background-dark, 0.9);
-  color: vars.$text-color-dark;
+  background: var(--color-footer-bg);
+  color: var(--color-text);
   text-align: center;
   padding: 1.5rem 2rem;
   font-size: 0.9rem;
-
-  body.light & {
-    background: rgba(vars.$background-light, 0.9);
-    color: vars.$text-color-light;
-  }
 }
 </style>

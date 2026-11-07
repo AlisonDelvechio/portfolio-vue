@@ -92,8 +92,6 @@ const next = computed(() => projects[index.value + 1])
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .project-page {
   padding: 10rem 1rem;
   max-width: 800px;
@@ -116,39 +114,26 @@ const next = computed(() => projects[index.value + 1])
       font-size: 2rem;
       padding: 0.4rem;
       border-radius: 50%;
-      border: 1px solid vars.$primary-color-light;
-      color: vars.$primary-color-light;
-      transition: background 0.3s ease, transform 0.3s ease;
+      border: 1px solid var(--color-fg);
+      color: var(--color-fg);
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 
       &:hover {
-        background: vars.$primary-color-light;
-        color: vars.$primary-color-dark;
+        background: var(--color-button-bg);
+        color: var(--color-button-fg);
         transform: scale(1.1);
-      }
-
-      body.dark & {
-        border-color: vars.$primary-color-dark;
-        color: vars.$primary-color-dark;
       }
     }
 
     h1 {
       font-size: 2rem;
-      color: vars.$text-color-light;
-
-      body.dark & {
-        color: vars.$text-color-dark;
-      }
+      color: var(--color-text);
     }
   }
 
   .description {
     margin: 1rem 0;
-    color: vars.$text-color-light;
-
-    body.dark & {
-      color: vars.$text-color-dark;
-    }
+    color: var(--color-text);
   }
 
   .meta {
@@ -156,14 +141,10 @@ const next = computed(() => projects[index.value + 1])
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    color: vars.$text-color-light;
+    color: var(--color-text);
 
     .icon {
       font-size: 1.2rem;
-    }
-
-    body.dark & {
-      color: vars.$text-color-dark;
     }
   }
 
@@ -177,18 +158,12 @@ const next = computed(() => projects[index.value + 1])
 
     .tag {
       display: inline-block;
-      background: vars.$tag-bg-light;
-      border: 1px solid vars.$tag-border-light;
+      background: var(--color-tag-bg);
+      border: 1px solid var(--color-tag-border);
       border-radius: 20px;
       padding: 0.3rem 0.8rem;
       font-size: 0.8rem;
-      color: vars.$text-color-light;
-
-      body.dark & {
-        background: vars.$tag-bg-dark;
-        border-color: vars.$tag-border-dark;
-        color: vars.$text-color-dark;
-      }
+      color: var(--color-text);
     }
   }
 
@@ -202,16 +177,15 @@ const next = computed(() => projects[index.value + 1])
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: vars.$primary-color-light;
-    color: vars.$primary-color-dark;
+    background: var(--color-button-bg);
+    color: var(--color-button-fg);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     margin: 1rem 0;
     text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: transform 0.2s ease;
 
     &:hover {
-      background: vars.$primary-color-light;
       transform: translateY(-2px);
     }
   }
@@ -228,7 +202,7 @@ const next = computed(() => projects[index.value + 1])
       max-width: 100%;
       height: auto;
       border-radius: 8px;
-      box-shadow: 0 2px 6px vars.$shadow-light;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
 
       &:hover {
@@ -250,16 +224,14 @@ const next = computed(() => projects[index.value + 1])
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 8px;
-      background: vars.$primary-color-light;
-      color: vars.$primary-color-dark;
+      background: var(--color-button-bg);
+      color: var(--color-button-fg);
       cursor: pointer;
-
       transition: transform 0.2s ease, box-shadow 0.2s ease;
 
       &:hover {
-        background: vars.$primary-color-light;
         transform: translateY(-2px);
-        box-shadow: 0 4px 6px vars.$shadow-light;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     }
   }

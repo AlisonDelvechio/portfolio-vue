@@ -37,8 +37,8 @@ onBeforeUnmount(() => {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: $accent-color;
-  color: $primary-color-dark;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
   border: none;
   border-radius: 50%;
   width: 40px;

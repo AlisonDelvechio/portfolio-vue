@@ -22,36 +22,22 @@ import { projects } from '@/data/projects'
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-
 .projects-preview {
   padding: 4rem clamp(1rem, 6vw, 10rem);
   text-align: center;
   margin: 4rem 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 60%);
-
-  body.dark & {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
-  }
+  background: var(--bg-projects);
 
   h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    color: vars.$text-color-light;
-
-    body.dark & {
-      color: vars.$text-color-dark;
-    }
+    color: var(--color-text);
   }
 
   p {
     font-size: 1rem;
-    color: vars.$text-muted-light;
+    color: var(--color-text-muted);
     margin-bottom: 2rem;
-
-    body.dark & {
-      color: vars.$text-muted-dark;
-    }
   }
 
   @media (max-width: 768px) {

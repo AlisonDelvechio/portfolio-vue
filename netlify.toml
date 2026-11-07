@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "dist"
 
+# O Vite 8 exige Node 20.19+ ou 22.12+.
+[build.environment]
+  NODE_VERSION = "22"
+
 [[headers]]
   for = "/*"
   [headers.values]

@@ -1,0 +1,126 @@
+@use "variables" as *;
+
+// Tokens de tema. Os componentes usam só var(--...) e não precisam saber qual tema
+// está ativo; para mudar uma cor, altere aqui. O tema é a classe do <body>
+// (aplicada por public/theme-init.js e pelo composable useTheme).
+
+body,
+body.dark {
+  color-scheme: dark;
+
+  // Superfícies
+  --color-bg: #{$secondary-color-dark};
+  --color-surface: #181818;
+  --color-surface-subtle: rgba(0, 0, 0, 0.05);
+  --color-header-bg: rgba(18, 18, 18, 0.8);
+  --color-footer-bg: rgba(18, 18, 18, 0.9);
+  --color-divider: rgba(255, 255, 255, 0.05);
+
+  // Texto
+  --color-fg: #{$primary-color-dark}; // títulos, links e bordas de destaque
+  --color-text: #{$text-color-dark};
+  --color-text-soft: #ccc;
+  --color-text-muted: #{$text-muted-dark};
+
+  // Destaque
+  --color-accent: #{$accent-color};
+  --color-on-accent: #{$primary-color-dark};
+
+  // Componentes
+  --color-chip-bg: rgba(255, 255, 255, 0.1);
+  --color-tag-bg: #{$tag-bg-dark};
+  --color-tag-border: #{$tag-border-dark};
+  --color-card-bg: #{$secondary-color-dark};
+  --color-card-border: #333;
+  --color-card-divider: #444;
+  --color-switch-bg: #333;
+  --color-button-bg: #{$primary-color-light};
+  --color-button-fg: #{$primary-color-dark};
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  // Bloco de código da seção Expertise
+  --color-code-bg: #1e1e1e;
+  --color-code-fg: #f8f8f2;
+  --color-code-highlight: #ff79c6;
+
+  // Terminal da seção "Meu trabalho"
+  --color-terminal-bg: rgba(20, 20, 20, 0.8);
+  --color-terminal-fg: #{$text-color-dark};
+  --color-syntax-tag: #{$accent-color};
+  --color-syntax-attr: #c792ea;
+  --color-syntax-value: #89ddff;
+
+  // Fundos decorativos
+  --bg-pattern: url('@/assets/diagmonds-dark.png');
+  --bg-hero: linear-gradient(
+    to bottom,
+    #{$bg-dark-strong} 0%,
+    #{$bg-dark-medium} 70%,
+    #{$bg-dark-transparent} 100%
+  );
+  --bg-contact: linear-gradient(
+    to right,
+    #{rgba($secondary-color-dark, 0.85)},
+    #{rgba($secondary-color-dark, 0.6)}
+  );
+  --bg-projects: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+
+  // Barra de rolagem
+  --scrollbar-track: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb: rgba(150, 150, 150, 0.5);
+  --scrollbar-thumb-hover: rgba(150, 150, 150, 0.8);
+}
+
+body.light {
+  color-scheme: light;
+
+  --color-bg: #{$secondary-color-light};
+  --color-surface: #{$background-light};
+  --color-header-bg: rgba(245, 245, 245, 0.8);
+  --color-footer-bg: rgba(245, 245, 245, 0.9);
+  --color-divider: #{$divider-color-light};
+
+  --color-fg: #{$primary-color-light};
+  --color-text: #{$text-color-light};
+  --color-text-soft: #555;
+  --color-text-muted: #{$text-muted-light};
+
+  --color-chip-bg: rgba(0, 0, 0, 0.1);
+  --color-tag-bg: #{$tag-bg-light};
+  --color-tag-border: #{$tag-border-light};
+  --color-card-bg: #{$secondary-color-light};
+  --color-card-border: #e0e0e0;
+  --color-card-divider: #ccc;
+  --color-switch-bg: #ddd;
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --color-code-bg: #c2c2c2;
+  --color-code-fg: #{$primary-color-light};
+  --color-code-highlight: #ca3d8d;
+
+  --color-terminal-bg: rgba(245, 245, 245, 0.8);
+  --color-terminal-fg: #{$text-color-light};
+  --color-syntax-tag: #d73a49;
+  --color-syntax-attr: #6f42c1;
+  --color-syntax-value: #22863a;
+
+  --bg-pattern: url('@/assets/diagmonds-light.png');
+  --bg-hero: linear-gradient(
+    to bottom,
+    #{$bg-light-strong} 0%,
+    #{$bg-light-medium} 70%,
+    #{$bg-light-transparent} 100%
+  );
+  --bg-contact: linear-gradient(
+    to bottom,
+    #{rgba($secondary-color-light, 1)},
+    #{rgba($secondary-color-light, 0.4)},
+    #{rgba($secondary-color-light, 0)}
+  );
+  --bg-projects: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 60%);
+
+  --scrollbar-track: rgba(240, 240, 240, 0.8);
+  --scrollbar-thumb: rgba(100, 100, 100, 0.5);
+  --scrollbar-thumb-hover: rgba(100, 100, 100, 0.8);
+}

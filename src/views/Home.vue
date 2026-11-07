@@ -25,39 +25,16 @@ import Contact from '@/components/Contact.vue';
 .section-divider {
   width: 100%;
   height: 2px;
-  background: $divider-color-dark;
+  background: var(--color-divider);
   margin: 3rem 0;
-
-  body.light & {
-    background: $divider-color-light;
-  }
 }
 
 .hero-expertise-wrapper {
-  background-image:
-    url('@/assets/diagmonds-dark.png'),
-    linear-gradient(
-      to bottom,
-      $bg-dark-strong 0%,
-      $bg-dark-medium 70%,
-      $bg-dark-transparent 100%
-    );
+  background-image: var(--bg-pattern), var(--bg-hero);
   background-repeat: repeat, no-repeat;
   background-size: 150px 150px, cover;
   background-position: center top, center;
   background-blend-mode: overlay;
   padding-bottom: 4rem;
-
-  // Modo light
-  body.light & {
-    background-image:
-      url('@/assets/diagmonds-light.png'),
-      linear-gradient(
-        to bottom,
-        $bg-light-strong 0%,
-        $bg-light-medium 70%,
-        $bg-light-transparent 100%
-      );
-  }
 }
 </style>

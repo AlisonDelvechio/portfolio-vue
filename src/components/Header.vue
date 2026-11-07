@@ -102,8 +102,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/variables' as vars;
-
 .header {
   position: fixed;
   top: 0;
@@ -111,13 +109,9 @@ onBeforeUnmount(() => {
   width: 100%;
   z-index: 1000;
 
-  background: rgba(18, 18, 18, 0.8); // fundo dark
+  background: var(--color-header-bg);
   backdrop-filter: blur(8px);
   padding: 1.5rem 0;
-
-  body.light & {
-    background: rgba(245, 245, 245, 0.8); // fundo light
-  }
 
   .container {
     width: 100%;
@@ -156,12 +150,7 @@ onBeforeUnmount(() => {
       font-size: 1.2rem;
 
       li a {
-        color: vars.$primary-color-dark; 
-
-        body.light & {
-          color: vars.$primary-color-light;
-        }
-
+        color: var(--color-fg);
         text-decoration: none;
         font-weight: 600;
         position: relative;
@@ -171,12 +160,7 @@ onBeforeUnmount(() => {
           display: block;
           width: 0;
           height: 2px;
-          background: vars.$primary-color-dark;
-
-          body.light & {
-            background: vars.$primary-color-light;
-          }
-
+          background: var(--color-fg);
           transition: width 0.3s;
           position: absolute;
           bottom: -4px;
@@ -202,12 +186,7 @@ onBeforeUnmount(() => {
     .bar {
       width: 25px;
       height: 3px;
-      background: vars.$primary-color-dark; // para dark, barra clara
-
-      body.light & {
-        background: vars.$primary-color-light; // para light, barra escura
-      }
-
+      background: var(--color-fg);
       border-radius: 2px;
     }
   }
@@ -244,13 +223,8 @@ onBeforeUnmount(() => {
       top: 100%;
       left: 1rem;
       grid-area: auto;
-      background: #181818;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-
-      body.light & {
-        background: #f5f5f5;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      }
+      background: var(--color-surface);
+      box-shadow: var(--shadow-menu);
 
       padding: 1rem 2rem;
       border-radius: 8px;
@@ -300,7 +274,7 @@ onBeforeUnmount(() => {
   }
 
   input:focus-visible + .slider {
-    outline: 2px solid $accent-color;
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 
@@ -309,7 +283,7 @@ onBeforeUnmount(() => {
     cursor: pointer;
     top: 0; left: 0; right: 0; bottom: 0;
 
-    background-color: #333; // dark mode default slider background
+    background-color: var(--color-switch-bg);
     border-radius: 34px;
     transition: background-color 0.4s;
 
@@ -345,8 +319,6 @@ onBeforeUnmount(() => {
   }
 
   input:checked + .slider {
-    background-color: #333;
-
     &::before {
       transform: translateX(30px);
     }
@@ -356,12 +328,5 @@ onBeforeUnmount(() => {
     }
   }
 
-  body.light & .slider {
-    background-color: #ddd;
-
-    input:checked + & {
-      background-color: #ddd;
-    }
-  }
 }
 </style>

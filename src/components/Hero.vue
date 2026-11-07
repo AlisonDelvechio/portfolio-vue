@@ -54,8 +54,6 @@ const descriptionWords = splitWords(description)
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/variables' as vars;
-
 section {
   min-height: 60vh;
   display: flex;
@@ -76,12 +74,7 @@ section {
   }
 
   h1 {
-    color: vars.$primary-color-dark;
-
-    body.light & {
-      color: vars.$primary-color-light;
-    }
-
+    color: var(--color-fg);
     font-size: 6rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -100,12 +93,7 @@ section {
 
   p {
     font-size: 1.5rem;
-    color: vars.$primary-color-dark;
-
-    body.light & {
-      color: vars.$primary-color-light;
-    }
-
+    color: var(--color-fg);
     margin-top: 1rem;
     letter-spacing: 0.05em;
 
