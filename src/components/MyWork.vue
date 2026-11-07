@@ -1,7 +1,7 @@
 <template>
-  <section class="my-work" ref="myWorkSection">
+  <section class="my-work" ref="myWorkSection" aria-labelledby="my-work-title">
     <div class="text-content">
-      <h2>Meu trabalho</h2>
+      <h2 id="my-work-title">Meu trabalho</h2>
       <p>
         Ao longo da minha carreira, atuei em diversos projetos que me permitiram desenvolver soluções práticas e escaláveis, sempre com foco na qualidade e na experiência do usuário. Trabalhei em equipes multidisciplinares, entregando desde funcionalidades específicas até integrações complexas, sempre buscando alinhar tecnologia e necessidades reais dos clientes.
         <br><br>
@@ -10,11 +10,11 @@
     </div>
     <div class="visual-effect">
       <div class="pc-frame" :class="{ animate: inView }">
-        <svg viewBox="0 0 64 48">
+        <svg viewBox="0 0 64 48" aria-hidden="true">
           <rect x="2" y="2" width="60" height="40" rx="4" ry="4" />
           <rect x="24" y="44" width="16" height="2" />
         </svg>
-        <div class="typing" v-if="inView">
+        <div class="typing" v-if="inView" aria-hidden="true">
           <pre><code v-html="displayedText"></code><span class="cursor">|</span></pre>
         </div>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onBeforeUnmount } from 'vue'
 import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 
 const myWorkSection = ref<HTMLElement | null>(null)
@@ -62,6 +62,11 @@ let index = 0
 let interval: number | undefined
 
 function startTyping() {
+  // Com redução de movimento, mostra o texto pronto em vez de digitar.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    displayedText.value = syntaxHighlight(rawText)
+    return
+  }
   displayedText.value = ''
   index = 0
 
@@ -71,6 +76,8 @@ function startTyping() {
     if (index >= rawText.length) clearInterval(interval)
   }, 25)
 }
+
+onBeforeUnmount(() => clearInterval(interval))
 
 useIntersectionObserver(myWorkSection, () => {
   if (!inView.value) {
@@ -88,8 +95,10 @@ useIntersectionObserver(myWorkSection, () => {
   grid-template-columns: 1fr 1fr;
   align-items: start;
   gap: 2rem;
-  padding: 4rem 12rem;
+  padding: 4rem clamp(1rem, 6vw, 12rem);
   justify-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 
   .text-content {
     h2 {
@@ -110,8 +119,8 @@ useIntersectionObserver(myWorkSection, () => {
 
     .pc-frame {
       position: relative;
-      width: 500px;
-      height: 350px;
+      width: min(500px, 100%);
+      aspect-ratio: 500 / 350;
 
       svg {
         width: 100%;
@@ -134,7 +143,7 @@ useIntersectionObserver(myWorkSection, () => {
         left: 5%;
         width: 90%;
         height: 84%;
-        font-family: monospace;
+        font-family: vars.$font-code;
         font-size: 0.9rem;
         color: vars.$text-color-dark;
         background: rgba(0, 0, 0, 0.7);
@@ -240,7 +249,7 @@ body.dark {
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .my-work {
     display: flex;
     flex-direction: column;
@@ -261,8 +270,7 @@ body.dark {
     .visual-effect {
       .pc-frame {
         width: 100%;
-        max-width: 350px;
-        height: 250px;
+        max-width: 420px;
 
         .typing {
           top: 6%;

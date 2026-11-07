@@ -60,26 +60,4 @@ import Contact from '@/components/Contact.vue';
       );
   }
 }
-
-.scroll-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: $accent-color;
-  color: $primary-color-dark;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 10000;
-
-  &:hover {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
 </style>

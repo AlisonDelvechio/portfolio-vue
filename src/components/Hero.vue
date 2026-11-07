@@ -2,19 +2,32 @@
   <section id="home">
     <div class="hero-content">
       <h1>
-        <span v-for="(char, index) in greeting" :key="index" :style="{ animationDelay: `${index * 0.05}s` }">
-          {{ char === ' ' ? '\u00A0' : char }}
-        </span>
-        <span>
-          <span v-for="(char, index) in name" :key="`name-${index}`" :style="{ animationDelay: `${(index + greeting.length) * 0.05}s` }">
-            {{ char === ' ' ? '\u00A0' : char }}
+        <span class="sr-only">{{ title }}</span>
+        <span aria-hidden="true">
+          <span v-for="(word, w) in titleWords" :key="w" class="word">
+            <span
+              v-for="(char, c) in word.chars"
+              :key="c"
+              class="char"
+              :style="{ animationDelay: `${(word.offset + c) * 0.05}s` }"
+              >{{ char }}</span
+            >
           </span>
         </span>
       </h1>
 
       <p>
-        <span v-for="(char, index) in description" :key="index" :style="{ animationDelay: `${index * 0.03}s` }">
-          {{ char }}
+        <span class="sr-only">{{ description }}</span>
+        <span aria-hidden="true">
+          <span v-for="(word, w) in descriptionWords" :key="w" class="word">
+            <span
+              v-for="(char, c) in word.chars"
+              :key="c"
+              class="char"
+              :style="{ animationDelay: `${(word.offset + c) * 0.03}s` }"
+              >{{ char }}</span
+            >
+          </span>
         </span>
       </p>
     </div>
@@ -22,10 +35,22 @@
 </template>
 
 <script setup lang="ts">
-const greeting = 'Olá, sou'.split('');
-const name = ' Alison'.split('');
+const title = 'Olá, sou Alison'
+const description = 'Desenvolvedor Front-end focado em Design Systems, Web Components e acessibilidade'
 
-const description = 'Desenvolvedor Front-end especializado em Vue, Sass e TypeScript'.split('');
+// Agrupa as letras por palavra: a animação continua letra a letra, mas a quebra
+// de linha só acontece entre palavras (antes quebrava no meio, ex.: "TypeS cript").
+function splitWords(text: string) {
+  let offset = 0
+  return text.split(' ').map((word) => {
+    const entry = { chars: [...word], offset }
+    offset += word.length + 1
+    return entry
+  })
+}
+
+const titleWords = splitWords(title)
+const descriptionWords = splitWords(description)
 </script>
 
 <style lang="scss" scoped>
@@ -50,11 +75,6 @@ section {
     min-height: 40vh;
   }
 
-  @media (max-width: 768px) {
-    margin-top: 5rem;
-    min-height: 40vh;
-  }
-
   h1 {
     color: vars.$primary-color-dark;
 
@@ -65,8 +85,8 @@ section {
     font-size: 6rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    white-space: pre-wrap;
     letter-spacing: 0.1em;
+    line-height: 1.15;
 
     @media (max-width: 768px) {
       font-size: 4rem;
@@ -87,7 +107,6 @@ section {
     }
 
     margin-top: 1rem;
-    white-space: pre-wrap;
     letter-spacing: 0.05em;
 
     @media (max-width: 768px) {
@@ -99,7 +118,17 @@ section {
     }
   }
 
-  span {
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 0.3em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .char {
     display: inline-block;
     animation: jump 0.5s ease forwards;
     opacity: 0;

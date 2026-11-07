@@ -1,8 +1,12 @@
 <template>
   <footer class="footer">
-    <p>&copy; 2025 Alison Delvechio. Todos os direitos reservados.</p>
+    <p>&copy; {{ year }} Alison Delvechio. Todos os direitos reservados.</p>
   </footer>
 </template>
+
+<script setup lang="ts">
+const year = new Date().getFullYear()
+</script>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as vars;

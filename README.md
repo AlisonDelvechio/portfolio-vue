@@ -13,36 +13,40 @@ Você pode acessar o portfólio online aqui: **[https://alison-delvechio-portfol
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Vue 3
-- TypeScript
+- Vue 3 (`<script setup>`) + TypeScript
 - Vite
-- SCSS (com variáveis e mixins)
-- Vue Router
-- CSS Grid e Flexbox
-- Modo Dark/Light com CSS dinâmico
-- Animações com transitions e keyframes
+- Vue Router (uma rota por projeto: `/projects/<slug>`)
+- SCSS (com variáveis)
+- Iconify com ícones locais (sem requisições externas)
+- Modo dark/light salvo no navegador, seguindo a preferência do sistema na primeira visita
 
 ## 📁 Estrutura do Projeto
 
 ```
 src/
-├── assets/         # Imagens e ícones
-├── components/     # Componentes reutilizáveis
-├── pages/          # Páginas principais (Home, About, Projects, etc)
-├── router/         # Configurações de rotas
-├── styles/         # Arquivos SCSS globais
+├── assets/
+│   ├── logos/          # Logos das empresas (WebP)
+│   └── projects/<slug>/ # cover.webp (card) e 01.webp, 02.webp... (galeria)
+├── components/         # Componentes reutilizáveis
+├── composables/        # useTheme, useIntersectionObserver
+├── data/               # projects.ts e experiences.ts: o conteúdo do site
+├── icons/icons.json    # Ícones usados (gerado por npm run icons)
+├── router/             # Rotas
+├── styles/             # SCSS global
+├── views/              # Home e página de projeto
 ├── App.vue
-├── main.ts
+└── main.ts
+public/
+├── _redirects          # Faz as rotas da SPA funcionarem ao recarregar na Netlify
+├── theme-init.js       # Aplica o tema antes da primeira pintura
+└── og-image.png        # Imagem de compartilhamento (LinkedIn, WhatsApp...)
 ```
 
-## 🚀 Funcionalidades
+## ✏️ Como atualizar o conteúdo
 
-- ✅ Listagem dinâmica de projetos com preview
-- ✅ Responsividade para dispositivos móveis
-- ✅ Efeitos visuais SVG e animações CSS
-- ✅ Modo claro e escuro
-- ✅ Código limpo e modularizado
-- ✅ Descrições dos projetos detalhadas
+- **Novo projeto:** crie `src/assets/projects/<slug>/` com `cover.webp` (cerca de 800px de largura) e as capturas `01.webp`, `02.webp`... (até 1600px), e adicione o projeto em `src/data/projects.ts`. A ordem do array é a ordem de exibição; `demo` é opcional e mostra o botão "Ver site".
+- **Experiência:** edite `src/data/experiences.ts`. O "mais de N anos" da seção de expertise é calculado a partir de `CAREER_START_YEAR`.
+- **Novo ícone:** adicione o nome em `scripts/build-icons.mjs` e rode `npm run icons`.
 
 ## 💻 Como rodar localmente
 

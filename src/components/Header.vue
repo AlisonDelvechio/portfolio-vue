@@ -1,45 +1,47 @@
 <template>
   <header class="header">
     <div class="container">
-      <!-- Logo -->
-      <div class="logo" @click="goToHomeSection">
-        <img :src="logoSrc" alt="Logo Alison" class="logo-img" />
-      </div>
+      <router-link to="/#home" class="logo" aria-label="Alison Delvechio, ir para o início" @click="closeMenu">
+        <img :src="logoSrc" alt="" class="logo-img" width="513" height="44" />
+      </router-link>
 
-      <!-- Navegação -->
-      <nav :class="{ 'is-open': menuOpen }" aria-label="Main Navigation">
+      <nav id="main-nav" ref="navEl" :class="{ 'is-open': menuOpen }" aria-label="Navegação principal">
         <ul>
-          <li><router-link to="/" @click="closeMenu">Home</router-link></li>
-          <li><router-link to="#expertise" @click="closeMenu">Expertise</router-link></li>
-          <li><router-link to="#projects" @click="closeMenu">Projetos</router-link></li>
-          <li><router-link to="#contato" @click="closeMenu">Contato</router-link></li>
+          <li v-for="link in links" :key="link.hash">
+            <router-link :to="{ path: '/', hash: link.hash }" @click="closeMenu">{{ link.label }}</router-link>
+          </li>
         </ul>
       </nav>
 
-      <!-- Botão de menu mobile -->
-      <button 
+      <button
+        ref="toggleBtn"
         class="menu-toggle"
-        @click="toggleMenu"
+        type="button"
         :aria-expanded="menuOpen"
         aria-controls="main-nav"
-        aria-label="Abrir ou fechar o menu"
+        :aria-label="menuOpen ? 'Fechar menu' : 'Abrir menu'"
+        @click="menuOpen = !menuOpen"
       >
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
 
-      <!-- Botão modo light/dark -->
       <div class="theme-switch">
         <label class="switch">
-          <input type="checkbox" v-model="isDarkMode" @change="toggleTheme">
+          <input
+            type="checkbox"
+            :checked="theme === 'dark'"
+            aria-label="Tema escuro"
+            @change="toggleTheme"
+          />
           <span class="slider">
-            <Icon 
-              :icon="isDarkMode ? 'mdi:moon-waning-crescent' : 'mdi:white-balance-sunny'" 
-              width="22" 
-              height="22" 
-              class="icon" 
-              :color="isDarkMode ? '#333' : '#555'" 
+            <Icon
+              :icon="theme === 'dark' ? 'mdi:moon-waning-crescent' : 'mdi:white-balance-sunny'"
+              width="22"
+              height="22"
+              class="icon"
+              :color="theme === 'dark' ? '#333' : '#555'"
             />
           </span>
         </label>
@@ -51,63 +53,51 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Icon } from '@iconify/vue'
-import { useRouter } from 'vue-router'
+import { useTheme } from '@/composables/useTheme'
 import LogoAlisonLight from '@/assets/Logo-Alison-V1.svg'
 import LogoAlisonDark from '@/assets/Logo-Alison-V1-Black.svg'
 
+const links = [
+  { label: 'Início', hash: '#home' },
+  { label: 'Expertise', hash: '#expertise' },
+  { label: 'Projetos', hash: '#projects' },
+  { label: 'Experiência', hash: '#experiencia' },
+  { label: 'Contato', hash: '#contato' },
+]
+
+const { theme, toggleTheme } = useTheme()
+const logoSrc = computed(() => (theme.value === 'dark' ? LogoAlisonDark : LogoAlisonLight))
+
 const menuOpen = ref(false)
-const isDarkMode = ref(true)
-
-const logoSrc = computed(() => {
-  return isDarkMode.value ? LogoAlisonDark : LogoAlisonLight
-})
-
-function toggleMenu() {
-  menuOpen.value = !menuOpen.value
-}
+const navEl = ref<HTMLElement | null>(null)
+const toggleBtn = ref<HTMLElement | null>(null)
 
 function closeMenu() {
   menuOpen.value = false
 }
 
-const router = useRouter()
-
-function goToHomeSection() {
-  router.push({ path: '/', hash: '#home' })
+function onClickOutside(event: MouseEvent) {
+  const target = event.target as Node
+  if (menuOpen.value && !navEl.value?.contains(target) && !toggleBtn.value?.contains(target)) {
+    closeMenu()
+  }
 }
 
-function toggleTheme() {
-  if (isDarkMode.value) {
-    document.body.classList.add('dark')
-    document.body.classList.remove('light')
-  } else {
-    document.body.classList.add('light')
-    document.body.classList.remove('dark')
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && menuOpen.value) {
+    closeMenu()
+    toggleBtn.value?.focus()
   }
 }
 
 onMounted(() => {
-  toggleTheme()
+  document.addEventListener('click', onClickOutside)
+  document.addEventListener('keydown', onKeydown)
+})
 
-  const navEl = document.querySelector('nav')
-  const toggleBtn = document.querySelector('.menu-toggle')
-
-  function handleClickOutside(event: MouseEvent) {
-    if (
-      menuOpen.value &&
-      navEl && toggleBtn &&
-      !navEl.contains(event.target as Node) &&
-      !toggleBtn.contains(event.target as Node)
-    ) {
-      menuOpen.value = false
-    }
-  }
-
-  document.addEventListener('click', handleClickOutside)
-
-  onBeforeUnmount(() => {
-    document.removeEventListener('click', handleClickOutside)
-  })
+onBeforeUnmount(() => {
+  document.removeEventListener('click', onClickOutside)
+  document.removeEventListener('keydown', onKeydown)
 })
 </script>
 
@@ -131,34 +121,35 @@ onMounted(() => {
 
   .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
-
-    position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: 'logo nav theme';
     align-items: center;
-    justify-content: center; 
+    gap: 1.5rem;
   }
 
   .logo {
-    position: absolute;
-    left: -18rem; 
+    grid-area: logo;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    min-width: 0;
 
     .logo-img {
-      width: 20rem;
+      width: 16rem;
+      max-width: 100%;
       height: auto;
     }
   }
 
   nav {
+    grid-area: nav;
+
     ul {
       display: flex;
-      gap: 2rem;
+      gap: 1.75rem;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -200,6 +191,7 @@ onMounted(() => {
   }
 
   .menu-toggle {
+    grid-area: menu;
     display: none;
     flex-direction: column;
     gap: 0.3rem;
@@ -220,37 +212,44 @@ onMounted(() => {
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
+    nav ul {
+      gap: 1.25rem;
+      font-size: 1.05rem;
+    }
+  }
+
+  @media (max-width: 900px) {
     .container {
-      justify-content: center;
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'menu logo theme';
+      padding: 0 1rem;
     }
 
     .logo {
-      margin-right: 2rem;
-      position: static; 
-      order: 2; 
+      justify-content: center;
 
       .logo-img {
         width: 15rem;
-        height: auto;
       }
     }
 
     .menu-toggle {
       display: flex;
-      order: 1;
-      position: absolute;
-      left: 1rem;
+      padding: 0.5rem;
     }
 
     nav {
       position: absolute;
       top: 100%;
       left: 1rem;
-      background: rgba(18, 18, 18, 0.95);
+      grid-area: auto;
+      background: #181818;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 
       body.light & {
-        background: rgba(245, 245, 245, 0.95);
+        background: #f5f5f5;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       }
 
       padding: 1rem 2rem;
@@ -275,28 +274,13 @@ onMounted(() => {
       pointer-events: auto;
     }
   }
-
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 }
 
 .theme-switch {
-  position: absolute;
-  right: 0;
+  grid-area: theme;
+  justify-self: end;
   display: flex;
   align-items: center;
-
-  @media (max-width: 768px) {
-    right: 0.5rem;
-  }
 }
 
 .switch {
@@ -306,9 +290,18 @@ onMounted(() => {
   height: 30px;
 
   input {
+    position: absolute;
     opacity: 0;
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  input:focus-visible + .slider {
+    outline: 2px solid $accent-color;
+    outline-offset: 3px;
   }
 
   .slider {

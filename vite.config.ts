@@ -9,6 +9,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    // Não embutir imagens em base64 no JS: elas viram arquivos com cache próprio
+    // e não pesam no carregamento inicial do bundle.
+    assetsInlineLimit: 0,
+  },
   css: {
     preprocessorOptions: {
       scss: {

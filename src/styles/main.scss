@@ -1,7 +1,10 @@
 @use './reset';
 
-* {
+html {
   scroll-behavior: smooth;
+}
+
+* {
   scrollbar-width: thin;
   scrollbar-color: rgba(150, 150, 150, 0.5) rgba(0, 0, 0, 0.1);
 }
@@ -69,4 +72,48 @@ body.light {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(150, 150, 150, 0.8);
+}
+
+// Seções com âncora não ficam escondidas atrás do header fixo.
+section[id] {
+  scroll-margin-top: $header-height;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Texto disponível só para leitores de tela.
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid $accent-color;
+  outline-offset: 3px;
+}
+
+// Respeita quem pediu ao sistema para reduzir animações.
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }

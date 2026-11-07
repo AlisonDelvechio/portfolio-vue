@@ -1,24 +1,26 @@
 <template>
   <section id="contato" class="contact" ref="contactSection">
-    <h2 :class="{ 'fade-up': animate }">Contato</h2>
-    <p :class="['fade-up', 'delay-1', { 'fade-up': animate }]">
+    <h2 :class="['fade-up', { visible: animate }]">Contato</h2>
+    <p :class="['fade-up', 'delay-1', { visible: animate }]">
       Quer conversar ou colaborar? Me mande um e-mail ou me encontre nas redes:
     </p>
 
-    <div :class="['contact-links', 'fade-up', 'delay-2', { 'fade-up': animate }]">
+    <div :class="['contact-links', 'fade-up', 'delay-2', { visible: animate }]">
       <a href="mailto:alisondelvechio@outlook.com" class="contact-link">
         <Icon icon="mdi:email-outline" width="24" />
         <span>Email</span>
       </a>
 
-      <a href="https://github.com/AlisonDelvechio" target="_blank" class="contact-link">
+      <a href="https://github.com/AlisonDelvechio" target="_blank" rel="noopener noreferrer" class="contact-link">
         <Icon icon="mdi:github" width="24" />
         <span>GitHub</span>
+        <span class="sr-only">(abre em nova aba)</span>
       </a>
 
-      <a href="https://www.linkedin.com/in/alison-delvechio-64094b172/" target="_blank" class="contact-link">
+      <a href="https://www.linkedin.com/in/alison-delvechio-64094b172/" target="_blank" rel="noopener noreferrer" class="contact-link">
         <Icon icon="mdi:linkedin" width="24" />
         <span>LinkedIn</span>
+        <span class="sr-only">(abre em nova aba)</span>
       </a>
     </div>
   </section>
@@ -116,10 +118,14 @@ useIntersectionObserver(contactSection, () => {
   }
 }
 
+// A animação só começa quando a seção entra na tela (classe .visible).
 .fade-up {
   opacity: 0;
   transform: translateX(-50px);
-  animation: fadeLeftToCenter 1s ease forwards;
+
+  &.visible {
+    animation: fadeLeftToCenter 1s ease forwards;
+  }
 }
 
 .delay-1 { animation-delay: 0.2s; }
