@@ -15,7 +15,7 @@
       <div class="timeline-content">
         <div class="info">
           <div class="location">
-            <Icon :icon="exp.icon" />
+            <Icon icon="mdi:office-building" aria-hidden="true" />
             <span>{{ exp.location }}</span>
           </div>
 
@@ -36,9 +36,12 @@
           <img
             v-for="(logo, i) in exp.logos"
             :key="i"
-            :src="logo"
-            :alt="`Logo de ${exp.location}`"
+            :src="logo.src"
+            :alt="logo.alt"
             class="logo"
+            loading="lazy"
+            width="50"
+            height="50"
           />
         </div>
       </div>
@@ -48,17 +51,8 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { ref, onMounted } from 'vue'
-
-interface Experience {
-  role: string
-  date: string
-  location: string
-  icon: string
-  description: string
-  logos: string[]
-  technologies: string[]
-}
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import type { Experience } from '@/data/experiences'
 
 defineProps<{
   experiences: Experience[]
@@ -67,23 +61,25 @@ defineProps<{
 const timelineItems = ref<(HTMLElement | null)[]>([])
 const visibleItems = ref<boolean[]>([])
 
+let observer: IntersectionObserver | null = null
+
 onMounted(() => {
-  timelineItems.value.forEach((el, index) => {
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          visibleItems.value[index] = true
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    observer.observe(el)
-  })
+  // Um único observer para todos os itens da linha do tempo.
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue
+        const index = timelineItems.value.indexOf(entry.target as HTMLElement)
+        if (index !== -1) visibleItems.value[index] = true
+        observer?.unobserve(entry.target)
+      }
+    },
+    { threshold: 0.1 }
+  )
+  timelineItems.value.forEach((el) => el && observer?.observe(el))
 })
+
+onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <style scoped lang="scss">

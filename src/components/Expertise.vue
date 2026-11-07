@@ -9,12 +9,13 @@
           <span>Software Development</span>
         </div>
         <h3 class="code-description">
-          | Desenvolvimento de aplicações web modernas e eficientes utilizando paradigmas de <strong>POO</strong>. |
+          | Desenvolvimento de aplicações web modernas, tipadas e testadas, utilizando paradigmas de <strong>POO</strong>. |
         </h3>
         <div class="specialties">
           <span>JavaScript</span>
           <span>TypeScript</span>
-          <span>Node.JS</span>
+          <span>Node.js</span>
+          <span>Supabase</span>
         </div>
       </div>
 
@@ -27,10 +28,10 @@
           | Desenvolvimento de <strong>Design Systems</strong> escaláveis e acessíveis. Integração entre times de design e desenvolvimento |
         </h3>
         <div class="specialties">
+          <span>Stencil</span>
+          <span>Storybook</span>
           <span>Zeroheight</span>
           <span>Figma</span>
-          <span>Adobe XD</span>
-          <span>Storybook</span>
         </div>
       </div>
 
@@ -40,12 +41,12 @@
           <span>Front-end Engineering</span>
         </div>
         <h3 class="code-description">
-          | Apaixonado por UI/UX. Mais de <strong>5 anos</strong> de experiência em desenvolvimento com frameworks. |
+          | Apaixonado por UI/UX. Mais de <strong>{{ years }} anos</strong> de experiência em desenvolvimento com frameworks. |
         </h3>
         <div class="specialties">
           <span>HTML</span>
-          <span>CSS</span>
-          <span>Vue.JS</span>
+          <span>CSS/Sass</span>
+          <span>Vue.js</span>
           <span>Angular</span>
           <span>Ionic</span>
         </div>
@@ -56,13 +57,16 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { CAREER_START_YEAR } from '@/data/experiences'
+
+const years = new Date().getFullYear() - CAREER_START_YEAR
 </script>
 
 <style lang="scss" scoped>
 @use '@/styles/variables' as vars;
 
 .expertise {
-  padding: 0.1rem 10rem;
+  padding: 0.1rem clamp(1rem, 6vw, 10rem);
   text-align: center;
 
   h2 {
@@ -78,9 +82,11 @@ import { Icon } from '@iconify/vue'
 
   .expertise-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 2rem;
     padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .expertise-item {
@@ -161,7 +167,7 @@ import { Icon } from '@iconify/vue'
   }
 
   .code-description {
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+    font-family: vars.$font-code;
     font-size: 1rem;
     background-color: #1e1e1e; 
     color: #f8f8f2; 
@@ -223,7 +229,7 @@ import { Icon } from '@iconify/vue'
     }
 
     .expertise-grid {
-      grid-template-columns: 1fr;
+      padding: 1rem;
     }
   }
 

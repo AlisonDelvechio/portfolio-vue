@@ -1,47 +1,45 @@
 <template>
-  <div
+  <router-link
     ref="cardRef"
+    :to="{ name: 'Project', params: { slug } }"
     :class="['project-card', { visible: isVisible }]"
     :style="{ transitionDelay: `${delay}ms` }"
-    role="button"
-    tabindex="0"
-    :aria-label="`Abrir detalhes do projeto ${title}`"
-    @click="goToProject"
-    @keydown.enter.prevent="goToProject"
-    @keydown.space.prevent="goToProject"
   >
     <div class="image-container">
-      <img :src="image" :alt="`Imagem do projeto ${title}`" class="project-image" />
+      <img
+        :src="image"
+        alt=""
+        class="project-image"
+        loading="lazy"
+        decoding="async"
+        width="800"
+        height="390"
+      />
     </div>
     <div class="project-info">
       <h3 class="project-title">{{ title }}</h3>
       <p class="project-description">{{ description }}</p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 
-const props = defineProps<{
+defineProps<{
+  slug: string
   title: string
   description: string
   image: string
   delay: number
-  slug?: string
 }>()
 
-const router = useRouter()
-
-function goToProject() {
-  router.push({ name: 'Projects', query: { project: props.slug ?? props.title } })
-}
-
-const cardRef = ref<HTMLElement | null>(null)
+const cardRef = ref<ComponentPublicInstance | null>(null)
+const cardEl = computed(() => (cardRef.value?.$el as HTMLElement | undefined) ?? null)
 const isVisible = ref(false)
-useIntersectionObserver(cardRef, () => {
+useIntersectionObserver(cardEl, () => {
   isVisible.value = true
 }, 0.1)
 </script>
@@ -51,6 +49,8 @@ useIntersectionObserver(cardRef, () => {
 
 .project-card {
   display: flex;
+  text-decoration: none;
+  text-align: left;
   flex-direction: column;
   border-radius: 12px;
   overflow: hidden;

@@ -2,7 +2,7 @@ import { onMounted, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
 
 export function useIntersectionObserver(
-  element: Ref<HTMLElement | null>,
+  element: Readonly<Ref<HTMLElement | null>>,
   callback: () => void,
   threshold = 0.1
 ) {
