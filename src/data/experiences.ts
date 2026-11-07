@@ -10,74 +10,117 @@ export interface Logo {
   alt: string
 }
 
-export interface Experience {
+/** Um contrato dentro de uma fase (empresa ou consultoria, cargo e período). */
+export interface Stint {
+  company: string
   role: string
-  date: string
-  location: string
-  description: string
+  period: string
+  summary: string
   logos: Logo[]
-  technologies: string[]
+  current?: boolean
 }
 
-const bradesco: Logo = { src: LogoBradesco, alt: 'Logo da Bradesco Seguros' }
-const bsn: Logo = { src: LogoBSN, alt: 'Logo da BSN Tecnologia' }
+/** Uma fase da carreira: o tipo de trabalho muda de uma fase para outra. */
+export interface Phase {
+  startYear: number
+  /** Ano de saída; ausente na fase atual. */
+  endYear?: number
+  org: string
+  title: string
+  team: string
+  summary: string
+  technologies: string[]
+  stints: Stint[]
+}
 
-/** Ano em que comecei a trabalhar com desenvolvimento (base do "mais de N anos"). */
-export const CAREER_START_YEAR = 2020
+const bradesco: Logo = { src: LogoBradesco, alt: 'Bradesco Seguros' }
+const bsn: Logo = { src: LogoBSN, alt: 'BSN Tecnologia' }
 
-export const experiences: Experience[] = [
+
+export const phases: Phase[] = [
   {
-    role: 'Desenvolvedor Front-End',
-    date: '2026 – Atual',
-    location: 'Bradesco Seguros · GFT Technologies',
-    description:
-      'Atuo no desenvolvimento e evolução do Design System, criando componentes reutilizáveis e contribuindo para a padronização e escalabilidade das aplicações.',
-    logos: [bradesco, { src: LogoGFT, alt: 'Logo da GFT Technologies' }],
-    technologies: ['Angular', 'Ionic', 'Stencil', 'Figma', 'Acessibilidade'],
-  },
-  {
-    role: 'Desenvolvedor Front-End',
-    date: '2025 – 2026',
-    location: 'Bradesco Seguros · Stefanini',
-    description:
-      'Desenvolvi bibliotecas de componentes modulares com Stencil, Ionic, Angular, TypeScript e Sass, com documentação integrada ao processo de desenvolvimento por meio do Storybook, com foco em escalabilidade, reutilização e consistência do Design System.',
-    logos: [bradesco, { src: LogoStefanini, alt: 'Logo da Stefanini' }],
+    startYear: 2025,
+    org: 'Bradesco Seguros',
+    title: 'Biblioteca de componentes',
+    team: 'time de TI',
+    summary: 'Componentes em Stencil para aplicações Angular e Ionic, documentados no Storybook.',
     technologies: ['Stencil', 'Angular', 'Ionic', 'TypeScript', 'Sass', 'Storybook'],
+    stints: [
+      {
+        company: 'GFT Technologies',
+        role: 'Desenvolvedor Front-end',
+        period: '2026 – atual',
+        summary: 'Evolução e manutenção dos componentes da biblioteca.',
+        logos: [bradesco, { src: LogoGFT, alt: 'GFT Technologies' }],
+        current: true,
+      },
+      {
+        company: 'Stefanini',
+        role: 'Desenvolvedor Front-end',
+        period: '2025 – 2026',
+        summary: 'Entrada no time de TI e na biblioteca de componentes.',
+        logos: [bradesco, { src: LogoStefanini, alt: 'Stefanini' }],
+      },
+    ],
   },
   {
-    role: 'Desenvolvedor Front-End',
-    date: '2023 – 2025',
-    location: 'Bradesco Seguros · The Bridge Social / QiBit',
-    description:
-      'Desenvolvi bibliotecas e integrações entre Zeroheight e Storybook, criei plugins para o Figma e implementei recursos de acessibilidade, oferecendo suporte técnico aos times de design e desenvolvimento ligados ao Design System.',
-    logos: [bradesco, { src: LogoQiBit, alt: 'Logo da QiBit' }],
-    technologies: ['Vue.js', 'Figma', 'Zeroheight', 'Storybook', 'Acessibilidade'],
+    startYear: 2021,
+    endYear: 2025,
+    org: 'Bradesco Seguros',
+    title: 'Sites e produtos digitais',
+    team: 'time de negócios',
+    summary: 'Sites, páginas e componentes para várias frentes digitais, seguindo o Design System da empresa.',
+    technologies: ['Vue.js', 'Web Components', 'Storybook', 'Zeroheight', 'Figma', 'Acessibilidade'],
+    stints: [
+      {
+        company: 'The Bridge Social / QiBit',
+        role: 'Desenvolvedor Front-end',
+        period: '2023 – 2025',
+        summary: 'Storybook integrado ao Zeroheight, plugins para o Figma e acessibilidade.',
+        logos: [bradesco, { src: LogoQiBit, alt: 'QiBit' }],
+      },
+      {
+        company: 'Sabion Digital',
+        role: 'Desenvolvedor Front-end',
+        period: '2021 – 2023',
+        summary: 'Sites, páginas e templates com Vue.js, Web Components e Firebase.',
+        logos: [bradesco, { src: LogoSabion, alt: 'Sabion Digital' }],
+      },
+    ],
   },
   {
-    role: 'Desenvolvedor Front-End',
-    date: '2021 – 2023',
-    location: 'Bradesco Seguros · Sabion Digital',
-    description:
-      'Criei componentes e páginas seguindo o Design System, estruturei uma biblioteca de componentes e templates usados por outros canais e participei da construção do site oficial do evento Design Conf.',
-    logos: [bradesco, { src: LogoSabion, alt: 'Logo da Sabion Digital' }],
-    technologies: ['Vue.js', 'Web Components', 'Storybook', 'Firebase'],
-  },
-  {
-    role: 'Desenvolvedor Full Stack',
-    date: '2020 – 2021',
-    location: 'BSN Tecnologia',
-    description:
-      'Desenvolvi e dei suporte a aplicações web e mobile, atuando na implementação de funcionalidades e administração de bancos de dados.',
-    logos: [bsn],
-    technologies: ['Angular', 'Ionic', 'PHP', 'Laravel', 'MySQL'],
-  },
-  {
-    role: 'Software QA Tester',
-    date: '2019 – 2020',
-    location: 'BSN Tecnologia',
-    description:
-      'Elaborei e executei planos de teste, documentei processos e sistemas e identifiquei falhas para garantir a qualidade dos softwares, apoiando também o desenvolvimento.',
-    logos: [bsn],
-    technologies: ['Testes de Software', 'QA', 'Documentação', 'Git', 'Revisão de Código'],
+    startYear: 2019,
+    endYear: 2021,
+    org: 'BSN Tecnologia',
+    title: 'Onde comecei',
+    team: 'do QA ao full stack',
+    summary: 'Primeiro testando software, depois desenvolvendo aplicações web e mobile.',
+    technologies: ['Angular', 'Ionic', 'PHP', 'Laravel', 'MySQL', 'QA'],
+    stints: [
+      {
+        company: 'BSN Tecnologia',
+        role: 'Desenvolvedor Full Stack',
+        period: '2020 – 2021',
+        summary: 'Apps web e mobile com Angular, Ionic, Laravel e MySQL.',
+        logos: [bsn],
+      },
+      {
+        company: 'BSN Tecnologia',
+        role: 'Software QA Tester',
+        period: '2019 – 2020',
+        summary: 'Planos de teste, documentação e caça a bugs.',
+        logos: [bsn],
+      },
+    ],
   },
 ]
+
+export function phasePeriod(phase: Phase) {
+  return `${phase.startYear} – ${phase.endYear ?? 'hoje'}`
+}
+
+/** "1 ano", "4 anos"; a fase atual conta até o ano corrente. */
+export function phaseDuration(phase: Phase, now = new Date().getFullYear()) {
+  const years = Math.max(1, (phase.endYear ?? now) - phase.startYear)
+  return years === 1 ? '1 ano' : `${years} anos`
+}

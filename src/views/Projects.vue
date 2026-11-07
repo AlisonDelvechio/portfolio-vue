@@ -1,5 +1,5 @@
 <template>
-  <article v-if="project" :key="project.slug" class="project-page">
+  <article v-if="project" :key="project.slug" v-reveal class="project-page container">
     <div class="project-header">
       <router-link
         :to="{ path: '/', hash: '#projects' }"
@@ -18,12 +18,12 @@
       <time :datetime="project.date">{{ formatProjectDate(project.date) }}</time>
     </div>
 
-    <ul class="tags" aria-label="Tecnologias">
+    <ul class="tag-list" aria-label="Tecnologias">
       <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
     </ul>
 
     <div class="links">
-      <a :href="project.repo" target="_blank" rel="noopener noreferrer" class="repo-btn">
+      <a :href="project.repo" target="_blank" rel="noopener noreferrer" class="btn primary">
         <Icon icon="mdi:github" class="icon" aria-hidden="true" />
         Ver repositório
         <span class="sr-only">(abre em nova aba)</span>
@@ -33,7 +33,7 @@
         :href="project.demo"
         target="_blank"
         rel="noopener noreferrer"
-        class="repo-btn"
+        class="btn"
       >
         <Icon icon="mdi:open-in-new" class="icon" aria-hidden="true" />
         Ver site
@@ -93,158 +93,116 @@ const next = computed(() => projects[index.value + 1])
 
 <style scoped lang="scss">
 .project-page {
-  padding: 10rem 1rem;
-  max-width: 800px;
-  margin: auto;
-  animation: page-enter 0.8s ease both;
+  max-width: 860px;
+  padding-top: calc(#{$header-height} + 3rem);
+  padding-bottom: 5rem;
+  display: grid;
+  gap: 1.25rem;
+}
 
-  .project-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-    .back-link {
-      display: inline-flex;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .back-icon {
-      cursor: pointer;
-      font-size: 2rem;
-      padding: 0.4rem;
-      border-radius: 50%;
-      border: 1px solid var(--color-fg);
-      color: var(--color-fg);
-      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-
-      &:hover {
-        background: var(--color-button-bg);
-        color: var(--color-button-fg);
-        transform: scale(1.1);
-      }
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: var(--color-text);
-    }
-  }
-
-  .description {
-    margin: 1rem 0;
-    color: var(--color-text);
-  }
-
-  .meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-
-    .icon {
-      font-size: 1.2rem;
-    }
-  }
-
-  .tags {
-    margin-bottom: 1rem;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    .tag {
-      display: inline-block;
-      background: var(--color-tag-bg);
-      border: 1px solid var(--color-tag-border);
-      border-radius: 20px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.8rem;
-      color: var(--color-text);
-    }
-  }
-
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .repo-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--color-button-bg);
-    color: var(--color-button-fg);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-    }
-  }
-
-  .images {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-
-    img {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.02);
-      }
-    }
-  }
-
-  .nav-buttons {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-
-    .nav-btn {
-      display: inline-flex;
-      text-decoration: none;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 8px;
-      background: var(--color-button-bg);
-      color: var(--color-button-fg);
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-    }
+  h1 {
+    font-size: $fs-h2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 }
 
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.back-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.back-icon {
+  font-size: 2.25rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-fg);
+  transition: border-color $t-fast ease;
+
+  &:hover {
+    border-color: var(--color-accent);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+.description {
+  max-width: 68ch;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-code;
+  font-size: $fs-small;
+  color: var(--color-text-muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+// Botões no estilo do atom-button: principal preenchido, secundário com borda.
+.btn,
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: $radius-sm;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-fg);
+  font-weight: 600;
+  font-size: $fs-small;
+  text-decoration: none;
+  transition: border-color $t-fast ease, opacity $t-fast ease;
+
+  &:hover {
+    border-color: var(--color-accent);
   }
+}
+
+.btn.primary {
+  background: var(--color-accent-fill);
+  border-color: var(--color-accent-fill);
+  color: var(--color-on-accent);
+
+  &:hover {
+    opacity: 0.88;
+  }
+}
+
+.images {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+
+  img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 </style>

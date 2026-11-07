@@ -27,7 +27,7 @@ main {
   z-index: 10001;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  background: $accent-color;
+  background: var(--color-accent);
   color: #fff !important;
   font-weight: 600;
   transform: translateY(-200%);

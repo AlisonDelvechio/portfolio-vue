@@ -4,6 +4,12 @@
 export interface Project {
   slug: string
   title: string
+  /** Título menor para o card da grade de estudos, quando o completo é longo. */
+  shortTitle?: string
+  /** Projetos em destaque aparecem grandes na Home; os outros, na grade de estudos. */
+  featured?: boolean
+  /** Rótulo da grade de estudos. */
+  kind?: 'estudo' | 'TCC'
   /** Texto curto para o card da Home. */
   summary: string
   /** Texto completo para a página do projeto. */
@@ -42,8 +48,9 @@ const data: ProjectData[] = [
   {
     slug: 'semana-em-jogo',
     title: 'Semana em Jogo',
+    featured: true,
     summary:
-      'App para acompanhar metas semanais de alimentação, treino e hábitos, com calendário, análises e sincronização.',
+      'Checklist semanal de treino, alimentação e hábitos. Funciona só no navegador ou sincronizado entre aparelhos pelo Supabase.',
     description:
       'Aplicação web para acompanhar metas semanais de alimentação, treino e outros hábitos, com registro diário, calendário mensal, análise de progresso, relatórios em CSV e PDF e backup. Funciona apenas no navegador (modo local) ou sincronizada entre dispositivos com Supabase, usando autenticação, Row Level Security e funções Postgres que gravam cada edição em uma única transação, além de detecção de conflitos entre dispositivos. As regras de negócio são cobertas por testes com Vitest, inclusive as migrações do banco executadas em um Postgres em memória (PGlite), e um pipeline de CI roda lint, testes, type-check e build a cada pull request.',
     date: '2026-09-26',
@@ -53,8 +60,9 @@ const data: ProjectData[] = [
   {
     slug: 'atom-ui',
     title: 'Atom UI',
+    featured: true,
     summary:
-      'Biblioteca de Web Components feita com Stencil, agnóstica de framework e integrada ao Angular.',
+      'Biblioteca de Web Components em Stencil, consumida por um app Angular 19 num monorepo. Um laboratório do que faço no trabalho.',
     description:
       'Biblioteca de Web Components criada com Stencil.js e SCSS, com foco em modularidade, responsividade e integração com frameworks modernos como Angular. Inclui componentes como alertas customizáveis e menu accordion, utilizando Shadow DOM, suporte a props e slots, variáveis globais com SCSS e integração via monorepo.',
     date: '2025-06-11',
@@ -64,7 +72,9 @@ const data: ProjectData[] = [
   {
     slug: 'star-blaster-game',
     title: 'Star Blaster Game',
-    summary: "Jogo de navegador no estilo shoot'em up, feito só com HTML, CSS e JavaScript.",
+    shortTitle: 'Star Blaster',
+    kind: 'estudo',
+    summary: "Shoot'em up em Canvas, sem bibliotecas.",
     description:
       "Um jogo de nave no estilo shoot'em up, desenvolvido para rodar diretamente no navegador utilizando apenas HTML, CSS e JavaScript puro. O principal desafio foi criar a mecânica de movimentação fluida, colisões e efeitos gráficos utilizando a API Canvas.",
     date: '2024-09-27',
@@ -74,7 +84,9 @@ const data: ProjectData[] = [
   {
     slug: 'league-login',
     title: 'Tela de login do League of Legends',
-    summary: 'Recriação da tela de login do League of Legends, com foco em animações.',
+    shortTitle: 'Login do LoL',
+    kind: 'estudo',
+    summary: 'Recriação para treinar CSS e animação.',
     description:
       'Recriação fiel da icônica tela de login do League of Legends, com foco em animações e responsividade. O projeto explora a manipulação do DOM e estilização avançada com CSS para simular a interface original.',
     date: '2023-01-21',
@@ -84,7 +96,8 @@ const data: ProjectData[] = [
   {
     slug: 'pokedex',
     title: 'Pokédex',
-    summary: 'Pokédex com busca e listagem consumindo a PokéAPI.',
+    kind: 'estudo',
+    summary: 'Busca e listagem com a PokéAPI.',
     description:
       'Aplicação web que consome a PokéAPI para listar e pesquisar Pokémon, utilizando JavaScript para manipulação dinâmica dos dados e renderização das informações. O projeto reforça o consumo de APIs REST e manipulação de elementos via JavaScript.',
     date: '2023-01-07',
@@ -94,7 +107,8 @@ const data: ProjectData[] = [
   {
     slug: 'first-portfolio',
     title: 'Primeiro portfólio',
-    summary: 'Meu primeiro portfólio, feito sem frameworks, com HTML, CSS e JavaScript.',
+    kind: 'estudo',
+    summary: 'Onde comecei. HTML, CSS e JavaScript.',
     description:
       'Meu primeiro portfólio desenvolvido para apresentar projetos e habilidades. Estruturado com HTML, CSS e JavaScript, com foco em boas práticas de responsividade e design. Esse projeto marcou minha introdução no desenvolvimento web e na criação de interfaces visuais.',
     date: '2021-07-02',
@@ -104,8 +118,8 @@ const data: ProjectData[] = [
   {
     slug: 'inventectcc',
     title: 'InventecTCC',
-    summary:
-      'Sistema de gerenciamento de patrimônio feito como TCC e entregue à instituição.',
+    kind: 'TCC',
+    summary: 'Controle de patrimônio entregue à instituição.',
     description:
       'Sistema web completo para gerenciamento de inventário e controle de estoque, desenvolvido como Trabalho de Conclusão de Curso (TCC). Utiliza PHP com integração ao banco de dados MySQL, além de recursos dinâmicos com jQuery e Ajax para melhor experiência do usuário.',
     date: '2021-05-15',
@@ -115,6 +129,13 @@ const data: ProjectData[] = [
 ]
 
 export const projects: Project[] = data.map((project) => ({ ...project, ...imagesFor(project.slug) }))
+
+export const featuredProjects = projects.filter((project) => project.featured)
+export const studyProjects = projects.filter((project) => !project.featured)
+
+export function projectYear(project: Project) {
+  return project.date.slice(0, 4)
+}
 
 export function findProjectIndex(slug: string) {
   return projects.findIndex((project) => project.slug === slug)
