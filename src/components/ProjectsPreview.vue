@@ -1,63 +1,65 @@
 <template>
-  <section class="projects-preview" id="projects">
-    <h2>Projetos</h2>
-    <p>Uma coleção de projetos nos quais trabalhei</p>
-    <div class="grid">
-      <ProjectCard
-        v-for="(project, index) in projects"
-        :key="project.slug"
-        :slug="project.slug"
-        :title="project.title"
-        :description="project.summary"
-        :image="project.cover"
-        :delay="(index % 3) * 100"
-      />
+  <section id="projects" class="section container" aria-labelledby="projetos-title">
+    <h2 id="projetos-title" v-reveal class="section-title">Projetos</h2>
+
+    <div class="group">
+      <h3 v-reveal class="group-title label">Em destaque</h3>
+      <div class="featured">
+        <ProjectCard
+          v-for="(project, i) in featuredProjects"
+          :key="project.slug"
+          v-reveal="i * 60"
+          :project="project"
+          variant="featured"
+        />
+      </div>
+    </div>
+
+    <div class="group">
+      <h3 v-reveal class="group-title label">Estudos e primeiros projetos</h3>
+      <div class="studies">
+        <ProjectCard
+          v-for="(project, i) in studyProjects"
+          :key="project.slug"
+          v-reveal="Math.min(i, 5) * 60"
+          :project="project"
+          variant="study"
+        />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import ProjectCard from '@/components/ProjectCard.vue'
-import { projects } from '@/data/projects'
+import { featuredProjects, studyProjects } from '@/data/projects'
 </script>
 
 <style scoped lang="scss">
-.projects-preview {
-  padding: 4rem clamp(1rem, 6vw, 10rem);
-  text-align: center;
-  margin: 4rem 0;
-  background: var(--bg-projects);
+.group {
+  display: grid;
+  gap: 1rem;
 
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-text);
+  & + & {
+    margin-top: 2.5rem;
   }
+}
 
-  p {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-  }
+.group-title {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 400;
+}
 
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
+.featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1.25rem;
+}
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 640px) {
-      grid-template-columns: 1fr;
-    }
-  }
+.studies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  gap: 1rem;
 }
 </style>

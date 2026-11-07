@@ -10,6 +10,19 @@ html {
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
+body {
+  font-family: $font-stack;
+  font-size: $fs-body;
+  line-height: 1.65;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  background-image: var(--bg-pattern);
+  background-size: 150px 150px;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
 #app {
   width: 100%;
   min-height: 100vh;
@@ -17,17 +30,103 @@ html {
   flex-direction: column;
 }
 
-body {
-  font-family: $font-stack;
-  width: 100%;
-  min-height: 100vh;
-  display: block;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-fg);
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
 body a {
   color: var(--color-fg);
+}
+
+// Troca de tema: só cores mudam, juntas, em 200 ms.
+body,
+.theme-transition {
+  transition:
+    background-color $t-theme ease,
+    color $t-theme ease,
+    border-color $t-theme ease;
+}
+
+// Largura e respiro padrão das seções
+.container {
+  width: 100%;
+  max-width: $container;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.section {
+  padding-block: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.section-title {
+  font-size: $fs-h2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+// Rótulo em fonte mono (datas, cargos, metadados)
+.label {
+  font-family: $font-code;
+  font-size: $fs-label;
+  letter-spacing: 0.03em;
+}
+
+// Tag de tecnologia: mesma aparência em todo o site
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  font-family: $font-code;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-tag-border);
+  background: var(--color-tag-bg);
+  color: var(--color-tag-fg);
+}
+
+// Link de texto sublinhado (o principal usa o azul; os secundários, cinza)
+.text-link {
+  color: var(--color-fg);
+  text-decoration: underline;
+  text-decoration-color: var(--color-link-line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color $t-fast ease;
+
+  &:hover,
+  &.primary {
+    text-decoration-color: var(--color-accent);
+  }
+}
+
+// Entrada única das seções e cards (diretiva v-reveal): fade com 8 px de subida,
+// uma vez, quando o elemento entra na tela.
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity $t-enter ease-out,
+    transform $t-enter ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 // Barra de rolagem: Chrome, Safari e derivados
@@ -42,7 +141,6 @@ body a {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 4px;
-  transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -72,7 +170,7 @@ img {
 }
 
 :focus-visible {
-  outline: 2px solid $accent-color;
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -80,6 +178,11 @@ img {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 
   *,

@@ -1,73 +1,59 @@
-@use "variables" as *;
 
 // Tokens de tema. Os componentes usam só var(--...) e não precisam saber qual tema
 // está ativo; para mudar uma cor, altere aqui. O tema é a classe do <body>
 // (aplicada por public/theme-init.js e pelo composable useTheme).
+// Todos os pares de texto e fundo passam no WCAG AA (4,5:1).
 
 body,
 body.dark {
   color-scheme: dark;
 
   // Superfícies
-  --color-bg: #{$secondary-color-dark};
-  --color-surface: #181818;
-  --color-surface-subtle: rgba(0, 0, 0, 0.05);
-  --color-header-bg: rgba(18, 18, 18, 0.8);
-  --color-footer-bg: rgba(18, 18, 18, 0.9);
-  --color-divider: rgba(255, 255, 255, 0.05);
+  --color-bg: #131313;
+  --bg-pattern: url('@/assets/bg-dark.png');
+  --color-surface: #1b1c1f;
+  --color-line: #2a2c31;
+  --color-header-bg: rgba(19, 19, 19, 0.85);
+  --color-footer-bg: #101010;
+  --shadow-card: none;
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.45);
 
   // Texto
-  --color-fg: #{$primary-color-dark}; // títulos, links e bordas de destaque
-  --color-text: #{$text-color-dark};
-  --color-text-soft: #ccc;
-  --color-text-muted: #{$text-muted-dark};
+  --color-fg: #f0f0f0; // títulos e links
+  --color-text: #cfd1d6;
+  --color-text-muted: #9a9ea6;
 
-  // Destaque
-  --color-accent: #{$accent-color};
-  --color-on-accent: #{$primary-color-dark};
+  // Azul
+  --color-accent: #3b82f6; // bordas, linha do tempo, moldura do monitor, foco
+  --color-accent-text: #7fb0ff; // azul usado como texto
+  --color-accent-fill: #2563eb; // fundo de botões e tags (mesmo azul do atom-button)
+  --color-on-accent: #ffffff;
+  --color-link-line: #4a4d55; // sublinhado dos links secundários
 
   // Componentes
-  --color-chip-bg: rgba(255, 255, 255, 0.1);
-  --color-tag-bg: #{$tag-bg-dark};
-  --color-tag-border: #{$tag-border-dark};
-  --color-card-bg: #{$secondary-color-dark};
-  --color-card-border: #333;
-  --color-card-divider: #444;
-  --color-switch-bg: #333;
-  --color-button-bg: #{$primary-color-light};
-  --color-button-fg: #{$primary-color-dark};
-  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --color-logo-border: transparent;
+  --color-tag-bg: #18202e;
+  --color-tag-border: #2f3a4f;
+  --color-tag-fg: #b9d2ff;
+  --color-timeline-past: #2a3a58;
+  --color-connector: #2f3b52;
+  --color-switch-bg: #2a2c31;
 
-  // Bloco de código da seção Expertise
-  --color-code-bg: #1e1e1e;
-  --color-code-fg: #f8f8f2;
-  --color-code-highlight: #ff79c6;
-
-  // Terminal da seção "Meu trabalho"
-  --color-terminal-bg: rgba(20, 20, 20, 0.8);
-  --color-terminal-fg: #{$text-color-dark};
-  --color-syntax-tag: #{$accent-color};
-  --color-syntax-attr: #c792ea;
-  --color-syntax-value: #89ddff;
-
-  // Fundos decorativos
-  --bg-pattern: url('@/assets/diagmonds-dark.png');
-  --bg-hero: linear-gradient(
-    to bottom,
-    #{$bg-dark-strong} 0%,
-    #{$bg-dark-medium} 70%,
-    #{$bg-dark-transparent} 100%
-  );
-  --bg-contact: linear-gradient(
-    to right,
-    #{rgba($secondary-color-dark, 0.85)},
-    #{rgba($secondary-color-dark, 0.6)}
-  );
-  --bg-projects: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+  // Editor do monitor
+  --editor-bg: #0d0e10;
+  --editor-tab: #16171a;
+  --editor-line: #24262b;
+  --editor-fg: #d7dae0;
+  --editor-muted: #8b8f97;
+  --editor-preview: #15171b;
+  --syntax-comment: #7d8590;
+  --syntax-string: #9ccc65;
+  --syntax-keyword: #c792ea;
+  --syntax-decorator: #ffb74d;
+  --syntax-tag: #7fb0ff;
 
   // Barra de rolagem
-  --scrollbar-track: rgba(0, 0, 0, 0.1);
+  --scrollbar-track: rgba(0, 0, 0, 0.2);
   --scrollbar-thumb: rgba(150, 150, 150, 0.5);
   --scrollbar-thumb-hover: rgba(150, 150, 150, 0.8);
 }
@@ -75,52 +61,45 @@ body.dark {
 body.light {
   color-scheme: light;
 
-  --color-bg: #{$secondary-color-light};
-  --color-surface: #{$background-light};
-  --color-header-bg: rgba(245, 245, 245, 0.8);
-  --color-footer-bg: rgba(245, 245, 245, 0.9);
-  --color-divider: #{$divider-color-light};
+  --color-bg: #eef0f3;
+  --bg-pattern: url('@/assets/bg-light.png');
+  --color-surface: #ffffff;
+  --color-line: #dde0e6;
+  --color-header-bg: rgba(238, 240, 243, 0.88);
+  --color-footer-bg: #e5e8ec;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-menu: 0 8px 24px rgba(16, 24, 40, 0.12);
 
-  --color-fg: #{$primary-color-light};
-  --color-text: #{$text-color-light};
-  --color-text-soft: #555;
-  --color-text-muted: #{$text-muted-light};
+  --color-fg: #16181d;
+  --color-text: #3a3f47;
+  --color-text-muted: #5f6672;
 
-  --color-chip-bg: rgba(0, 0, 0, 0.1);
-  --color-tag-bg: #{$tag-bg-light};
-  --color-tag-border: #{$tag-border-light};
-  --color-card-bg: #{$secondary-color-light};
-  --color-card-border: #e0e0e0;
-  --color-card-divider: #ccc;
-  --color-switch-bg: #ddd;
-  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --color-accent: #2563eb;
+  --color-accent-text: #1d4ed8;
+  --color-accent-fill: #2563eb;
+  --color-link-line: #b5bcc7;
 
-  --color-code-bg: #c2c2c2;
-  --color-code-fg: #{$primary-color-light};
-  --color-code-highlight: #ca3d8d;
+  --color-logo-border: #dde0e6;
+  --color-tag-bg: #eef3fd;
+  --color-tag-border: #c9d8f6;
+  --color-tag-fg: #1d4ed8;
+  --color-timeline-past: #b9c6dc;
+  --color-connector: #c5cfdf;
+  --color-switch-bg: #d5d9df;
 
-  --color-terminal-bg: rgba(245, 245, 245, 0.8);
-  --color-terminal-fg: #{$text-color-light};
-  --color-syntax-tag: #d73a49;
-  --color-syntax-attr: #6f42c1;
-  --color-syntax-value: #22863a;
+  --editor-bg: #fbfbfc;
+  --editor-tab: #f0f2f5;
+  --editor-line: #e1e4e8;
+  --editor-fg: #24292f;
+  --editor-muted: #5f6672;
+  --editor-preview: #f3f4f6;
+  --syntax-comment: #6a737d;
+  --syntax-string: #1a7f37;
+  --syntax-keyword: #6f42c1;
+  --syntax-decorator: #b35900;
+  --syntax-tag: #cf222e;
 
-  --bg-pattern: url('@/assets/diagmonds-light.png');
-  --bg-hero: linear-gradient(
-    to bottom,
-    #{$bg-light-strong} 0%,
-    #{$bg-light-medium} 70%,
-    #{$bg-light-transparent} 100%
-  );
-  --bg-contact: linear-gradient(
-    to bottom,
-    #{rgba($secondary-color-light, 1)},
-    #{rgba($secondary-color-light, 0.4)},
-    #{rgba($secondary-color-light, 0)}
-  );
-  --bg-projects: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 60%);
-
-  --scrollbar-track: rgba(240, 240, 240, 0.8);
-  --scrollbar-thumb: rgba(100, 100, 100, 0.5);
-  --scrollbar-thumb-hover: rgba(100, 100, 100, 0.8);
+  --scrollbar-track: rgba(0, 0, 0, 0.05);
+  --scrollbar-thumb: rgba(100, 100, 100, 0.45);
+  --scrollbar-thumb-hover: rgba(100, 100, 100, 0.75);
 }

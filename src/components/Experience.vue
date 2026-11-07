@@ -1,229 +1,284 @@
 <template>
-  <div class="timeline">
-    <div
-      v-for="(exp, index) in experiences"
-      :key="index"
-      ref="timelineItems"
-      :class="['timeline-item', { visible: visibleItems[index] }]"
-      :style="{ transitionDelay: `${index * 150}ms` }"
-    >
-      <div class="timeline-header">
-        <h3 class="role">{{ exp.role }}</h3>
-        <span class="date">{{ exp.date }}</span>
-      </div>
+  <section id="experiencia" class="section container" aria-labelledby="experiencia-title">
+    <h2 id="experiencia-title" v-reveal class="section-title">Experiência</h2>
 
-      <div class="timeline-content">
-        <div class="info">
-          <div class="location">
-            <Icon icon="mdi:office-building" aria-hidden="true" />
-            <span>{{ exp.location }}</span>
-          </div>
-
-          <p class="description">{{ exp.description }}</p>
-
-          <div class="tech-tags">
-            <span
-              v-for="(tech, i) in exp.technologies"
-              :key="i"
-              class="tag"
-            >
-              {{ tech }}
-            </span>
-          </div>
+    <!-- Linha do tempo: cada fase é um marco; as empresas da fase são pontos menores. -->
+    <ol class="timeline">
+      <li v-for="(phase, i) in phases" :key="phase.startYear" class="phase" :class="{ current: !phase.endYear }">
+        <div v-reveal class="when">
+          <span class="period">{{ phasePeriod(phase) }}</span>
+          <span class="duration label">{{ phaseDuration(phase) }}</span>
+          <span class="org">{{ phase.org }}</span>
         </div>
 
-        <div class="logos">
-          <img
-            v-for="(logo, i) in exp.logos"
-            :key="i"
-            :src="logo.src"
-            :alt="logo.alt"
-            class="logo"
-            loading="lazy"
-            width="50"
-            height="50"
-          />
+        <div class="body">
+          <div v-reveal="40">
+            <h3>
+              {{ phase.title }} <span class="team">· {{ phase.team }}</span>
+            </h3>
+            <p class="summary">{{ phase.summary }}</p>
+            <ul class="tag-list" aria-label="Tecnologias">
+              <li v-for="tech in phase.technologies" :key="tech" class="tag">{{ tech }}</li>
+            </ul>
+          </div>
+
+          <ul class="stints" :aria-label="`Empresas na fase ${i + 1}`">
+            <li v-for="(stint, j) in phase.stints" :key="stint.role + stint.period" v-reveal="80 + j * 60" class="stint">
+              <div class="logos">
+                <img
+                  v-for="logo in stint.logos"
+                  :key="logo.alt"
+                  :src="logo.src"
+                  :alt="logo.alt"
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                />
+              </div>
+              <div class="stint-text">
+                <b>{{ stint.company }}</b>
+                <span class="role label">{{ stint.role }} · {{ stint.period }}</span>
+                <span>{{ stint.summary }}</span>
+              </div>
+            </li>
+          </ul>
         </div>
-      </div>
-    </div>
-  </div>
+      </li>
+    </ol>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import type { Experience } from '@/data/experiences'
-
-defineProps<{
-  experiences: Experience[]
-}>()
-
-const timelineItems = ref<(HTMLElement | null)[]>([])
-const visibleItems = ref<boolean[]>([])
-
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  // Um único observer para todos os itens da linha do tempo.
-  observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue
-        const index = timelineItems.value.indexOf(entry.target as HTMLElement)
-        if (index !== -1) visibleItems.value[index] = true
-        observer?.unobserve(entry.target)
-      }
-    },
-    { threshold: 0.1 }
-  )
-  timelineItems.value.forEach((el) => el && observer?.observe(el))
-})
-
-onBeforeUnmount(() => observer?.disconnect())
+import { phases, phasePeriod, phaseDuration } from '@/data/experiences'
 </script>
 
 <style scoped lang="scss">
+// Posição horizontal da linha: coluna das datas + metade do espaço entre colunas.
+$col: 8.5rem;
+$gap: 2.75rem;
+
 .timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  --x: calc(#{$col} + #{$gap} / 2);
+  --stint-x: calc(#{$gap} / -2);
+  position: relative;
+  display: grid;
+  list-style: none;
+
+  // A linha é azul no trecho atual e esmaece no passado.
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      to bottom,
+      var(--color-accent) 0%,
+      var(--color-accent) 20%,
+      var(--color-timeline-past) 32%,
+      var(--color-timeline-past) 100%
+    );
+  }
 }
 
-.timeline-item {
-  border-left: 3px solid var(--color-accent);
-  padding-left: 1.5rem;
+.phase {
   position: relative;
-  width: 100%;
-  max-width: 760px;
-  padding-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: $col minmax(0, 1fr);
+  column-gap: $gap;
+  padding-bottom: 3rem;
 
   &:last-child {
     padding-bottom: 0;
   }
 
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  // Marco da fase
   &::before {
     content: '';
     position: absolute;
-    left: -0.6rem;
-    top: -0.8rem;
-    width: 1rem;
-    height: 1rem;
-    background: var(--color-accent);
-    border: 2px solid var(--color-on-accent);
+    left: var(--x);
+    top: 0.3rem;
+    width: 18px;
+    height: 18px;
+    transform: translateX(-50%);
     border-radius: 50%;
+    background: var(--color-bg);
+    border: 3px solid var(--color-accent);
+    z-index: 1;
   }
 
-  .timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    margin-left: 1rem;
-
-    .role {
-      font-weight: 600;
-      font-size: 1.25rem;
-      color: var(--color-text);
-    }
-
-    .date {
-      font-size: 1.1rem;
-      color: var(--color-fg);
-    }
-  }
-
-  .timeline-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    background: var(--color-surface-subtle);
-    padding: 1rem;
-    border-radius: 12px;
-
-    @media(min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .info {
-      flex: 1;
-      min-width: 0;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-
-      .location {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 500;
-        color: var(--color-text);
-      }
-
-      .description {
-        color: var(--color-text-soft);
-        text-align: left;
-      }
-
-      .tech-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-
-        .tag {
-          background: var(--color-accent);
-          color: var(--color-on-accent);
-          padding: 0.25rem 0.5rem;
-          border-radius: 8px;
-          font-size: 0.75rem;
-        }
-      }
-    }
-
-    // Logos em "fichas" do mesmo tamanho, que não encolhem nem saem do card.
-    .logos {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      .logo {
-        width: 52px;
-        height: 52px;
-        padding: 6px;
-        object-fit: contain;
-        background: #fff;
-        border: 1px solid var(--color-card-border);
-        border-radius: 10px;
-      }
-    }
+  &.current::before {
+    background: var(--color-accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-accent) 22%, transparent);
   }
 }
 
-@media (max-width: 768px) {
-  .timeline-item {
-    .timeline-header {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 0;
-    }
+.when {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  justify-items: end;
+  text-align: right;
 
-    .timeline-content .logos .logo {
-      width: 44px;
-      height: 44px;
-    }
+  .period {
+    font-family: $font-code;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-fg);
+    white-space: nowrap;
+  }
+
+  .duration {
+    padding: 0 0.5rem;
+    border-radius: 99px;
+    border: 1px solid var(--color-line);
+    color: var(--color-accent-text);
+  }
+
+  .org {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+}
+
+.body {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+
+  h3 {
+    font-size: $fs-h3;
+    font-weight: 700;
+  }
+
+  .team {
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  .summary {
+    margin: 0.5rem 0 0.75rem;
+    max-width: 62ch;
+  }
+}
+
+.stints {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.stint {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: $radius;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  // Mantém o atraso escalonado da entrada (v-reveal) junto com o hover.
+  transition:
+    border-color $t-fast ease,
+    opacity $t-enter ease-out var(--reveal-delay, 0ms),
+    transform $t-enter ease-out var(--reveal-delay, 0ms);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+
+  // Ponto da empresa na linha, ligado ao card por um traço.
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+  }
+
+  &::before {
+    left: var(--stint-x);
+    width: 9px;
+    height: 9px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
+    z-index: 1;
+  }
+
+  &::after {
+    left: var(--stint-x);
+    width: calc(#{$gap} / 2);
+    height: 1px;
+    background: var(--color-connector);
+  }
+}
+
+.logos {
+  display: flex;
+  gap: 0.375rem;
+
+  img {
+    width: 44px;
+    height: 44px;
+    padding: 5px;
+    border-radius: 9px;
+    background: #fff;
+    border: 1px solid var(--color-logo-border);
+    object-fit: contain;
+  }
+}
+
+.stint-text {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+
+  b {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+
+  .role {
+    color: var(--color-accent-text);
+  }
+
+  span:last-child {
+    font-size: $fs-small;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .timeline {
+    --x: 9px;
+    --stint-x: calc(9px - 2.25rem);
+  }
+
+  .phase {
+    grid-template-columns: 1fr;
+    row-gap: 0.75rem;
+    padding-left: 2.25rem;
+  }
+
+  .when {
+    grid-auto-flow: column;
+    justify-content: start;
+    justify-items: start;
+    align-items: center;
+    gap: 0.625rem;
+    text-align: left;
+  }
+
+  .stint {
+    grid-template-columns: 1fr;
+  }
+
+  .stint::after {
+    width: calc(2.25rem - 9px);
   }
 }
 </style>

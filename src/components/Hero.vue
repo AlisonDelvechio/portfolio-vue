@@ -1,133 +1,85 @@
 <template>
-  <section id="home">
-    <div class="hero-content">
-      <h1>
-        <span class="sr-only">{{ title }}</span>
-        <span aria-hidden="true">
-          <span v-for="(word, w) in titleWords" :key="w" class="word">
-            <span
-              v-for="(char, c) in word.chars"
-              :key="c"
-              class="char"
-              :style="{ animationDelay: `${(word.offset + c) * 0.05}s` }"
-              >{{ char }}</span
-            >
-          </span>
-        </span>
-      </h1>
-
-      <p>
-        <span class="sr-only">{{ description }}</span>
-        <span aria-hidden="true">
-          <span v-for="(word, w) in descriptionWords" :key="w" class="word">
-            <span
-              v-for="(char, c) in word.chars"
-              :key="c"
-              class="char"
-              :style="{ animationDelay: `${(word.offset + c) * 0.03}s` }"
-              >{{ char }}</span
-            >
-          </span>
-        </span>
+  <section id="home" class="hero container">
+    <div class="text">
+      <p class="hello">Olá, eu sou</p>
+      <h1>Alison Delvechio</h1>
+      <p class="intro">
+        Desenvolvedor front-end. Hoje trabalho na biblioteca de componentes do Bradesco Seguros, com
+        Stencil, Angular e Ionic.
       </p>
+      <ul class="links">
+        <li>
+          <a href="/curriculo-alison-delvechio.pdf" class="text-link" target="_blank" rel="noopener">
+            Currículo (PDF)<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/AlisonDelvechio" class="text-link" target="_blank" rel="noopener noreferrer">
+            GitHub<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/alison-delvechio-64094b172/"
+            class="text-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+      </ul>
     </div>
+
+    <CodeMonitor />
   </section>
 </template>
 
 <script setup lang="ts">
-const title = 'Olá, sou Alison'
-const description = 'Desenvolvedor Front-end focado em Design Systems, Web Components e acessibilidade'
-
-// Agrupa as letras por palavra: a animação continua letra a letra, mas a quebra
-// de linha só acontece entre palavras (antes quebrava no meio, ex.: "TypeS cript").
-function splitWords(text: string) {
-  let offset = 0
-  return text.split(' ').map((word) => {
-    const entry = { chars: [...word], offset }
-    offset += word.length + 1
-    return entry
-  })
-}
-
-const titleWords = splitWords(title)
-const descriptionWords = splitWords(description)
+import CodeMonitor from '@/components/CodeMonitor.vue'
 </script>
 
 <style lang="scss" scoped>
-section {
-  min-height: 60vh;
-  display: flex;
-  justify-content: center;
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   align-items: center;
-  text-align: center;
-  padding: 2rem;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  padding-top: calc(#{$header-height} + clamp(2.5rem, 6vw, 5rem));
+  padding-bottom: clamp(1rem, 3vw, 2rem);
+}
 
-  .hero-content {
-    max-width: 800px;
-    position: relative;
-    z-index: 1;
-  }
+.text {
+  display: grid;
+  gap: 1.125rem;
+}
 
-  @media (max-width: 768px) {
-    margin-top: 5rem;
-    min-height: 40vh;
-  }
+.hello {
+  color: var(--color-text-muted);
+}
 
-  h1 {
-    color: var(--color-fg);
-    font-size: 6rem;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    line-height: 1.15;
+h1 {
+  font-size: $fs-display;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
 
-    @media (max-width: 768px) {
-      font-size: 4rem;
-    }
+.intro {
+  max-width: 40ch;
+}
 
-    @media (max-width: 480px) {
-      font-size: 2.5rem;
-      letter-spacing: 0.05em;
-    }
-  }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  padding-top: 0.25rem;
+}
 
-  p {
-    font-size: 1.5rem;
-    color: var(--color-fg);
-    margin-top: 1rem;
-    letter-spacing: 0.05em;
-
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 1rem;
-    }
-  }
-
-  .word {
-    display: inline-block;
-    white-space: nowrap;
-    margin-right: 0.3em;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  .char {
-    display: inline-block;
-    animation: jump 0.5s ease forwards;
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  @keyframes jump {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@media (max-width: $bp-md) {
+  .hero {
+    grid-template-columns: 1fr;
   }
 }
 </style>

@@ -1,119 +1,66 @@
 <template>
-  <section id="contato" class="contact" ref="contactSection">
-    <h2 :class="['fade-up', { visible: animate }]">Contato</h2>
-    <p :class="['fade-up', 'delay-1', { visible: animate }]">
-      Quer conversar ou colaborar? Me mande um e-mail ou me encontre nas redes:
-    </p>
-
-    <div :class="['contact-links', 'fade-up', 'delay-2', { visible: animate }]">
-      <a href="mailto:alisondelvechio@outlook.com" class="contact-link">
-        <Icon icon="mdi:email-outline" width="24" />
-        <span>Email</span>
-      </a>
-
-      <a href="https://github.com/AlisonDelvechio" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <Icon icon="mdi:github" width="24" />
-        <span>GitHub</span>
-        <span class="sr-only">(abre em nova aba)</span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/alison-delvechio-64094b172/" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <Icon icon="mdi:linkedin" width="24" />
-        <span>LinkedIn</span>
-        <span class="sr-only">(abre em nova aba)</span>
-      </a>
+  <section id="contato" class="section container contact" aria-labelledby="contato-title">
+    <div v-reveal class="inner">
+      <h2 id="contato-title" class="section-title">Contato</h2>
+      <p>
+        Gosto de trocar ideia sobre front-end, componentes e design systems. Se quiser conversar, o melhor
+        caminho é o e-mail.
+      </p>
+      <a href="mailto:alisondelvechio@outlook.com" class="email">alisondelvechio@outlook.com</a>
+      <ul class="links">
+        <li>
+          <a href="https://github.com/AlisonDelvechio" class="text-link" target="_blank" rel="noopener noreferrer">
+            GitHub<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/alison-delvechio-64094b172/"
+            class="text-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+        <li>
+          <a href="/curriculo-alison-delvechio.pdf" class="text-link" target="_blank" rel="noopener">
+            Currículo (PDF)<span class="sr-only"> (abre em nova aba)</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { Icon } from '@iconify/vue'
-import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
-
-const contactSection = ref<HTMLElement | null>(null)
-const animate = ref(false)
-
-useIntersectionObserver(contactSection, () => {
-  animate.value = true
-}, 0.1)
-</script>
-
 <style scoped lang="scss">
-.contact {
-  position: relative;
-  padding: 4rem 2rem;
-  text-align: center;
-  background-image: var(--bg-pattern), var(--bg-contact);
-  background-repeat: repeat, no-repeat;
-  background-size: 150px 150px, cover;
-  background-position: center center, center;
-  background-blend-mode: overlay;
+.inner {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  max-width: 40rem;
 
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: var(--color-fg);
-    max-width: 500px;
-    margin: 0 auto 2rem;
-  }
-
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      color: var(--color-fg);
-      text-decoration: none;
-      transition: color 0.3s, transform 0.3s;
-
-      &:hover {
-        color: var(--color-accent);
-        transform: translateY(-3px);
-      }
-    }
+  .section-title {
+    margin-bottom: 0;
   }
 }
 
-// A animação só começa quando a seção entra na tela (classe .visible).
-.fade-up {
-  opacity: 0;
-  transform: translateX(-50px);
-
-  &.visible {
-    animation: fadeLeftToCenter 1s ease forwards;
-  }
+.email {
+  font-family: $font-code;
+  font-size: clamp(1rem, 0.8rem + 1vw, 1.35rem);
+  color: var(--color-fg);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  overflow-wrap: anywhere;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-
-@keyframes fadeLeftToCenter {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .contact-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  font-size: $fs-small;
 }
 </style>
